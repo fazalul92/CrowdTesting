@@ -3,10 +3,8 @@
 <%
     String mturk = request.getParameter("mturk");
     int ret = DBProcess.loginUser(mturk);
-	System.out.println("Login = "+ret);
     if (ret == 0) {
     	ret = DBProcess.registerUser(mturk);
-    	System.out.println("Register = "+ret);
     }
     if(ret == 0){
         response.sendRedirect("../index.jsp");

@@ -2,7 +2,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Cloud Testing Research!</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Crowd Testing Research!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -27,7 +27,7 @@
                   </li>
                   <li><a href="createreqr.jsp"><i class="fa fa-bar-chart-o"></i> Add Requirements <span class="fa fa-chevron-down"></span></a>
                   </li>
-                  <li><a href="requirements.jsp"><i class="fa fa-bar-chart-o"></i> Add Requirements <span class="fa fa-chevron-down"></span></a>
+                  <li><a href="requirements.jsp"><i class="fa fa-bar-chart-o"></i> View Requirements <span class="fa fa-chevron-down"></span></a>
                   </li>
                 </ul>
               </div>

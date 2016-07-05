@@ -41,7 +41,7 @@ public class DBProcess {
 			statement.close();
 			Statement st = con.createStatement();
 		    ResultSet rs;
-		    rs = st.executeQuery("select * from members where mturk_id='" + mturk + "'");
+		    rs = st.executeQuery("select * from users where mturk_id='" + mturk + "'");
 			if(rs.next()){
 				count = rs.getInt("id");
 			}
@@ -197,7 +197,8 @@ public class DBProcess {
 		ResultSet rs = null;
 		try {
 			Statement st = con.createStatement();
-			rs = st.executeQuery("SELECT COUNT(*) as nos FROM comments where pid="+tid+" AND parent_type=testcase");
+			rs = st.executeQuery("SELECT COUNT(*) as nos FROM comments where pid='"+tid+"' AND parent_type='testcase'");
+			rs.next();
 			return rs.getString("nos");
 		} catch (SQLException e) {
 			e.printStackTrace();
