@@ -12,7 +12,7 @@
     <title>Cloud Testing Researching </title>
 
     <!-- Bootstrap -->
-    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
@@ -27,4 +27,4 @@
     <link href="vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
 
     <!-- Custom Theme Style -->
-    <link href="build/css/custom.min.css" rel="stylesheet">
+    <link href="build/css/custom.css" rel="stylesheet">

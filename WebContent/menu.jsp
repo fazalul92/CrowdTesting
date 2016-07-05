@@ -25,6 +25,10 @@
                       <li><a href="postsurvey.jsp">Post-survey</a></li>
                     </ul>
                   </li>
+                  <li><a href="createreqr.jsp"><i class="fa fa-bar-chart-o"></i> Add Requirements <span class="fa fa-chevron-down"></span></a>
+                  </li>
+                  <li><a href="requirements.jsp"><i class="fa fa-bar-chart-o"></i> Add Requirements <span class="fa fa-chevron-down"></span></a>
+                  </li>
                 </ul>
               </div>
 

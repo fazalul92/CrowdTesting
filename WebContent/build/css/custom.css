@@ -198,7 +198,7 @@
   position: fixed; }
 
 body .container.body .right_col {
-  background: #F7F7F7; }
+  background: #FFF; }
 
 .nav-md .container.body .right_col {
   padding: 10px 20px 0;
@@ -917,6 +917,15 @@ legend {
 /** Contacts **/
 /* *********  /custom accordion  **************************** */
 /* *********  dashboard widget  **************************** */
+table {
+	table-layout:fixed;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    word-wrap: break-word;
+}
+
+
 table.tile h3, table.tile h4, table.tile span {
   font-weight: bold;
   vertical-align: middle !important; }

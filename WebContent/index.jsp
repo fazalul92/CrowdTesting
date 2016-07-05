@@ -33,63 +33,15 @@
             <form method="post" action="exec/loginprocess.jsp">
               <h1>Login Form</h1>
               <div>
-                <input name="username" type="text" class="form-control" placeholder="Username" required="" />
-              </div>
-              <div>
-                <input name="password" type="password" class="form-control" placeholder="Password" required="" />
+                <input name="mturk" type="text" class="form-control" placeholder="MTurk ID" required="" />
               </div>
               <div>
                 <input type="submit" class="btn btn-default submit" value="Log In" />
-                <a class="reset_pass" href="#">Lost your password?</a>
               </div>
 
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">New to site?
-                  <a href="#signup" class="to_register"> Create Account </a>
-                </p>
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                </div>
-              </div>
-            </form>
-          </section>
-        </div>
-
-        <div id="register" class="animate form registration_form">
-          <section class="login_content">
-            <form method="post" action="exec/regprocess.jsp">
-              <h1>Create Account</h1>
-              <div>
-                <input name="first_name" type="text" class="form-control" placeholder="First Name" required="" />
-              </div>
-              <div>
-                <input name="last_name" type="text" class="form-control" placeholder="Last Name" required="" />
-              </div>
-              <div>
-                <input name="mturk" type="text" class="form-control" placeholder="Mturk ID" required="" />
-              </div>
-              <div>
-                <input name="email" type="email" class="form-control" placeholder="Email" required="" />
-              </div>
-              <div>
-                <input name="password" type="password" class="form-control" placeholder="Password" required="" />
-              </div>
-              <div>
-                <input type="submit" class="btn btn-default submit" value="Submit"/>
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="separator">
-                <p class="change_link">Already a member ?
-                  <a href="#signin" class="to_register"> Log in </a>
-                </p>
-
                 <div class="clearfix"></div>
                 <br />
 
