@@ -11,6 +11,8 @@
 	    ret += DBProcess.responseData("personality_responses",uid, parameterName, parameterValue);
 	}
     if (ret > 0) {
+    	DBProcess.updateState(uid,2);
+	    session.setAttribute("state", 2);
         response.sendRedirect("../dashboard.jsp");
     } else {
         response.sendRedirect("../persona.jsp");

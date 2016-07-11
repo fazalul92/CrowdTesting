@@ -52,7 +52,7 @@
 	                        <tr>
 	                          <td><label class="" for="<%= rs2.getInt("id") %>"><%= rs2.getString("description") %> </label></td>
 	                          <% for(int i=0;i<5;i++) { %>
-	                          		<td><input type="radio" name="<%= rs2.getInt("id") %>" value="<%= i+1 %>"></td>
+	                          		<td><input type="radio" name="<%= rs2.getInt("id") %>" value="<%= i+1 %>" required></td>
 	                          <% } %>
 	                    	</tr>
 	                    <% } %>

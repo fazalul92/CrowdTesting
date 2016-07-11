@@ -11,6 +11,8 @@
 	    ret += DBProcess.responseData("presurvey_responses", uid, parameterName, parameterValue);
 	}
     if (ret > 0) {
+    	DBProcess.updateState(uid,1);
+	    session.setAttribute("state", 1);
         response.sendRedirect("../dashboard.jsp");
     } else {
         response.sendRedirect("../presurvey.jsp");

@@ -72,7 +72,7 @@
 		                    <input name="type" type="hidden" value="comment">
 		                <div class="row">
 		                  <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-		                    <textarea name="descr" id="descr" style="height:40px;overflow:auto;" class="col-md-10 col-sm-10 col-xs-10 form-group"></textarea>
+		                    <textarea name="descr" id="descr" style="height:40px;overflow:auto;" minlength="2" class="col-md-10 col-sm-10 col-xs-10 form-group"></textarea>
 		                    <button type="submit" class="btn btn-success" style="float:right;">Reply</button>
 		                  </div>
 		                  
@@ -96,7 +96,7 @@
                   <h2>Add Comment<small></small></h2>
                   <div class="clearfix"></div>
                 </div>
-                <form method="post" action="exec/addComment.jsp">
+                <form id="commentForm" method="post" action="exec/addComment.jsp">
                 <div class="x_content ">
                   <div id="alerts"></div>
                 <div class="row">
@@ -109,7 +109,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <textarea name="descr" id="descr" style="height:50px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder=""></textarea>
+                    <textarea name="descr" id="descr" style="height:50px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="" minlength="2"></textarea>
                   </div>
                   
                 </div>
@@ -134,5 +134,20 @@
 	<%@ include file="scripts.jsp" %>
 	
     <script src="build/js/custom.min.js"></script>
+    <script type="text/javascript">
+	    /*$('form').on('submit',function(e){
+	        e.preventDefault();
+	        $.ajax({
+	            type     : "POST",
+	            cache    : false,
+	            url      : $(this).attr('action'),
+	            data     : $(this).serialize(),
+	            success  : function(data) {
+	                console.log(data);
+	            }
+	        });
+	
+	    });*/
+    </script>
   </body>
 </html>

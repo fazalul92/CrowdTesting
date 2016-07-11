@@ -9,7 +9,6 @@
 
 
             <br />
-
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
@@ -18,17 +17,35 @@
                   <li><a href="dashboard.jsp"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   </li>
                   <li class="active"><a><i class="fa fa-edit"></i> Pre-requisite Surveys <span class="fa fa-chevron-down"></span></a>
+                    
                     <ul class="nav child_menu" style="display:block;">
-                      <li><a href="presurvey.jsp">Pre-survey</a></li>
-                      <li><a href="persona.jsp">Personality</a></li>
-                      <li><a href="creativity.jsp">Creativity</a></li>
-                      <li><a href="postsurvey.jsp">Post-survey</a></li>
+                      <% switch((Integer) session.getAttribute("state")) { 
+                      case 0: out.println("<li><a href='presurvey.jsp'>Pre-survey</a></li>");
+                    			break;
+                      case 1: out.println("<li><a href='persona.jsp'>Personality Survey</a></li>");
+                    			break;
+                      case 2: out.println("<li><a href='creativity.jsp'>Creativity survey</a></li>");
+                    			break;
+                      case 99: out.println("<li><a href='postsurvey.jsp'>Post survey</a></li>");
+                    			break;
+                      default: out.println("<li>All Surveys Completed</li>");
+                      			break;
+                      } %>
+                      
                     </ul>
                   </li>
+                  <% if((Integer) session.getAttribute("state") == 9) { %>
+                  <li><a href="debrief.jsp"><i class="fa fa-bar-chart-o"></i> Further Instructions <span class="fa fa-chevron-down"></span></a>
+                  </li>
+                  
+                  <% } %>
+                  <% if((Integer) session.getAttribute("state") == 10) { %>
                   <li><a href="createreqr.jsp"><i class="fa fa-bar-chart-o"></i> Add Requirements <span class="fa fa-chevron-down"></span></a>
                   </li>
                   <li><a href="requirements.jsp"><i class="fa fa-bar-chart-o"></i> View Requirements <span class="fa fa-chevron-down"></span></a>
                   </li>
+                  
+                  <% } %>
                 </ul>
               </div>
 

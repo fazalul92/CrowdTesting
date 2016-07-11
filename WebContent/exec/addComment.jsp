@@ -11,6 +11,6 @@
     if (ret == 1) {
         response.sendRedirect("../viewComments.jsp?id="+testcaseID);
     } else {
-        response.sendRedirect("../viewComments.jsp?id="+testcaseID+"&error=2");
+        response.sendRedirect("../viewComments.jsp?error=2&id="+testcaseID);
     }
 %>

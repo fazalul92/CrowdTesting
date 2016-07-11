@@ -98,6 +98,20 @@ public class DBProcess {
 		return count;
 	}
 	
+	public static int updateState(String uid, int state){
+		int count = 0;
+		try {
+			connect();
+			Statement st = con.createStatement();
+		    String sql = "UPDATE users SET state = "+state+" WHERE id="+uid;
+		    count = st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
 	public static ResultSet getQuestions(String TableName) {
 		connect();
 		ResultSet rs = null;

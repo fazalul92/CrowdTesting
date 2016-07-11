@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2016 at 09:18 PM
+-- Generation Time: Jul 11, 2016 at 10:21 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `description` text NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 -- --------------------------------------------------------
 
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `presurvey_responses` (
   PRIMARY KEY (`id`),
   KEY `FK_presurvey_responses_presurvey_questions` (`question_id`),
   KEY `FK_presurvey_responses_user` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 -- --------------------------------------------------------
 
@@ -221,9 +221,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created_at` datetime NOT NULL,
   `created_phase` tinyint(4) NOT NULL,
   `personality` int(11) NOT NULL DEFAULT '0',
+  `state` int(11) NOT NULL DEFAULT '0' COMMENT '0 = new user, 1 = presurvey, 2 = personality, 3 = creativity, 10 = prereqs completed.',
   `completion_code` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Constraints for dumped tables
@@ -261,9 +262,9 @@ ALTER TABLE `presurvey_responses`
 -- Constraints for table `usergroups`
 --
 ALTER TABLE `usergroups`
-  ADD CONSTRAINT `usergroups_ibfk_3` FOREIGN KEY (`uid3`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `usergroups_ibfk_1` FOREIGN KEY (`uid1`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `usergroups_ibfk_2` FOREIGN KEY (`uid2`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `usergroups_ibfk_2` FOREIGN KEY (`uid2`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `usergroups_ibfk_3` FOREIGN KEY (`uid3`) REFERENCES `users` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

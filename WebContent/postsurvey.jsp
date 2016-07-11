@@ -51,7 +51,8 @@
 	                    		String[] choices = answers.split("\\|");
 	                    	%>
 	                          <th scope="row"><label class="" for="<%= rs1.getInt("id") %>"><%= rs1.getString("description") %> <span class="required">*</span></label></th>
-	                          <td><select name="<%= rs1.getInt("id") %>" class="form-control">
+	                          <td><select name="<%= rs1.getInt("id") %>" required="required" class="form-control">
+	                          		<option value=""></option>
 			                        <% for (int i = 0; i < choices.length; i++) { %>
 			                        
 			                        <option value="<%= choices[i] %>"><%= choices[i] %></option>

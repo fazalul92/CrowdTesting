@@ -11,6 +11,8 @@
 	    ret += DBProcess.responseData("creativity_responses",uid, parameterName, parameterValue);
 	}
     if (ret > 0) {
+    	DBProcess.updateState(uid,3);
+	    session.setAttribute("state", 3);
         response.sendRedirect("../dashboard.jsp");
     } else {
         response.sendRedirect("../creativity.jsp");

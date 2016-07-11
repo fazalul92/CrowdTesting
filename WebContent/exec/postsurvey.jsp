@@ -11,6 +11,8 @@
 	    ret += DBProcess.responseData("postsurvey_responses", uid, parameterName, parameterValue);
 	}
     if (ret > 0) {
+    	DBProcess.updateState(uid,100);
+	    session.setAttribute("state", 100);
         response.sendRedirect("../dashboard.jsp");
     } else {
         response.sendRedirect("../postsurvey.jsp");
