@@ -1,5 +1,5 @@
 	<%
-		if(session.getAttribute("auth")==null || ((boolean) session.getAttribute("auth")!=true)){
+		if(session.getAttribute("auth")==null || ((Boolean) session.getAttribute("auth")!=true)){
 			response.sendRedirect("index.jsp");
 		}
 	%>
