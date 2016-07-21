@@ -34,12 +34,12 @@
                       
                     </ul>
                   </li>
-                  <% if((Integer) session.getAttribute("state") == 9) { %>
+                  <% if((Integer) session.getAttribute("state") == 3) { %>
                   <li><a href="debrief.jsp"><i class="fa fa-bar-chart-o"></i> Further Instructions <span class="fa fa-chevron-down"></span></a>
                   </li>
                   
                   <% } %>
-                  <% if((Integer) session.getAttribute("state") == 10) { %>
+                  <% if((Integer) session.getAttribute("state") == 3) { %>
                   <li><a href="createreqr.jsp"><i class="fa fa-bar-chart-o"></i> Add Requirements <span class="fa fa-chevron-down"></span></a>
                   </li>
                   <li><a href="requirements.jsp"><i class="fa fa-bar-chart-o"></i> View Requirements <span class="fa fa-chevron-down"></span></a>
