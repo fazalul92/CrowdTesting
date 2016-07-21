@@ -1,4 +1,4 @@
-<%@ page import ="java.sql.*" %>
+<%@ page import ="java.sql.ResultSet" %>
 <%@ page import ="edu.rit.se.creativecrowd.DBProcess" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,8 @@
 		
 		<%
 			System.out.println(session.getAttribute("auth"));
-			ResultSet rs1 = DBProcess.getQuestions("postsurvey_questions");
+		  DBProcess dbProc = new DBProcess();
+			ResultSet rs1 = dbProc.getQuestions("postsurvey_questions");
 		%>
 		
         <!-- page content -->

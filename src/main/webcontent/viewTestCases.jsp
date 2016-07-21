@@ -1,4 +1,4 @@
-<%@ page import ="java.sql.*" %>
+<%@ page import ="java.sql.ResultSet" %>
 <%@ page import ="edu.rit.se.creativecrowd.DBProcess" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +20,8 @@
 
             </div>
 			  <%
-			  	 ResultSet rs = DBProcess.getTestCases(request.getParameter("id"),session.getAttribute("groupid").toString());
+			    DBProcess dbProc = new DBProcess();
+			  	ResultSet rs = dbProc.getTestCases(request.getParameter("id"),session.getAttribute("groupid").toString());
 			  %>
             <% while(rs.next()) { %>
             <!--  Start Panel -->
@@ -37,7 +38,7 @@
 	                  <table border="0" style="width:100%;">
 	                  <tr>
 		                  <td width="100">
-			                  <b><%= DBProcess.getCommentCount(rs.getString("id")) %> comments</b>
+			                  <b><%= dbProc.getCommentCount(rs.getString("id")) %> comments</b>
 						  </td>
 						  <td>
 						  	<div style="float:right;">

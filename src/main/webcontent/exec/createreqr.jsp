@@ -1,9 +1,9 @@
-<%@ page import ="java.sql.*" %>
-<%@ page import ="edu.rit.se.creativecrowd.DBProcess" %>
+<%@ page import="edu.rit.se.creativecrowd.DBProcess"%>
 <%
 	String title = request.getParameter("title");
     String descr = request.getParameter("descr");
-    int ret = DBProcess.addReqr(title, descr);
+    DBProcess dbProc = new DBProcess();
+    int ret = dbProc.addReqr(title, descr);
     if (ret == 1) {
         response.sendRedirect("../createreqr.jsp");
     } else {

@@ -1,5 +1,3 @@
-<%@ page import ="java.sql.*" %>
-<%@ page import ="edu.rit.se.creativecrowd.DBProcess" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>

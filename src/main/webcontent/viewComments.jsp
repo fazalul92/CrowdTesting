@@ -1,4 +1,4 @@
-<%@ page import ="java.sql.*" %>
+<%@ page import ="java.sql.ResultSet" %>
 <%@ page import ="edu.rit.se.creativecrowd.DBProcess" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,8 +23,9 @@
 
             </div>
 			  <%
-			  	 ResultSet rs1 = DBProcess.viewTestCase(request.getParameter("id"),session.getAttribute("groupid").toString());
-			  	 ResultSet rs2 = DBProcess.getComments("testcase",request.getParameter("id"),session.getAttribute("groupid").toString());
+			    DBProcess dbProc = new DBProcess();
+			  	ResultSet rs1 = dbProc.viewTestCase(request.getParameter("id"),session.getAttribute("groupid").toString());
+			  	ResultSet rs2 = dbProc.getComments("testcase",request.getParameter("id"),session.getAttribute("groupid").toString());
 			  %>
             <% while(rs1.next()) { %>
             <!--  Start Panel -->
@@ -54,11 +55,11 @@
 	                  <b><%= rs2.getString("name") %></b><br/><br/>
 	                    <%= rs2.getString("description") %>
 	                  </div>
-			                  <b><%= rs2.getString("created_at") %> | <%= DBProcess.getReplyCount(rs2.getString("id")) %> replies</b>
+			                  <b><%= rs2.getString("created_at") %> | <%= dbProc.getReplyCount(rs2.getString("id")) %> replies</b>
 						  <br/><br/>
 	                  <div class="x_content">
 	                    <%
-	   			  	 		ResultSet rs3 = DBProcess.getComments("comment",rs2.getString("id"),session.getAttribute("groupid").toString());
+	   			  	 		ResultSet rs3 = dbProc.getComments("comment",rs2.getString("id"),session.getAttribute("groupid").toString());
 	                    	while(rs3.next()){
 	                    %>
 	                    <div class="well">

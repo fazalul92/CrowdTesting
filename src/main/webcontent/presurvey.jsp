@@ -1,4 +1,4 @@
-<%@ page import ="java.sql.*" %>
+<%@ page import ="java.sql.ResultSet" %>
 <%@ page import ="edu.rit.se.creativecrowd.DBProcess" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,8 @@
 		<%@ include file="menu.jsp" %>
 		
 		<%
-			ResultSet rs1 = DBProcess.getQuestions("presurvey_questions");
+		  DBProcess dbProc = new DBProcess();
+			ResultSet rs1 = dbProc.getQuestions("presurvey_questions");
 		%>
 		
         <!-- page content -->

@@ -1,4 +1,4 @@
-<%@ page import ="java.sql.*" %>
+<%@ page import ="java.sql.ResultSet" %>
 <%@ page import ="edu.rit.se.creativecrowd.DBProcess" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +20,8 @@
 
             </div>
 			  <%
-			  	 ResultSet rs = DBProcess.getRequirements();
+			    DBProcess dbProc = new DBProcess();
+			  	ResultSet rs = dbProc.getRequirements();
 			  %>
             <% while(rs.next()) { %>
             <!--  Start Panel -->

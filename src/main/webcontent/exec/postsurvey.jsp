@@ -1,17 +1,17 @@
-<%@ page import ="java.sql.*" %>
-<%@ page import ="java.util.*" %>
-<%@ page import ="edu.rit.se.creativecrowd.DBProcess" %>
+<%@ page import="java.util.Enumeration"%>
+<%@ page import="edu.rit.se.creativecrowd.DBProcess"%>
 <%	
 	String uid = session.getAttribute("userid").toString();
 	Enumeration en = request.getParameterNames();
+	DBProcess dbProc = new DBProcess();
 	int ret = 0;
 	while (en.hasMoreElements()) {
 	    String parameterName = (String) en.nextElement();
 	    String parameterValue = request.getParameter(parameterName);
-	    ret += DBProcess.responseData("postsurvey_responses", uid, parameterName, parameterValue);
+	    ret += dbProc.responseData("postsurvey_responses", uid, parameterName, parameterValue);
 	}
     if (ret > 0) {
-    	DBProcess.updateState(uid,100);
+    	dbProc.updateState(uid,100);
 	    session.setAttribute("state", 100);
         response.sendRedirect("../dashboard.jsp");
     } else {
