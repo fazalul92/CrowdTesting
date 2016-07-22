@@ -28,11 +28,20 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
 	            <div class="x_panel">
 	                  <div class="x_title">
-	                    <h2><%= rs1.getString("title") %></h2>
+	                    <h2>Requirement ID <%= rs1.getString("id") %></h2>
 	                    <div class="clearfix"></div>
 	                  </div>
 	                  <div class="x_content">
-	                    <%= rs1.getString("description") %>
+	                  	<b>Stakeholder</b><br>
+	                    <%= rs1.getString("stakeholder") %>
+	                  </div>
+	                  <div class="x_content">
+	                  	<b>Feature</b><br>
+	                    <%= rs1.getString("feature") %>
+	                  </div>
+	                  <div class="x_content">
+	                  	<b>Benefit</b><br>
+	                    <%= rs1.getString("benefit") %>
 	                  </div>
 	                  <a href="viewTestCases.jsp?id=<%= rs1.getString("id") %>">
 		                  <button type="button" class="btn btn-primary">View Test Cases</button>

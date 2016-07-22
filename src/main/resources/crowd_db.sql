@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2016 at 06:46 AM
+-- Generation Time: Jul 22, 2016 at 07:17 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -165,8 +165,9 @@ CREATE TABLE IF NOT EXISTS `presurvey_responses` (
 
 CREATE TABLE IF NOT EXISTS `requirements` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) NOT NULL,
-  `description` text NOT NULL,
+  `stakeholder` varchar(100) NOT NULL,
+  `feature` varchar(500) NOT NULL,
+  `benefit` varchar(500) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
@@ -197,8 +198,9 @@ CREATE TABLE IF NOT EXISTS `testcases` (
   `rid` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
   `gid` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `description` text NOT NULL,
+  `context` varchar(500) NOT NULL,
+  `stimuli` varchar(500) NOT NULL,
+  `behavior` varchar(500) NOT NULL,
   `created_at` datetime NOT NULL,
   `published` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)

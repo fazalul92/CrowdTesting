@@ -1,9 +1,10 @@
 <%@ page import="edu.rit.se.creativecrowd.DBProcess"%>
 <%
-	String title = request.getParameter("title");
-    String descr = request.getParameter("descr");
+	String stkholder = request.getParameter("stakeholder");
+	String feat = request.getParameter("feature");
+	String benf = request.getParameter("benefit");
     DBProcess dbProc = new DBProcess();
-    int ret = dbProc.addReqr(title, descr);
+    int ret = dbProc.addReqr(stkholder, feat, benf);
     dbProc.disConnect();
     if (ret == 1) {
         response.sendRedirect("../createreqr.jsp");

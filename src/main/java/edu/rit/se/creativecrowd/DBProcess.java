@@ -173,7 +173,7 @@ public class DBProcess {
 
   }
 
-  public int addReqr(String title, String descr)
+  public int addReqr(String stkholder, String feat, String benf)
       throws ClassNotFoundException, IOException, SQLException {
     int count = 0;
     java.util.Date dt = new java.util.Date();
@@ -181,8 +181,8 @@ public class DBProcess {
     String dtime = sdf.format(dt);
     try {
       PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
-          "INSERT INTO `requirements`(`title`, `description`, `created_at`) VALUES ('" + title
-              + "','" + descr + "','" + dtime + "')");
+          "INSERT INTO `requirements`(`stakeholder`, `feature`, `benefit`, `created_at`) VALUES ('" + stkholder
+              + "','" + feat + "','" + benf + "','" + dtime + "')");
       count = statement.executeUpdate();
       statement.close();
       mConn.close();
@@ -206,7 +206,7 @@ public class DBProcess {
     return rs;
   }
 
-  public int addTestCase(String rid, String uid, String gid, String title, String descr)
+  public int addTestCase(String rid, String uid, String gid, String cont, String stim, String behv)
       throws ClassNotFoundException, IOException, SQLException {
     int count = 0;
     java.util.Date dt = new java.util.Date();
@@ -214,8 +214,8 @@ public class DBProcess {
     String dtime = sdf.format(dt);
     try {
       PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
-          "INSERT INTO `testcases` (`rid`, `uid`, `gid`, `title`, `description`, `created_at`) VALUES ('"
-              + rid + "','" + uid + "','" + gid + "','" + title + "','" + descr + "','" + dtime
+          "INSERT INTO `testcases` (`rid`, `uid`, `gid`, `context`, `stimuli`, `behavior`, `created_at`) VALUES ('"
+              + rid + "','" + uid + "','" + gid + "','" + cont + "','" + stim + "','" + behv + "','" + dtime
               + "')");
       System.out.println(statement);
       count = statement.executeUpdate();

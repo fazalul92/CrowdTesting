@@ -32,13 +32,19 @@
                   <div id="alerts"></div>
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <input name="title" type="text" placeholder="Title" class="form-control">
+                    <input name="stakeholder" type="text" placeholder="Stakeholder" class="form-control">
                   </div>
                   
                 </div>
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <textarea name="descr" id="descr" style="height:200px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Description"></textarea>
+                    <textarea name="feature" id="feature" style="height:200px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Feature"></textarea>
+                  </div>
+                  
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                    <textarea name="benefit" id="benefit" style="height:200px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Benefit"></textarea>
                   </div>
                   
                 </div>

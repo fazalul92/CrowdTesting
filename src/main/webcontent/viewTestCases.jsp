@@ -28,13 +28,21 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
 	            <div class="x_panel">
 	                  <div class="x_title">
-	                    <h2><%= rs.getString("title") %><small><%= rs.getString("name") %></small></h2>
+	                    <h2>Testcase ID <%= rs.getString("id") %><small><%= rs.getString("name") %></small></h2>
 	                    <div class="clearfix"></div>
 	                  </div>
 	                  <div class="x_content">
-	                    <%= rs.getString("description") %>
+	                  <b>Context</b><br/>
+	                    <%= rs.getString("context") %>
 	                  </div>
-	                  <div class="ln_solid"></div>
+	                  <div class="x_content">
+	                  <b>Stimuli</b><br/>
+	                    <%= rs.getString("stimuli") %>
+	                  </div>
+	                  <div class="x_content">
+	                  <b>Behavior</b><br/>
+	                    <%= rs.getString("behavior") %>
+	                  </div>
 	                  <table border="0" style="width:100%;">
 	                  <tr>
 		                  <td width="100">

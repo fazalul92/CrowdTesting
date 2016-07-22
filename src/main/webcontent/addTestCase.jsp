@@ -33,13 +33,24 @@
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
                     <input name="requirementID" type="hidden" value="<%= request.getParameter("id") %>">
-                    <input name="title" type="text" placeholder="Title" class="form-control" maxlength="100">
                   </div>
                   
                 </div>
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <textarea name="descr" id="descr" style="height:200px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Description"></textarea>
+                    <textarea name="context" id="context" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Context"></textarea>
+                  </div>
+                  
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                    <textarea name="stimuli" id="stimuli" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Stimuli"></textarea>
+                  </div>
+                  
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                    <textarea name="behavior" id="behavior" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Behavior"></textarea>
                   </div>
                   
                 </div>
