@@ -6,5 +6,6 @@
   DBProcess dbProc = new DBProcess();
   dbProc.setGroup(uid, gid);
   ResultSet rs = dbProc.getUser(uid);
+  dbProc.disConnect();
   response.sendRedirect("resetSession.jsp");
 %>

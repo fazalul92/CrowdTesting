@@ -4,6 +4,7 @@
     String descr = request.getParameter("descr");
     DBProcess dbProc = new DBProcess();
     int ret = dbProc.addReqr(title, descr);
+    dbProc.disConnect();
     if (ret == 1) {
         response.sendRedirect("../createreqr.jsp");
     } else {

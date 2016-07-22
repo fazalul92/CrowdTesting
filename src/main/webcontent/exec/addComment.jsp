@@ -8,6 +8,7 @@
 	String type = request.getParameter("type");
 	DBProcess dbProc = new DBProcess();
   int ret = dbProc.addComment(type, pid, uid, gid, descr);
+  dbProc.disConnect();
   if (ret == 1) {
     response.sendRedirect("../viewComments.jsp?id="+testcaseID);
   } else {

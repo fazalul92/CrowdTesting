@@ -8,6 +8,7 @@
   DBProcess dbProc = new DBProcess();
   // int ret = DBProcess.registerUser(mturk, user, pwd, fname, lname);
   int ret = dbProc.registerUser(mturk);
+  dbProc.disConnect();
   if (ret > 0) {
     session.setAttribute("email", user);
     session.setAttribute("userid", ret);

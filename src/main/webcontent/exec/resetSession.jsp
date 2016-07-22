@@ -9,8 +9,10 @@
     session.setAttribute("groupid", rs.getString("gid"));
     session.setAttribute("name", rs.getString("name"));
     session.setAttribute("auth", true);
+    dbProc.disConnect();
     response.sendRedirect("../dashboard.jsp");
   } else {
+	  dbProc.disConnect();
     response.sendRedirect("../index.jsp");
   }
 %>

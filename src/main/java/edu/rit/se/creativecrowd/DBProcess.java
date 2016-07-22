@@ -15,8 +15,21 @@ public class DBProcess {
   private final Properties mProps = new Properties();
 
   private Connection mConn = null;
+  
+  public DBProcess() throws IOException, SQLException, ClassNotFoundException {
+	  if (mConn == null) {
+	      try (InputStream inStream = DBProcess.class.getResourceAsStream("/application.properties")) {
+	        mProps.load(inStream);
+	        Class.forName(mProps.getProperty("jdbc.driverClassName"));
 
-  public void connect() throws IOException, SQLException, ClassNotFoundException {
+	        mConn = DriverManager.getConnection(
+	            mProps.getProperty("jdbc.url") + "?user=" + mProps.getProperty("jdbc.username")
+	                + "&password=" + mProps.getProperty("jdbc.password"));
+	      }
+	    }
+  }
+
+  /*public void connect() throws IOException, SQLException, ClassNotFoundException {
     if (mConn == null) {
       try (InputStream inStream = DBProcess.class.getResourceAsStream("/application.properties")) {
         mProps.load(inStream);
@@ -27,7 +40,7 @@ public class DBProcess {
                 + "&password=" + mProps.getProperty("jdbc.password"));
       }
     }
-  }
+  }*/
 
   public void disConnect() throws SQLException {
     if (mConn != null) {
@@ -45,7 +58,6 @@ public class DBProcess {
     NameGenerator gen = new NameGenerator();
     String name = gen.getName() + " " + gen.getName();
     try {
-      connect();
       PreparedStatement statement = mConn.prepareStatement(
           "INSERT INTO `users`(`mturk_id`, `created_at`, `created_phase`, `name`) VALUES ('" + mturk
               + "','" + dtime + "','" + createphase + "','" + name + "')");
@@ -59,15 +71,12 @@ public class DBProcess {
       }
     } catch (SQLException e) {
       e.printStackTrace();
-    } finally {
-      disConnect();
     }
     return count;
   }
 
   public int loginUser(String mturk) throws ClassNotFoundException, IOException, SQLException {
     try {
-      connect();
       Statement st = mConn.createStatement();
       ResultSet rs;
       rs = st.executeQuery("select * from users where mturk_id='" + mturk + "'");
@@ -78,8 +87,6 @@ public class DBProcess {
       }
     } catch (SQLException e) {
       e.printStackTrace();
-    } finally {
-      disConnect();
     }
     return 0;
   }
@@ -88,7 +95,6 @@ public class DBProcess {
   public ResultSet getUser(String uid) throws ClassNotFoundException, IOException, SQLException {
     ResultSet rs = null;
     try {
-      connect();
       Statement st = mConn.createStatement();
       rs = st.executeQuery("select * from users where id='" + uid + "'");
     } catch (SQLException e) {
@@ -101,38 +107,42 @@ public class DBProcess {
       throws ClassNotFoundException, IOException, SQLException {
     int count = 0;
     try {
-      connect();
       Statement st = mConn.createStatement();
       String sql = "UPDATE users SET gid = " + gid + " WHERE id=" + uid;
       count = st.executeUpdate(sql);
     } catch (SQLException e) {
       e.printStackTrace();
-    } finally {
-      disConnect();
     }
     return count;
   }
 
-  public int updateState(String uid, int state)
+  public String[] updateState(String uid, String state)
       throws ClassNotFoundException, IOException, SQLException {
-    int count = 0;
+    String NewState = "";
+    String[] ReturnVal = new String[2];
     try {
-      connect();
+      ResultSet rs = null;
       Statement st = mConn.createStatement();
-      String sql = "UPDATE users SET state = " + state + " WHERE id=" + uid;
-      count = st.executeUpdate(sql);
+      rs = st.executeQuery("select next_seq from statuses where seq_no='" + state + "'");
+      rs.next();
+      NewState = rs.getString("next_seq");
+      ReturnVal[0] = NewState;
+      rs = st.executeQuery("select filename from statuses where seq_no='" + NewState + "'");
+      rs.next();
+      ReturnVal[1] = rs.getString("filename");
+      st = mConn.createStatement();
+      String sql = "UPDATE users SET state = '" + NewState + "' WHERE id='" + uid+"'";
+      st.executeUpdate(sql);
     } catch (SQLException e) {
       e.printStackTrace();
-    } finally {
-      disConnect();
     }
-    return count;
+    
+    return ReturnVal;
   }
 
   // TODO: Can't close connection here; closing connection will also close the ResultSet
   public ResultSet getQuestions(String TableName)
       throws ClassNotFoundException, IOException, SQLException {
-    connect();
     ResultSet rs = null;
     try {
       Statement st = mConn.createStatement();
@@ -150,7 +160,6 @@ public class DBProcess {
     java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     String dtime = sdf.format(dt);
     try {
-      connect();
       PreparedStatement statement = (PreparedStatement) mConn.prepareStatement("INSERT INTO `"
           + table + "`(`question_id`, `user_id`, `description`, `created_at`) VALUES ('"
           + parameterName + "','" + uid + "','" + parameterValue + "','" + dtime + "')");
@@ -159,8 +168,6 @@ public class DBProcess {
       mConn.close();
     } catch (SQLException e) {
       e.printStackTrace();
-    } finally {
-      disConnect();
     }
     return count;
 
@@ -173,7 +180,6 @@ public class DBProcess {
     java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     String dtime = sdf.format(dt);
     try {
-      connect();
       PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
           "INSERT INTO `requirements`(`title`, `description`, `created_at`) VALUES ('" + title
               + "','" + descr + "','" + dtime + "')");
@@ -182,8 +188,6 @@ public class DBProcess {
       mConn.close();
     } catch (SQLException e) {
       e.printStackTrace();
-    } finally {
-      disConnect();
     }
     return count;
 
@@ -192,7 +196,6 @@ public class DBProcess {
   // TODO: Can't close connection here; closing connection will also close the
   // ResultSet
   public ResultSet getRequirements() throws ClassNotFoundException, IOException, SQLException {
-    connect();
     ResultSet rs = null;
     try {
       Statement st = mConn.createStatement();
@@ -210,7 +213,6 @@ public class DBProcess {
     java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     String dtime = sdf.format(dt);
     try {
-      connect();
       PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
           "INSERT INTO `testcases` (`rid`, `uid`, `gid`, `title`, `description`, `created_at`) VALUES ('"
               + rid + "','" + uid + "','" + gid + "','" + title + "','" + descr + "','" + dtime
@@ -221,8 +223,6 @@ public class DBProcess {
       mConn.close();
     } catch (SQLException e) {
       e.printStackTrace();
-    } finally {
-      disConnect();
     }
     return count;
 
@@ -232,7 +232,6 @@ public class DBProcess {
   // ResultSet
   public ResultSet getTestCases(String rid, String gid)
       throws ClassNotFoundException, IOException, SQLException {
-    connect();
     ResultSet rs = null;
     try {
       Statement st = mConn.createStatement();
@@ -249,7 +248,6 @@ public class DBProcess {
   // ResultSet
   public String getCommentCount(String tid)
       throws ClassNotFoundException, IOException, SQLException {
-    connect();
     ResultSet rs = null;
     try {
       Statement st = mConn.createStatement();
@@ -267,7 +265,6 @@ public class DBProcess {
   // ResultSet
   public ResultSet viewTestCase(String id, String gid)
       throws ClassNotFoundException, IOException, SQLException {
-    connect();
     ResultSet rs = null;
     try {
       Statement st = mConn.createStatement();
@@ -284,7 +281,6 @@ public class DBProcess {
   // ResultSet
   public ResultSet getComments(String type, String tid, String gid)
       throws ClassNotFoundException, IOException, SQLException {
-    connect();
     ResultSet rs = null;
     try {
       Statement st = mConn.createStatement();
@@ -299,7 +295,6 @@ public class DBProcess {
 
   public String getReplyCount(String cid) throws ClassNotFoundException, IOException, SQLException {
     try {
-      connect();
       ResultSet rs = null;
       Statement st = mConn.createStatement();
       rs = st.executeQuery(
@@ -308,8 +303,6 @@ public class DBProcess {
       return rs.getString("nos");
     } catch (SQLException e) {
       e.printStackTrace();
-    } finally {
-      disConnect();
     }
     return "0";
   }
@@ -321,7 +314,6 @@ public class DBProcess {
     java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     String dtime = sdf.format(dt);
     try {
-      connect();
       PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
           "INSERT INTO `comments` (`parent_type`, `pid`, `uid`, `gid`, `description`, `created_at`) VALUES ('"
               + parent + "','" + pid + "','" + uid + "','" + gid + "','" + descr + "','" + dtime
@@ -332,9 +324,20 @@ public class DBProcess {
       mConn.close();
     } catch (SQLException e) {
       e.printStackTrace();
-    } finally {
-      disConnect();
     }
     return count;
   }
+  
+  
+  public ResultSet getMenu(String SeqNo) {
+	    ResultSet rs = null;
+	    try {
+	      Statement st = mConn.createStatement();
+	      rs = st.executeQuery("select * from statuses where seq_no = '"+SeqNo+"'");
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	    }
+	    return rs;
+  }
+  
 }

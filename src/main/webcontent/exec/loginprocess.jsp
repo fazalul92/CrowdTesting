@@ -7,6 +7,7 @@
   if (ret == 0) {
     ret = dbProc.registerUser(mturk);
     session.setAttribute("state", "0");
+    dbProc.disConnect();
     response.sendRedirect("../index.jsp");
   } else {
     ResultSet rs = dbProc.getUser(Integer.toString(ret));
@@ -15,6 +16,7 @@
     session.setAttribute("state", rs.getInt("state"));
     session.setAttribute("groupid", rs.getString("gid"));
     session.setAttribute("auth", true);
+    dbProc.disConnect();
     response.sendRedirect("../dashboard.jsp");
   }
 %>

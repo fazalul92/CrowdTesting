@@ -7,6 +7,7 @@
   String descr = request.getParameter("descr");
   DBProcess dbProc = new DBProcess();
   int ret = dbProc.addTestCase(rid, uid, gid, title, descr);
+  dbProc.disConnect();
   if (ret == 1) {
     response.sendRedirect("../requirements.jsp");
   } else {

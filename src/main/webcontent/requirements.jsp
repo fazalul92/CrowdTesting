@@ -21,23 +21,23 @@
             </div>
 			  <%
 			    DBProcess dbProc = new DBProcess();
-			  	ResultSet rs = dbProc.getRequirements();
+			  	ResultSet rs1 = dbProc.getRequirements();
 			  %>
-            <% while(rs.next()) { %>
+            <% while(rs1.next()) { %>
             <!--  Start Panel -->
             <div class="col-md-12 col-sm-12 col-xs-12">
 	            <div class="x_panel">
 	                  <div class="x_title">
-	                    <h2><%= rs.getString("title") %></h2>
+	                    <h2><%= rs1.getString("title") %></h2>
 	                    <div class="clearfix"></div>
 	                  </div>
 	                  <div class="x_content">
-	                    <%= rs.getString("description") %>
+	                    <%= rs1.getString("description") %>
 	                  </div>
-	                  <a href="viewTestCases.jsp?id=<%= rs.getString("id") %>">
+	                  <a href="viewTestCases.jsp?id=<%= rs1.getString("id") %>">
 		                  <button type="button" class="btn btn-primary">View Test Cases</button>
 					  </a>
-	                  <a href="addTestCase.jsp?id=<%= rs.getString("id") %>">
+	                  <a href="addTestCase.jsp?id=<%= rs1.getString("id") %>">
 	                  	<button type="button" class="btn btn-success">Add Test Case</button>
 	                  </a>
 	            </div>
@@ -58,3 +58,4 @@
     <script src="build/js/custom.min.js"></script>
   </body>
 </html>
+<% dbProc.disConnect(); %>

@@ -11,10 +11,12 @@
     ret += dbProc.responseData("personality_responses", uid, parameterName, parameterValue);
   }
   if (ret > 0) {
-    dbProc.updateState(uid, 2);
-    session.setAttribute("state", 2);
-    response.sendRedirect("../dashboard.jsp");
+  	String[] StateInfo = dbProc.updateState(uid,session.getAttribute("state").toString());
+	session.setAttribute("state", StateInfo[0]);
+    dbProc.disConnect();
+    response.sendRedirect("../"+StateInfo[1]);
   } else {
+	dbProc.disConnect();
     response.sendRedirect("../persona.jsp");
   }
 %>

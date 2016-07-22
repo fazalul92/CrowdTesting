@@ -1,8 +1,9 @@
-
-        <div class="col-md-3 left_col">
+<%@ page import ="java.sql.ResultSet" %>
+        <%@page import="edu.rit.se.creativecrowd.DBProcess"%>
+<div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Crowd Testing Research!</span></a>
+              <a href="dashboard.jsp" class="site_title"><i class="fa fa-paw"></i> <span>Crowd Testing Research!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -15,37 +16,17 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                   <li><a href="dashboard.jsp"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                  </li>                  
+                  <% 
+                  	String state = session.getAttribute("state").toString();
+                  	DBProcess dbp = new DBProcess();
+                  	ResultSet rsm = dbp.getMenu(state);
+                  	while(rsm.next()) {
+                  %>
+                  	<li><a href="<%= rsm.getString("filename") %>"><i class="fa fa-bar-chart-o"></i> <%= rsm.getString("title") %> <span class="fa fa-chevron-down"></span></a>
                   </li>
-                  <li class="active"><a><i class="fa fa-edit"></i> Pre-requisite Surveys <span class="fa fa-chevron-down"></span></a>
-                    
-                    <ul class="nav child_menu" style="display:block;">
-                      <% switch((Integer) session.getAttribute("state")) { 
-                      case 0: out.println("<li><a href='presurvey.jsp'>Pre-survey</a></li>");
-                    			break;
-                      case 1: out.println("<li><a href='persona.jsp'>Personality Survey</a></li>");
-                    			break;
-                      case 2: out.println("<li><a href='creativity.jsp'>Creativity survey</a></li>");
-                    			break;
-                      case 99: out.println("<li><a href='postsurvey.jsp'>Post survey</a></li>");
-                    			break;
-                      default: out.println("<li>All Surveys Completed</li>");
-                      			break;
-                      } %>
-                      
-                    </ul>
-                  </li>
-                  <% if((Integer) session.getAttribute("state") == 3) { %>
-                  <li><a href="debrief.jsp"><i class="fa fa-bar-chart-o"></i> Further Instructions <span class="fa fa-chevron-down"></span></a>
-                  </li>
-                  
                   <% } %>
-                  <% if((Integer) session.getAttribute("state") == 3) { %>
-                  <li><a href="createreqr.jsp"><i class="fa fa-bar-chart-o"></i> Add Requirements <span class="fa fa-chevron-down"></span></a>
-                  </li>
-                  <li><a href="requirements.jsp"><i class="fa fa-bar-chart-o"></i> View Requirements <span class="fa fa-chevron-down"></span></a>
-                  </li>
                   
-                  <% } %>
                 </ul>
               </div>
 
@@ -131,3 +112,5 @@
           </div>
         </div>
         <!-- /top navigation -->
+
+<% dbp.disConnect(); %>

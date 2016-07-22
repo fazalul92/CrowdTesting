@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2016 at 10:21 AM
+-- Generation Time: Jul 22, 2016 at 06:46 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `description` text NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `personality_responses` (
   PRIMARY KEY (`id`),
   KEY `FK_personality_responses_user` (`user_id`),
   KEY `FK_personality_responses_personality_question` (`question_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 -- --------------------------------------------------------
 
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `postsurvey_responses` (
   PRIMARY KEY (`id`),
   KEY `FK_postsurvey_responses_user` (`user_id`),
   KEY `FK_postsurvey_responses_postsurvey_question` (`question_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `presurvey_responses` (
   PRIMARY KEY (`id`),
   KEY `FK_presurvey_responses_presurvey_questions` (`question_id`),
   KEY `FK_presurvey_responses_user` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -169,7 +169,22 @@ CREATE TABLE IF NOT EXISTS `requirements` (
   `description` text NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `statuses`
+--
+
+CREATE TABLE IF NOT EXISTS `statuses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `seq_no` int(11) NOT NULL,
+  `title` varchar(25) NOT NULL,
+  `filename` varchar(20) NOT NULL,
+  `next_seq` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 -- --------------------------------------------------------
 
@@ -224,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `state` int(11) NOT NULL DEFAULT '0' COMMENT '0 = new user, 1 = presurvey, 2 = personality, 3 = creativity, 10 = prereqs completed.',
   `completion_code` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Constraints for dumped tables
