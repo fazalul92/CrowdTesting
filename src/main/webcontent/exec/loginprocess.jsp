@@ -15,6 +15,7 @@
 			ResultSet rs = dbProc.getUser(Integer.toString(ret));
 			rs.next();
 			session.setAttribute("userid", ret);
+			session.setAttribute("group_type", rs.getInt("group_type"));
 			session.setAttribute("state", rs.getInt("state"));
 			session.setAttribute("groupid", rs.getString("gid"));
 			session.setAttribute("auth", true);

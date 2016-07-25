@@ -46,7 +46,7 @@
 	                  <table border="0" style="width:100%;">
 	                  <tr>
 		                  <td width="100">
-			                  <b><%= dbProc.getCommentCount(rs.getString("id")) %> comments</b>
+			                 <% if((Integer) session.getAttribute("group_type") == 3) { %> <b><%= dbProc.getCommentCount(rs.getString("id")) %> comments</b> <% } %>
 						  </td>
 						  <td>
 						  	<div style="float:right;">
@@ -59,9 +59,11 @@
 						  	<%
 						  		}
 						  	%>
+						  		<% if((Integer) session.getAttribute("group_type") == 3) { %> 
 			                  <a href="viewComments.jsp?id=<%= rs.getString("id") %>">
 				                  <button type="button" class="btn btn-primary">View And Add Comments</button>
 							  </a>
+							  <% } %>
 			                </div>
 		                  </td>
 	                  </tr>
