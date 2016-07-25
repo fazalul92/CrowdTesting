@@ -50,6 +50,15 @@
 						  </td>
 						  <td>
 						  	<div style="float:right;">
+						  	<%
+						  		if((Integer) session.getAttribute("userid") == rs.getInt("uid")) {
+						  	%>
+						  		<a href="editTestCase.jsp?id=<%= rs.getString("id") %>">
+				                  <button type="button" class="btn btn-danger">Edit</button>
+							  	</a>
+						  	<%
+						  		}
+						  	%>
 			                  <a href="viewComments.jsp?id=<%= rs.getString("id") %>">
 				                  <button type="button" class="btn btn-primary">View And Add Comments</button>
 							  </a>

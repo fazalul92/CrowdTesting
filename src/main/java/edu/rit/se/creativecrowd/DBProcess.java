@@ -46,13 +46,17 @@ public class DBProcess {
 			mConn = null; // close() does not set to null
 		}
 	}
+	
+	private String currentDateTIme() {
+		java.util.Date dt = new java.util.Date();
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return sdf.format(dt);
+	}
 
 	public int registerUser(String mturk) throws ClassNotFoundException, IOException, SQLException {
 		int count = 0;
 		int createphase = 1;
-		java.util.Date dt = new java.util.Date();
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dtime = sdf.format(dt);
+		String dtime = currentDateTIme();
 		NameGenerator gen = new NameGenerator();
 		String name = gen.getName() + " " + gen.getName();
 		try {
@@ -87,6 +91,20 @@ public class DBProcess {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	
+	public int addLog(int uid, String message){
+		int ret=0;
+		String dtime = currentDateTIme();
+		try {
+			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
+					"INSERT INTO `logs`(`uid`, `message`, `created_at`) VALUES ('" + uid + "','" + message + "','" + dtime + "')");
+			ret = statement.executeUpdate();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ret;
 	}
 
 	// TODO: Can't close connection here; closing connection will also close the
@@ -154,9 +172,7 @@ public class DBProcess {
 	public int responseData(String table, String uid, String parameterName, String parameterValue)
 			throws ClassNotFoundException, IOException, SQLException {
 		int count = 0;
-		java.util.Date dt = new java.util.Date();
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dtime = sdf.format(dt);
+		String dtime = currentDateTIme();
 		try {
 			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
 					"INSERT INTO `" + table + "`(`question_id`, `user_id`, `description`, `created_at`) VALUES ('"
@@ -174,9 +190,7 @@ public class DBProcess {
 	public int addReqr(String stkholder, String feat, String benf)
 			throws ClassNotFoundException, IOException, SQLException {
 		int count = 0;
-		java.util.Date dt = new java.util.Date();
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dtime = sdf.format(dt);
+		String dtime = currentDateTIme();
 		try {
 			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
 					"INSERT INTO `requirements`(`stakeholder`, `feature`, `benefit`, `created_at`) VALUES ('"
@@ -207,15 +221,12 @@ public class DBProcess {
 	public int addTestCase(String rid, String uid, String gid, String cont, String stim, String behv)
 			throws ClassNotFoundException, IOException, SQLException {
 		int count = 0;
-		java.util.Date dt = new java.util.Date();
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dtime = sdf.format(dt);
+		String dtime = currentDateTIme();
 		try {
 			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
 					"INSERT INTO `testcases` (`rid`, `uid`, `gid`, `context`, `stimuli`, `behavior`, `created_at`) VALUES ('"
 							+ rid + "','" + uid + "','" + gid + "','" + cont + "','" + stim + "','" + behv + "','"
 							+ dtime + "')");
-			System.out.println(statement);
 			count = statement.executeUpdate();
 			statement.close();
 
@@ -234,7 +245,7 @@ public class DBProcess {
 			Statement st = mConn.createStatement();
 			rs = st.executeQuery(
 					"select testcase.*, user.name from testcases testcase, users user where testcase.uid=user.id AND testcase.rid="
-							+ rid + " AND testcase.gid=" + gid);
+							+ rid + " AND testcase.gid=" + gid + " AND testcase.published='1'");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -271,6 +282,25 @@ public class DBProcess {
 		}
 		return rs;
 	}
+	
+	public int editTestCase(String tid,String uid,String cont,String stim,String behv){
+		int ret = 0;
+		try {
+			//Insert into `testcase_history` (`pid`, `context`, `stimuli`, `behavior`, `created_at`)  SELECT id, context, stimuli, behavior, created_at from `testcases` where id='2'
+			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
+					"Insert into `testcase_history` (`pid`, `context`, `stimuli`, `behavior`, `created_at`)  SELECT id, context, stimuli, behavior, created_at from `testcases` where id="+tid);
+			statement.executeUpdate();
+			statement.close();
+			
+			Statement st = mConn.createStatement();
+			String sql = "UPDATE testcases SET context = '" + cont + "', stimuli = '" + stim + "', behavior = '" + behv + "' WHERE id='" + tid + "'";
+			ret = st.executeUpdate(sql);
+			
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return ret;
+	}
 
 	// TODO: Can't close connection here; closing connection will also close the
 	// ResultSet
@@ -305,9 +335,7 @@ public class DBProcess {
 	public int addComment(String parent, String pid, String uid, String gid, String descr)
 			throws ClassNotFoundException, IOException, SQLException {
 		int count = 0;
-		java.util.Date dt = new java.util.Date();
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dtime = sdf.format(dt);
+		String dtime = currentDateTIme();
 		try {
 			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
 					"INSERT INTO `comments` (`parent_type`, `pid`, `uid`, `gid`, `description`, `created_at`) VALUES ('"

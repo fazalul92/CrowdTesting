@@ -42,7 +42,7 @@
             <nav>
 
               <ul class="nav navbar-nav navbar-right">
-
+				<!-- 
                 <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
@@ -106,6 +106,12 @@
                       </div>
                     </li>
                   </ul>
+                </li> -->
+                <li>
+                	<a href="exec/logout.jsp">
+	                  	<button type="button" class="btn btn-success">Log Out</button>
+	                  </a>
+                
                 </li>
               </ul>
             </nav>

@@ -18,6 +18,7 @@
 			session.setAttribute("state", rs.getInt("state"));
 			session.setAttribute("groupid", rs.getString("gid"));
 			session.setAttribute("auth", true);
+			dbProc.addLog(ret,"Login");
 			response.sendRedirect("../dashboard.jsp");
 		}
 	} finally {

@@ -1,3 +1,9 @@
+	<%
+		if(session.getAttribute("auth")!=null && ((Boolean) session.getAttribute("auth")==true)){
+			response.sendRedirect("dashboard.jsp");
+		}
+	%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
