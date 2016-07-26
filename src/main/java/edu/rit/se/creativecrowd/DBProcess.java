@@ -187,6 +187,24 @@ public class DBProcess {
 
 	}
 
+	public int discResponseData(String uid, String gid, String iid, String val)
+			throws ClassNotFoundException, IOException, SQLException {
+		int count = 0;
+		String dtime = currentDateTIme();
+		try {
+			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
+					"INSERT INTO `discpersonality_responses`(`uid`, `group_no`, `item_no`, `response`, `created_at`) VALUES ('"
+							+ uid + "','" + gid + "','" + iid + "','" + val + "','" + dtime + "')");
+			count += statement.executeUpdate();
+			statement.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+
+	}
+
 	public int addReqr(String stkholder, String feat, String benf)
 			throws ClassNotFoundException, IOException, SQLException {
 		int count = 0;

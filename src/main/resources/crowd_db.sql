@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2016 at 12:19 AM
+-- Generation Time: Jul 27, 2016 at 01:04 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -69,6 +69,36 @@ CREATE TABLE IF NOT EXISTS `creativity_responses` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `discpersonality_questions`
+--
+
+CREATE TABLE IF NOT EXISTS `discpersonality_questions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_no` int(11) NOT NULL,
+  `item_no` int(11) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=113 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `discpersonality_responses`
+--
+
+CREATE TABLE IF NOT EXISTS `discpersonality_responses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `group_no` int(11) NOT NULL,
+  `item_no` int(11) NOT NULL,
+  `response` varchar(10) NOT NULL,
+  `created_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `logs`
 --
 
@@ -78,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `message` varchar(25) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 -- --------------------------------------------------------
 
