@@ -38,19 +38,19 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <textarea name="context" id="context" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Context"></textarea>
+                    <textarea name="context" id="context" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Context" maxlength="500"></textarea>
                   </div>
                   
                 </div>
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <textarea name="stimuli" id="stimuli" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Stimuli"></textarea>
+                    <textarea name="stimuli" id="stimuli" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Stimuli" maxlength="500"></textarea>
                   </div>
                   
                 </div>
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <textarea name="behavior" id="behavior" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Behavior"></textarea>
+                    <textarea name="behavior" id="behavior" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Behavior" maxlength="500"></textarea>
                   </div>
                   
                 </div>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2016 at 01:04 AM
+-- Generation Time: Jul 27, 2016 at 09:54 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `discpersonality_responses` (
   `response` varchar(10) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=113 ;
 
 -- --------------------------------------------------------
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `message` varchar(25) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 -- --------------------------------------------------------
 
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `presurvey_responses` (
   PRIMARY KEY (`id`),
   KEY `FK_presurvey_responses_presurvey_questions` (`question_id`),
   KEY `FK_presurvey_responses_user` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 -- --------------------------------------------------------
 
@@ -265,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `testcases` (
   `created_at` datetime NOT NULL,
   `published` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -294,7 +294,7 @@ CREATE TABLE IF NOT EXISTS `usergroups` (
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `gid` int(11) NOT NULL DEFAULT '0',
-  `group_type` int(11) NOT NULL COMMENT '1 = nominal, 2 = non-interactive, 3 = interacting',
+  `group_type` int(11) NOT NULL DEFAULT '1' COMMENT '1 = nominal, 2 = non-interactive, 3 = interacting',
   `mturk_id` varchar(20) NOT NULL,
   `name` varchar(50) NOT NULL,
   `created_at` datetime NOT NULL,
@@ -303,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `state` int(11) NOT NULL DEFAULT '1' COMMENT '0 = new user, 1 = presurvey, 2 = personality, 3 = creativity, 10 = prereqs completed.',
   `completion_code` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Constraints for dumped tables
