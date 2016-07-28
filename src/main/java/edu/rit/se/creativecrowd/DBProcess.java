@@ -147,7 +147,7 @@ public class DBProcess {
 			if(i<3) {
 				count = st1.executeUpdate("UPDATE usergroups SET "+uidn+" = " + uid + " WHERE gid=" + gid);
 			} else {
-				count = st1.executeUpdate("UPDATE usergroups SET "+uidn+" = " + uid + " AND status = 3 WHERE gid=" + gid);
+				count = st1.executeUpdate("UPDATE usergroups SET "+uidn+" = " + uid + ", status = 3 WHERE gid=" + gid);
 				st1.executeUpdate("UPDATE usergroups SET status = 2 WHERE gid=" + (gid+1));
 			}
 			st1.executeUpdate("UPDATE users SET gid = " + gid + " AND group_type = "+rs.getInt("type")+" WHERE id=" + uid);
