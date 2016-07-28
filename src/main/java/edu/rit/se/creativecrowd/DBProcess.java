@@ -137,20 +137,20 @@ public class DBProcess {
 		ResultSet rs = null;
 		try {
 			Statement st = mConn.createStatement();
+			Statement st1 = mConn.createStatement();
 			rs = st.executeQuery("select * from usergroups where status=2 order by gid");
 			rs.next();
-			System.out.println("");
 			int gid = rs.getInt("gid");
-			System.out.println("");
 			int i=1;
 			for(i=1;rs.getString("uid"+i)!=null;i++);
+			String uidn = "uid"+i;
 			if(i<3) {
-				count = st.executeUpdate("UPDATE usergroups SET uid"+i+" = " + uid + " WHERE gid=" + gid);
+				count = st1.executeUpdate("UPDATE usergroups SET "+uidn+" = " + uid + " WHERE gid=" + gid);
 			} else {
-				count = st.executeUpdate("UPDATE usergroups SET uid"+i+" = " + uid + " AND status = 3 WHERE gid=" + gid);
-				st.executeUpdate("UPDATE usergroups SET status = 2 WHERE gid=" + (gid+1));
+				count = st1.executeUpdate("UPDATE usergroups SET "+uidn+" = " + uid + " AND status = 3 WHERE gid=" + gid);
+				st1.executeUpdate("UPDATE usergroups SET status = 2 WHERE gid=" + (gid+1));
 			}
-			st.executeUpdate("UPDATE users SET gid = " + gid + " AND group_type = "+rs.getInt("type")+" WHERE id=" + uid);
+			st1.executeUpdate("UPDATE users SET gid = " + gid + " AND group_type = "+rs.getInt("type")+" WHERE id=" + uid);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

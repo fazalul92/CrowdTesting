@@ -7,5 +7,7 @@
 	  int ret = dbProc.assignTeam(uid);
 	  response.sendRedirect("resetSession.jsp");
   }
-  response.sendRedirect("dashboard.jsp");
+  else {
+  	response.sendRedirect("dashboard.jsp");
+  }
 %>
