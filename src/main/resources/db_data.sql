@@ -238,6 +238,44 @@ INSERT INTO `statuses` (`id`, `seq_no`, `title`, `filename`, `next_seq`) VALUES
 (8, 4, 'View Requirements', 'requirements.jsp', 6),
 (9, 3, 'Group Creation', 'exec/groupassign.jsp', 4);
 
+
+/* USERGROUPS DATA */
+
+INSERT INTO `usergroups` (`gid`, `type`, `uid1`, `uid2`, `uid3`, `description`, `status`) VALUES
+(1, 1, NULL, NULL, NULL, 'Nominal', 2),
+(2, 1, NULL, NULL, NULL, 'Nominal', 1),
+(3, 1, NULL, NULL, NULL, 'Nominal', 1),
+(4, 1, NULL, NULL, NULL, 'Nominal', 1),
+(5, 1, NULL, NULL, NULL, 'Nominal', 1),
+(6, 1, NULL, NULL, NULL, 'Nominal', 1),
+(7, 1, NULL, NULL, NULL, 'Nominal', 1),
+(8, 1, NULL, NULL, NULL, 'Nominal', 1),
+(9, 1, NULL, NULL, NULL, 'Nominal', 1),
+(10, 1, NULL, NULL, NULL, 'Nominal', 1),
+(11, 1, NULL, NULL, NULL, 'Nominal', 1),
+(12, 2, NULL, NULL, NULL, 'Non-interacting', 1),
+(13, 2, NULL, NULL, NULL, 'Non-interacting', 1),
+(14, 2, NULL, NULL, NULL, 'Non-interacting', 1),
+(15, 2, NULL, NULL, NULL, 'Non-interacting', 1),
+(16, 2, NULL, NULL, NULL, 'Non-interacting', 1),
+(17, 2, NULL, NULL, NULL, 'Non-interacting', 1),
+(18, 2, NULL, NULL, NULL, 'Non-interacting', 1),
+(19, 2, NULL, NULL, NULL, 'Non-interacting', 1),
+(20, 2, NULL, NULL, NULL, 'Non-interacting', 1),
+(21, 2, NULL, NULL, NULL, 'Non-interacting', 1),
+(22, 2, NULL, NULL, NULL, 'Non-interacting', 1),
+(23, 3, NULL, NULL, NULL, 'Interacting', 1),
+(24, 3, NULL, NULL, NULL, 'Interacting', 1),
+(25, 3, NULL, NULL, NULL, 'Interacting', 1),
+(26, 3, NULL, NULL, NULL, 'Interacting', 1),
+(27, 3, NULL, NULL, NULL, 'Interacting', 1),
+(28, 3, NULL, NULL, NULL, 'Interacting', 1),
+(29, 3, NULL, NULL, NULL, 'Interacting', 1),
+(30, 3, NULL, NULL, NULL, 'Interacting', 1),
+(31, 3, NULL, NULL, NULL, 'Interacting', 1),
+(32, 3, NULL, NULL, NULL, 'Interacting', 1),
+(33, 3, NULL, NULL, NULL, 'Interacting', 1);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
