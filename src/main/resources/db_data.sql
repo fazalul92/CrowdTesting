@@ -230,12 +230,13 @@ INSERT INTO `presurvey_questions` (`id`, `description`, `question_type`, `answer
 
 INSERT INTO `statuses` (`id`, `seq_no`, `title`, `filename`, `next_seq`) VALUES
 (1, 1, 'Pre-Survey', 'presurvey.jsp', 2),
-(2, 2, 'Personality Survey', 'discpersona.jsp', 4),
+(2, 2, 'Personality Survey', 'discpersona.jsp', 3),
 (4, 4, 'Further Instructions', 'debrief.jsp', 6),
 (5, 4, 'Add Requirements', 'createreqr.jsp', 6),
 (6, 6, 'Post-Survey', 'postsurvey.jsp', 7),
 (7, 7, 'Completion', 'completed.jsp', 8),
-(8, 4, 'View Requirements', 'requirements.jsp', 6);
+(8, 4, 'View Requirements', 'requirements.jsp', 6),
+(9, 3, 'Group Creation', 'exec/groupassign.jsp', 4);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
