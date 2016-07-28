@@ -21,7 +21,7 @@
             </div>
 			  <%
 			    DBProcess dbProc = new DBProcess();
-			  	ResultSet rs = dbProc.getTestCases(request.getParameter("id"),session.getAttribute("groupid").toString());
+			  	ResultSet rs = dbProc.getTestCases(request.getParameter("id"),session.getAttribute("groupid").toString(),session.getAttribute("userid").toString(),session.getAttribute("group_type").toString());
 			  %>
             <% while(rs.next()) { %>
             <!--  Start Panel -->

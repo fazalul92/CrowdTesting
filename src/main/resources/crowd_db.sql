@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2016 at 09:54 PM
+-- Generation Time: Jul 28, 2016 at 08:42 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `discpersonality_responses` (
   `response` varchar(10) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=113 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=169 ;
 
 -- --------------------------------------------------------
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `message` varchar(25) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 -- --------------------------------------------------------
 
@@ -230,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `statuses` (
   `filename` varchar(20) NOT NULL,
   `next_seq` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -275,15 +275,17 @@ CREATE TABLE IF NOT EXISTS `testcases` (
 
 CREATE TABLE IF NOT EXISTS `usergroups` (
   `gid` int(11) NOT NULL AUTO_INCREMENT,
-  `uid1` int(11) NOT NULL,
-  `uid2` int(11) NOT NULL,
-  `uid3` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `uid1` int(11) DEFAULT NULL,
+  `uid2` int(11) DEFAULT NULL,
+  `uid3` int(11) DEFAULT NULL,
   `description` text NOT NULL,
+  `status` int(11) NOT NULL COMMENT '1 = empty, 2 = partial, 3 = full',
   PRIMARY KEY (`gid`),
   KEY `uid1` (`uid1`),
   KEY `uid2` (`uid2`),
   KEY `uid3` (`uid3`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 -- --------------------------------------------------------
 
@@ -303,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `state` int(11) NOT NULL DEFAULT '1' COMMENT '0 = new user, 1 = presurvey, 2 = personality, 3 = creativity, 10 = prereqs completed.',
   `completion_code` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 --
 -- Constraints for dumped tables

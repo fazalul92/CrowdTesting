@@ -132,6 +132,31 @@ public class DBProcess {
 		return count;
 	}
 
+	public int assignTeam(String uid) throws ClassNotFoundException, IOException, SQLException {
+		int count = 0;
+		ResultSet rs = null;
+		try {
+			Statement st = mConn.createStatement();
+			rs = st.executeQuery("select * from usergroups where status=2 order by gid");
+			rs.next();
+			System.out.println("");
+			int gid = rs.getInt("gid");
+			System.out.println("");
+			int i=1;
+			for(i=1;rs.getString("uid"+i)!=null;i++);
+			if(i<3) {
+				count = st.executeUpdate("UPDATE usergroups SET uid"+i+" = " + uid + " WHERE gid=" + gid);
+			} else {
+				count = st.executeUpdate("UPDATE usergroups SET uid"+i+" = " + uid + " AND status = 3 WHERE gid=" + gid);
+				st.executeUpdate("UPDATE usergroups SET status = 2 WHERE gid=" + (gid+1));
+			}
+			st.executeUpdate("UPDATE users SET gid = " + gid + " AND group_type = "+rs.getInt("type")+" WHERE id=" + uid);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
 	public String[] updateState(String uid, String state) throws ClassNotFoundException, IOException, SQLException {
 		String NewState = "";
 		String[] ReturnVal = new String[2];
@@ -257,13 +282,18 @@ public class DBProcess {
 
 	// TODO: Can't close connection here; closing connection will also close the
 	// ResultSet
-	public ResultSet getTestCases(String rid, String gid) throws ClassNotFoundException, IOException, SQLException {
+	public ResultSet getTestCases(String rid, String gid, String uid, String gtype) throws ClassNotFoundException, IOException, SQLException {
 		ResultSet rs = null;
 		try {
 			Statement st = mConn.createStatement();
-			rs = st.executeQuery(
-					"select testcase.*, user.name from testcases testcase, users user where testcase.uid=user.id AND testcase.rid="
-							+ rid + " AND testcase.gid=" + gid + " AND testcase.published='1'");
+			if(Integer.parseInt(gtype)>1) {
+				rs = st.executeQuery(
+						"select testcase.*, user.name from testcases testcase, users user where testcase.uid=user.id AND testcase.rid="
+								+ rid + " AND testcase.gid=" + gid + " AND testcase.published='1'");
+			} else {
+				rs = st.executeQuery(
+						"select testcase.*, user.name from testcases testcase, users user where testcase.uid=user.id AND testcase.rid=" + rid + " AND testcase.uid=" + uid + " AND testcase.published='1'");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
