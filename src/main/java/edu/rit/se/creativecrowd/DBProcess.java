@@ -55,14 +55,14 @@ public class DBProcess {
 
 	public int registerUser(String mturk) throws ClassNotFoundException, IOException, SQLException {
 		int count = 0;
-		int createphase = 1;
+		int completion = 0;
 		String dtime = currentDateTIme();
 		NameGenerator gen = new NameGenerator();
 		String name = gen.getName() + " " + gen.getName();
 		try {
 			PreparedStatement statement = mConn
-					.prepareStatement("INSERT INTO `users`(`mturk_id`, `created_at`, `created_phase`, `name`) VALUES ('"
-							+ mturk + "','" + dtime + "','" + createphase + "','" + name + "')");
+					.prepareStatement("INSERT INTO `users`(`mturk_id`, `created_at`, `completion`, `name`) VALUES ('"
+							+ mturk + "','" + dtime + "','" + completion + "','" + name + "')");
 			count = statement.executeUpdate();
 			statement.close();
 			Statement st = mConn.createStatement();
@@ -179,6 +179,51 @@ public class DBProcess {
 		}
 
 		return ReturnVal;
+	}
+	
+	public int timeOutCheck(int uid) throws ClassNotFoundException, IOException, SQLException{
+		ResultSet rs = null, rs1 = null;
+		try {
+			Statement st = mConn.createStatement();
+			Statement st1 = mConn.createStatement();
+			rs = st.executeQuery("SELECT * FROM users WHERE users.id = "+uid+" and users.created_at > DATE_SUB(CURDATE(), INTERVAL 1 DAY)");
+			rs1 = st1.executeQuery("SELECT COUNT(*) as nos FROM testcases where uid="+uid);
+			rs1.next();
+			int tcount = rs1.getInt("nos");
+			/* Modify tcount to base */
+			if (!rs.isBeforeFirst() && tcount > 1) {   
+				Statement st3 = mConn.createStatement();
+				st3.executeUpdate("UPDATE users SET completion = 1 WHERE id='" + uid + "'");
+			    return 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public void updateCompletionState(String uid) throws ClassNotFoundException, IOException, SQLException{
+		try {
+				Statement st3 = mConn.createStatement();
+				st3.executeUpdate("UPDATE users SET completion = 2 WHERE id='" + uid + "'");
+				//GET COMPLETION CODE HERE AND REPLACE X IN SQL
+				st3.executeUpdate("UPDATE users SET completion_code = 'X' WHERE id='" + uid + "'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String getCompletionCode(String uid) throws ClassNotFoundException, IOException, SQLException{
+		String ret = "";
+		try {
+			Statement st = mConn.createStatement();
+			ResultSet rs = st.executeQuery("select completion_code from users where id = "+uid);
+			rs.next();
+			ret = rs.getString("completion_code");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ret;
 	}
 
 	// TODO: Can't close connection here; closing connection will also close the
@@ -388,7 +433,6 @@ public class DBProcess {
 			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
 					"INSERT INTO `comments` (`parent_type`, `pid`, `uid`, `gid`, `description`, `created_at`) VALUES ('"
 							+ parent + "','" + pid + "','" + uid + "','" + gid + "','" + descr + "','" + dtime + "')");
-			System.out.println(statement);
 			count = statement.executeUpdate();
 			statement.close();
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2016 at 08:42 PM
+-- Generation Time: Jul 30, 2016 at 06:41 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `message` varchar(25) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 -- --------------------------------------------------------
 
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `postsurvey_responses` (
   PRIMARY KEY (`id`),
   KEY `FK_postsurvey_responses_user` (`user_id`),
   KEY `FK_postsurvey_responses_postsurvey_question` (`question_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 -- --------------------------------------------------------
 
@@ -300,12 +300,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   `mturk_id` varchar(20) NOT NULL,
   `name` varchar(50) NOT NULL,
   `created_at` datetime NOT NULL,
-  `created_phase` tinyint(4) NOT NULL,
+  `completion` tinyint(4) NOT NULL COMMENT '0 = not completed, 1 = completed.',
   `personality` int(11) NOT NULL DEFAULT '0',
   `state` int(11) NOT NULL DEFAULT '1' COMMENT '0 = new user, 1 = presurvey, 2 = personality, 3 = creativity, 10 = prereqs completed.',
   `completion_code` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
 -- Constraints for dumped tables

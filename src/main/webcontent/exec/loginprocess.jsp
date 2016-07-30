@@ -18,6 +18,12 @@
 			session.setAttribute("group_type", rs.getInt("group_type"));
 			session.setAttribute("state", rs.getInt("state"));
 			session.setAttribute("groupid", rs.getString("gid"));
+			if(rs.getInt("completion")==0){
+				int comp = dbProc.timeOutCheck(ret);
+				session.setAttribute("completion", comp);
+			} else {
+				session.setAttribute("completion", rs.getInt("completion"));
+			}
 			session.setAttribute("auth", true);
 			dbProc.addLog(ret,"Login");
 			response.sendRedirect("../dashboard.jsp");
