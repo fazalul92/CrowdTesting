@@ -12,8 +12,7 @@
 		<%@ include file="menu.jsp" %>
 		
 		<%
-			System.out.println(session.getAttribute("auth"));
-		  DBProcess dbProc = new DBProcess();
+		  	DBProcess dbProc = new DBProcess();
 			ResultSet rs1 = dbProc.getQuestions("postsurvey_questions");
 		%>
 		

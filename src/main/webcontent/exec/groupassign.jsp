@@ -8,6 +8,6 @@
 	  response.sendRedirect("resetSession.jsp");
   }
   else {
-  	response.sendRedirect("dashboard.jsp");
+  	response.sendRedirect("../dashboard.jsp");
   }
 %>

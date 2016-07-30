@@ -186,7 +186,7 @@ public class DBProcess {
 		try {
 			Statement st = mConn.createStatement();
 			Statement st1 = mConn.createStatement();
-			rs = st.executeQuery("SELECT * FROM users WHERE users.id = "+uid+" and users.created_at > DATE_SUB(CURDATE(), INTERVAL 1 DAY)");
+			rs = st.executeQuery("SELECT * FROM users WHERE users.id = "+uid+" and users.created_at > DATE_SUB(CURTIME(), INTERVAL 4 HOUR)");
 			rs1 = st1.executeQuery("SELECT COUNT(*) as nos FROM testcases where uid="+uid);
 			rs1.next();
 			int tcount = rs1.getInt("nos");

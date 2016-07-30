@@ -35,7 +35,6 @@
 	                    %>
 	                    Completion code: <b><%= ccode %></b>
 	                  </div>
-	                  <div class="ln_solid"></div>
 	            </div>
             </div>
             <!-- End Panel -->
