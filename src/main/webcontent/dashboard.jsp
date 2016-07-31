@@ -1,7 +1,24 @@
+<%@ page import ="edu.rit.se.creativecrowd.DBProcess" %>
+<%
+	DBProcess dbProc = new DBProcess();
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
   <%@ include file="head.jsp" %>
+  <style>
+  	#detailsTable {
+  		padding:5px;
+  		margin: 50px auto;
+  	}
+  	#detailsTable td{
+  		padding:5px;
+  		margin: 0 auto;
+  		min-width: 200px;
+  		text-align: center;
+  		font-weight: bold;
+  	}
+  </style>
   </head>
 
   <body class="nav-md">
@@ -34,6 +51,40 @@
 
 						</p><p>In rhoncus ullamcorper est. Etiam varius dolor at ex scelerisque vulputate. Suspendisse ornare lorem in magna sagittis posuere. Aenean cursus nunc mollis porttitor lacinia. Nunc lacus lectus, rhoncus a turpis at, semper varius mi. Etiam vel hendrerit ipsum, eget tempus enim. Nullam rhoncus tincidunt felis ac mollis. Donec sit amet sem vestibulum, maximus leo sit amet, mattis nulla. Phasellus et nunc ut mauris gravida porttitor. Cras nec consequat orci, quis bibendum magna. Vestibulum lobortis magna et mauris dictum imperdiet.
 	                  </p>
+	                  <table border="1" id="detailsTable">
+	                  	<tr>
+	                  		<td>
+	                  		</td>
+	                  		<td>
+	                  			Completed
+	                  		</td>
+	                  		<td>
+	                  			Minimum Required
+	                  		</td>
+	                  	</tr>
+	                  	<tr>
+	                  		<td>
+	                  			Time
+	                  		</td>
+	                  		<td>
+	                  			<%= dbProc.timeSinceLogin(session.getAttribute("userid").toString()) %>
+	                  		</td>
+	                  		<td>
+	                  			4 hours
+	                  		</td>
+	                  	</tr>
+	                  	<tr>
+	                  		<td>
+	                  			Test Cases
+	                  		</td>
+	                  		<td>
+	                  			<%= dbProc.testCaseCount(Integer.parseInt(session.getAttribute("userid").toString())) %>
+	                  		</td>
+	                  		<td>
+	                  			2
+	                  		</td>
+	                  	</tr>
+	                  </table>
 	                  </div>
 	                  <div class="ln_solid"></div>
 	            </div>
@@ -51,3 +102,6 @@
     <script src="build/js/custom.min.js"></script>
   </body>
 </html>
+<%
+	dbProc.disConnect();
+%>

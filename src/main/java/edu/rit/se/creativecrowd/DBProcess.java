@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.Properties;
+import java.util.Date;
 
 public class DBProcess {
 
@@ -51,6 +53,51 @@ public class DBProcess {
 		java.util.Date dt = new java.util.Date();
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(dt);
+	}
+	
+	public String timeDifference(Date startDate, Date endDate){
+		long different = endDate.getTime() - startDate.getTime();
+		long secondsInMilli = 1000;
+		long minutesInMilli = secondsInMilli * 60;
+		long hoursInMilli = minutesInMilli * 60;
+		long daysInMilli = hoursInMilli * 24;
+		long elapsedDays = different / daysInMilli;
+		different = different % daysInMilli;
+		long elapsedHours = different / hoursInMilli;
+		/*different = different % hoursInMilli;
+		long elapsedMinutes = different / minutesInMilli;
+		different = different % minutesInMilli;
+		long elapsedSeconds = different / secondsInMilli;*/
+		String ret = "";
+		/*if(elapsedDays>0)
+			ret = elapsedDays+" days, "+elapsedHours+" hours, "+elapsedMinutes+" minutes, "+elapsedSeconds+" seconds";
+		else
+			ret = elapsedHours+" hours, "+elapsedMinutes+" minutes, "+elapsedSeconds+" seconds";*/
+		if(elapsedDays>0)
+			ret = elapsedDays+" days, "+elapsedHours+" hours";
+		else
+			ret = elapsedHours+" hours";
+		return ret;
+	}
+	
+	public String timeSinceLogin(String uid) throws SQLException {
+		String ret = "";
+		try {
+		Statement st = mConn.createStatement();
+		ResultSet rs;
+		// User's Registration TImestamp
+		rs = st.executeQuery("select created_at from users where id="+uid);
+		rs.next();
+		Timestamp timestamp = rs.getTimestamp("created_at");
+		java.util.Date startDate = new java.util.Date(timestamp.getTime());
+		// Current TimeStamp
+		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date endDate = dateFormat.parse(currentDateTIme());
+	    ret = timeDifference(startDate, endDate);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return ret;
 	}
 
 	public int registerUser(String mturk) throws ClassNotFoundException, IOException, SQLException {
@@ -107,8 +154,6 @@ public class DBProcess {
 		return ret;
 	}
 
-	// TODO: Can't close connection here; closing connection will also close the
-	// ResultSet
 	public ResultSet getUser(String uid) throws ClassNotFoundException, IOException, SQLException {
 		ResultSet rs = null;
 		try {
@@ -181,15 +226,25 @@ public class DBProcess {
 		return ReturnVal;
 	}
 	
-	public int timeOutCheck(int uid) throws ClassNotFoundException, IOException, SQLException{
-		ResultSet rs = null, rs1 = null;
+	public int testCaseCount(int uid) throws ClassNotFoundException, IOException, SQLException{
+		ResultSet rs = null;
 		try {
 			Statement st = mConn.createStatement();
-			Statement st1 = mConn.createStatement();
+			rs = st.executeQuery("SELECT COUNT(*) as nos FROM testcases where uid="+uid);
+			rs.next();
+			return rs.getInt("nos");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public int timeOutCheck(int uid) throws ClassNotFoundException, IOException, SQLException{
+		ResultSet rs = null;
+		try {
+			Statement st = mConn.createStatement();
 			rs = st.executeQuery("SELECT * FROM users WHERE users.id = "+uid+" and users.created_at > DATE_SUB(CURTIME(), INTERVAL 4 HOUR)");
-			rs1 = st1.executeQuery("SELECT COUNT(*) as nos FROM testcases where uid="+uid);
-			rs1.next();
-			int tcount = rs1.getInt("nos");
+			int tcount = testCaseCount(uid);
 			/* Modify tcount to base */
 			if (!rs.isBeforeFirst() && tcount > 1) {   
 				Statement st3 = mConn.createStatement();
@@ -226,8 +281,6 @@ public class DBProcess {
 		return ret;
 	}
 
-	// TODO: Can't close connection here; closing connection will also close the
-	// ResultSet
 	public ResultSet getQuestions(String TableName) throws ClassNotFoundException, IOException, SQLException {
 		ResultSet rs = null;
 		try {
@@ -293,8 +346,6 @@ public class DBProcess {
 
 	}
 
-	// TODO: Can't close connection here; closing connection will also close the
-	// ResultSet
 	public ResultSet getRequirements() throws ClassNotFoundException, IOException, SQLException {
 		ResultSet rs = null;
 		try {
@@ -325,8 +376,6 @@ public class DBProcess {
 
 	}
 
-	// TODO: Can't close connection here; closing connection will also close the
-	// ResultSet
 	public ResultSet getTestCases(String rid, String gid, String uid, String gtype) throws ClassNotFoundException, IOException, SQLException {
 		ResultSet rs = null;
 		try {
@@ -345,8 +394,6 @@ public class DBProcess {
 		return rs;
 	}
 
-	// TODO: Can't close connection here; closing connection will also close the
-	// ResultSet
 	public String getCommentCount(String tid) throws ClassNotFoundException, IOException, SQLException {
 		ResultSet rs = null;
 		try {
@@ -361,8 +408,6 @@ public class DBProcess {
 		return "0";
 	}
 
-	// TODO: Can't close connection here; closing connection will also close the
-	// ResultSet
 	public ResultSet viewTestCase(String id, String gid) throws ClassNotFoundException, IOException, SQLException {
 		ResultSet rs = null;
 		try {
@@ -395,8 +440,6 @@ public class DBProcess {
 		return ret;
 	}
 
-	// TODO: Can't close connection here; closing connection will also close the
-	// ResultSet
 	public ResultSet getComments(String type, String tid, String gid)
 			throws ClassNotFoundException, IOException, SQLException {
 		ResultSet rs = null;
