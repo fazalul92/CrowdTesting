@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Properties;
+import java.util.Random;
 import java.util.Date;
 
 public class DBProcess {
@@ -30,32 +31,20 @@ public class DBProcess {
 		}
 	}
 
-	/*
-	 * public void connect() throws IOException, SQLException,
-	 * ClassNotFoundException { if (mConn == null) { try (InputStream inStream =
-	 * DBProcess.class.getResourceAsStream("/application.properties")) {
-	 * mProps.load(inStream);
-	 * Class.forName(mProps.getProperty("jdbc.driverClassName"));
-	 * 
-	 * mConn = DriverManager.getConnection( mProps.getProperty("jdbc.url") +
-	 * "?user=" + mProps.getProperty("jdbc.username") + "&password=" +
-	 * mProps.getProperty("jdbc.password")); } } }
-	 */
-
 	public void disConnect() throws SQLException {
 		if (mConn != null) {
 			mConn.close();
 			mConn = null; // close() does not set to null
 		}
 	}
-	
+
 	private String currentDateTIme() {
 		java.util.Date dt = new java.util.Date();
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(dt);
 	}
-	
-	public String timeDifference(Date startDate, Date endDate){
+
+	public String timeDifference(Date startDate, Date endDate) {
 		long different = endDate.getTime() - startDate.getTime();
 		long secondsInMilli = 1000;
 		long minutesInMilli = secondsInMilli * 60;
@@ -64,37 +53,38 @@ public class DBProcess {
 		long elapsedDays = different / daysInMilli;
 		different = different % daysInMilli;
 		long elapsedHours = different / hoursInMilli;
-		/*different = different % hoursInMilli;
-		long elapsedMinutes = different / minutesInMilli;
-		different = different % minutesInMilli;
-		long elapsedSeconds = different / secondsInMilli;*/
+		/*
+		 * different = different % hoursInMilli; long elapsedMinutes = different
+		 * / minutesInMilli; different = different % minutesInMilli; long
+		 * elapsedSeconds = different / secondsInMilli;
+		 *
+		 *
+		 * if(elapsedDays>0) ret = elapsedDays+" days, "+elapsedHours+" hours, "
+		 * +elapsedMinutes+" minutes, "+elapsedSeconds+" seconds"; else ret =
+		 * elapsedHours+" hours, "+elapsedMinutes+" minutes, "
+		 * +elapsedSeconds+" seconds";
+		 */
 		String ret = "";
-		/*if(elapsedDays>0)
-			ret = elapsedDays+" days, "+elapsedHours+" hours, "+elapsedMinutes+" minutes, "+elapsedSeconds+" seconds";
+		if (elapsedDays > 0)
+			ret = elapsedDays + " days, " + elapsedHours + " hours";
 		else
-			ret = elapsedHours+" hours, "+elapsedMinutes+" minutes, "+elapsedSeconds+" seconds";*/
-		if(elapsedDays>0)
-			ret = elapsedDays+" days, "+elapsedHours+" hours";
-		else
-			ret = elapsedHours+" hours";
+			ret = elapsedHours + " hours";
 		return ret;
 	}
-	
+
 	public String timeSinceLogin(String uid) throws SQLException {
 		String ret = "";
 		try {
-		Statement st = mConn.createStatement();
-		ResultSet rs;
-		// User's Registration TImestamp
-		rs = st.executeQuery("select created_at from users where id="+uid);
-		rs.next();
-		Timestamp timestamp = rs.getTimestamp("created_at");
-		java.util.Date startDate = new java.util.Date(timestamp.getTime());
-		// Current TimeStamp
-		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date endDate = dateFormat.parse(currentDateTIme());
-	    ret = timeDifference(startDate, endDate);
-		} catch(Exception e) {
+			Statement st = mConn.createStatement();
+			ResultSet rs;
+			rs = st.executeQuery("select created_at from users where id=" + uid);
+			rs.next();
+			Timestamp timestamp = rs.getTimestamp("created_at");
+			java.util.Date startDate = new java.util.Date(timestamp.getTime());
+			java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date endDate = dateFormat.parse(currentDateTIme());
+			ret = timeDifference(startDate, endDate);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ret;
@@ -139,13 +129,14 @@ public class DBProcess {
 		}
 		return 0;
 	}
-	
-	public int addLog(int uid, String message){
-		int ret=0;
+
+	public int addLog(int uid, String message) {
+		int ret = 0;
 		String dtime = currentDateTIme();
 		try {
-			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
-					"INSERT INTO `logs`(`uid`, `message`, `created_at`) VALUES ('" + uid + "','" + message + "','" + dtime + "')");
+			PreparedStatement statement = (PreparedStatement) mConn
+					.prepareStatement("INSERT INTO `logs`(`uid`, `message`, `created_at`) VALUES ('" + uid + "','"
+							+ message + "','" + dtime + "')");
 			ret = statement.executeUpdate();
 			statement.close();
 		} catch (SQLException e) {
@@ -186,16 +177,19 @@ public class DBProcess {
 			rs = st.executeQuery("select * from usergroups where status=2 order by gid");
 			rs.next();
 			int gid = rs.getInt("gid");
-			int i=1;
-			for(i=1;rs.getString("uid"+i)!=null;i++);
-			String uidn = "uid"+i;
-			if(i<3) {
-				count = st1.executeUpdate("UPDATE usergroups SET "+uidn+" = " + uid + " WHERE gid=" + gid);
+			int i = 1;
+			for (i = 1; rs.getString("uid" + i) != null; i++)
+				;
+			String uidn = "uid" + i;
+			if (i < 3) {
+				count = st1.executeUpdate("UPDATE usergroups SET " + uidn + " = " + uid + " WHERE gid=" + gid);
 			} else {
-				count = st1.executeUpdate("UPDATE usergroups SET "+uidn+" = " + uid + ", status = 3 WHERE gid=" + gid);
-				st1.executeUpdate("UPDATE usergroups SET status = 2 WHERE gid=" + (gid+1));
+				count = st1
+						.executeUpdate("UPDATE usergroups SET " + uidn + " = " + uid + ", status = 3 WHERE gid=" + gid);
+				st1.executeUpdate("UPDATE usergroups SET status = 2 WHERE gid=" + (gid + 1));
 			}
-			st1.executeUpdate("UPDATE users SET gid = " + gid + " AND group_type = "+rs.getInt("type")+" WHERE id=" + uid);
+			st1.executeUpdate(
+					"UPDATE users SET gid = " + gid + " AND group_type = " + rs.getInt("type") + " WHERE id=" + uid);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -225,12 +219,12 @@ public class DBProcess {
 
 		return ReturnVal;
 	}
-	
-	public int testCaseCount(int uid) throws ClassNotFoundException, IOException, SQLException{
+
+	public int testCaseCount(int uid) throws ClassNotFoundException, IOException, SQLException {
 		ResultSet rs = null;
 		try {
 			Statement st = mConn.createStatement();
-			rs = st.executeQuery("SELECT COUNT(*) as nos FROM testcases where uid="+uid);
+			rs = st.executeQuery("SELECT COUNT(*) as nos FROM testcases where uid=" + uid);
 			rs.next();
 			return rs.getInt("nos");
 		} catch (SQLException e) {
@@ -238,41 +232,63 @@ public class DBProcess {
 		}
 		return 0;
 	}
-	
-	public int timeOutCheck(int uid) throws ClassNotFoundException, IOException, SQLException{
+
+	public int timeOutCheck(int uid) throws ClassNotFoundException, IOException, SQLException {
 		ResultSet rs = null;
 		try {
 			Statement st = mConn.createStatement();
-			rs = st.executeQuery("SELECT * FROM users WHERE users.id = "+uid+" and users.created_at > DATE_SUB(CURTIME(), INTERVAL 4 HOUR)");
+			rs = st.executeQuery("SELECT * FROM users WHERE users.id = " + uid
+					+ " and users.created_at > DATE_SUB(CURTIME(), INTERVAL 4 HOUR)");
 			int tcount = testCaseCount(uid);
 			/* Modify tcount to base */
-			if (!rs.isBeforeFirst() && tcount > 1) {   
+			if (!rs.isBeforeFirst() && tcount > 1) {
 				Statement st3 = mConn.createStatement();
 				st3.executeUpdate("UPDATE users SET completion = 1 WHERE id='" + uid + "'");
-			    return 1;
+				return 1;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return 0;
 	}
-	
-	public void updateCompletionState(String uid) throws ClassNotFoundException, IOException, SQLException{
+
+	public void updateCompletionState(String uid) throws ClassNotFoundException, IOException, SQLException {
 		try {
-				Statement st3 = mConn.createStatement();
-				st3.executeUpdate("UPDATE users SET completion = 2 WHERE id='" + uid + "'");
-				//GET COMPLETION CODE HERE AND REPLACE X IN SQL
-				st3.executeUpdate("UPDATE users SET completion_code = 'X' WHERE id='" + uid + "'");
+			Statement st3 = mConn.createStatement();
+			st3.executeUpdate("UPDATE users SET completion = 2 WHERE id='" + uid + "'");
+			boolean uniq = true;
+			Statement st = mConn.createStatement();
+			ResultSet rs;
+			String salt="";
+			while(uniq){
+				salt = getSaltString();
+				rs = st.executeQuery("select id from users where completion_code = '" + salt + "'");
+				if(!rs.isBeforeFirst())
+					uniq=false;
+			}
+			st3.executeUpdate("UPDATE users SET completion_code = '"+salt+"' WHERE id='" + uid + "'");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public String getCompletionCode(String uid) throws ClassNotFoundException, IOException, SQLException{
+	protected String getSaltString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 10) {
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+    }
+
+	public String getCompletionCode(String uid) throws ClassNotFoundException, IOException, SQLException {
 		String ret = "";
 		try {
 			Statement st = mConn.createStatement();
-			ResultSet rs = st.executeQuery("select completion_code from users where id = "+uid);
+			ResultSet rs = st.executeQuery("select completion_code from users where id = " + uid);
 			rs.next();
 			ret = rs.getString("completion_code");
 		} catch (SQLException e) {
@@ -376,17 +392,19 @@ public class DBProcess {
 
 	}
 
-	public ResultSet getTestCases(String rid, String gid, String uid, String gtype) throws ClassNotFoundException, IOException, SQLException {
+	public ResultSet getTestCases(String rid, String gid, String uid, String gtype)
+			throws ClassNotFoundException, IOException, SQLException {
 		ResultSet rs = null;
 		try {
 			Statement st = mConn.createStatement();
-			if(Integer.parseInt(gtype)>1) {
+			if (Integer.parseInt(gtype) > 1) {
 				rs = st.executeQuery(
 						"select testcase.*, user.name from testcases testcase, users user where testcase.uid=user.id AND testcase.rid="
 								+ rid + " AND testcase.gid=" + gid + " AND testcase.published='1'");
 			} else {
 				rs = st.executeQuery(
-						"select testcase.*, user.name from testcases testcase, users user where testcase.uid=user.id AND testcase.rid=" + rid + " AND testcase.uid=" + uid + " AND testcase.published='1'");
+						"select testcase.*, user.name from testcases testcase, users user where testcase.uid=user.id AND testcase.rid="
+								+ rid + " AND testcase.uid=" + uid + " AND testcase.published='1'");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -420,21 +438,25 @@ public class DBProcess {
 		}
 		return rs;
 	}
-	
-	public int editTestCase(String tid,String uid,String cont,String stim,String behv){
+
+	public int editTestCase(String tid, String uid, String cont, String stim, String behv) {
 		int ret = 0;
 		try {
-			//Insert into `testcase_history` (`pid`, `context`, `stimuli`, `behavior`, `created_at`)  SELECT id, context, stimuli, behavior, created_at from `testcases` where id='2'
+			// Insert into `testcase_history` (`pid`, `context`, `stimuli`,
+			// `behavior`, `created_at`) SELECT id, context, stimuli, behavior,
+			// created_at from `testcases` where id='2'
 			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
-					"Insert into `testcase_history` (`pid`, `context`, `stimuli`, `behavior`, `created_at`)  SELECT id, context, stimuli, behavior, created_at from `testcases` where id="+tid);
+					"Insert into `testcase_history` (`pid`, `context`, `stimuli`, `behavior`, `created_at`)  SELECT id, context, stimuli, behavior, created_at from `testcases` where id="
+							+ tid);
 			statement.executeUpdate();
 			statement.close();
-			
+
 			Statement st = mConn.createStatement();
-			String sql = "UPDATE testcases SET context = '" + cont + "', stimuli = '" + stim + "', behavior = '" + behv + "' WHERE id='" + tid + "'";
+			String sql = "UPDATE testcases SET context = '" + cont + "', stimuli = '" + stim + "', behavior = '" + behv
+					+ "' WHERE id='" + tid + "'";
 			ret = st.executeUpdate(sql);
-			
-		} catch (SQLException e){
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return ret;
