@@ -116,6 +116,9 @@
 	                  </a>
                 
                 </li>
+                <li style="color: #2a3f54;margin-top: 18px;font-weight: bold;font-size: medium;">
+                	<%= session.getAttribute("name").toString() %>
+                </li>
               </ul>
             </nav>
           </div>

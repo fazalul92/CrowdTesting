@@ -94,8 +94,9 @@ public class DBProcess {
 		int count = 0;
 		int completion = 0;
 		String dtime = currentDateTIme();
-		NameGen gen = new NameGen();
-		String name = gen.getName();
+		/*NameGen gen = new NameGen();
+		String name = gen.getName();*/
+		String name = "Participant";
 		try {
 			PreparedStatement statement = mConn
 					.prepareStatement("INSERT INTO `users`(`mturk_id`, `created_at`, `completion`, `name`) VALUES ('"
@@ -178,8 +179,8 @@ public class DBProcess {
 			rs.next();
 			int gid = rs.getInt("gid");
 			int i = 1;
-			for (i = 1; rs.getString("uid" + i) != null; i++)
-				;
+			for (i = 1; rs.getString("uid" + i) != null; i++);
+			String name = "Participant "+i;
 			String uidn = "uid" + i;
 			if (i < 3) {
 				count = st1.executeUpdate("UPDATE usergroups SET " + uidn + " = " + uid + " WHERE gid=" + gid);
@@ -189,7 +190,7 @@ public class DBProcess {
 				st1.executeUpdate("UPDATE usergroups SET status = 2 WHERE gid=" + (gid + 1));
 			}
 			st1.executeUpdate(
-					"UPDATE users SET gid = " + gid + " AND group_type = " + rs.getInt("type") + " WHERE id=" + uid);
+					"UPDATE users SET gid = " + gid + ", group_type = " + rs.getInt("type") + ", name='"+name+"' WHERE id=" + uid);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

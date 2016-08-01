@@ -16,6 +16,7 @@
 			rs.next();
 			session.setAttribute("userid", ret);
 			session.setAttribute("group_type", rs.getInt("group_type"));
+			session.setAttribute("name", rs.getString("name"));
 			session.setAttribute("state", rs.getInt("state"));
 			session.setAttribute("groupid", rs.getString("gid"));
 			if(rs.getInt("completion")==0){
