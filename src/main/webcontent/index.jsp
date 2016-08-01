@@ -39,7 +39,7 @@
             <form method="post" action="exec/loginprocess.jsp">
               <h1>Login</h1>
               <div>
-                <input name="mturk" type="text" class="form-control" placeholder="MTurk ID" required="" />
+                <input name="mturk" type="text" class="form-control" placeholder="Amazon MTurk ID" required="" />
               </div>
               <div>
                 <input type="submit" class="btn btn-default submit" value="Log In" />
@@ -47,7 +47,23 @@
 
               <div class="clearfix"></div>
 
-              <div class="separator">
+						<div>
+							<p>
+								This HIT is part of a research study being conducted at
+								Rochester Institute of Technology. Please review the <a
+									href="doc/informed_consent.pdf">informed consent</a> form and <b>check
+									the box</b> below to continue.
+							</p>
+
+							<p>I have read and understand the information in informed
+								consent form. I will receive a copy of this form if I ask for
+								one. I agree to participate in this study with the understanding
+								that I may choose not to participate or to stop participating at
+								any time without penalty or loss of benefits to which I am
+								otherwise entitled. I understand that by clicking to proceed
+								with the study, I agree to consent to these terms.</p>
+						</div>
+						<div class="separator">
                 <div class="clearfix"></div>
                 <br />
 
