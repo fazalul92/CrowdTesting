@@ -7,6 +7,7 @@
 	if (rs.next()) {
 		session.setAttribute("userid", rs.getString("id"));
 		session.setAttribute("groupid", rs.getString("gid"));
+		session.setAttribute("group_type", rs.getInt("group_type"));
 		session.setAttribute("name", rs.getString("name"));
 		session.setAttribute("auth", true);
 		String[] StateInfo = dbProc.updateState(uid, session.getAttribute("state").toString());
