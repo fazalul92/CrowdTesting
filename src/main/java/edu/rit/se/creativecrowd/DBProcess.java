@@ -94,8 +94,8 @@ public class DBProcess {
 		int count = 0;
 		int completion = 0;
 		String dtime = currentDateTIme();
-		NameGenerator gen = new NameGenerator();
-		String name = gen.getName() + " " + gen.getName();
+		NameGen gen = new NameGen();
+		String name = gen.getName();
 		try {
 			PreparedStatement statement = mConn
 					.prepareStatement("INSERT INTO `users`(`mturk_id`, `created_at`, `completion`, `name`) VALUES ('"
