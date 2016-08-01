@@ -2,7 +2,7 @@
 <%@ page import="edu.rit.se.creativecrowd.DBProcess"%>
 <%	
 	String uid = session.getAttribute("userid").toString();
-	Enumeration en = request.getParameterNames();
+	Enumeration<String> en = request.getParameterNames();
 	DBProcess dbProc = new DBProcess();
 	int ret = 0;
 	while (en.hasMoreElements()) {
