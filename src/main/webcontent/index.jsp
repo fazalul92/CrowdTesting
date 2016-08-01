@@ -41,29 +41,40 @@
               <div>
                 <input name="mturk" type="text" class="form-control" placeholder="Amazon MTurk ID" required="" />
               </div>
-              <div>
-                <input type="submit" class="btn btn-default submit" value="Log In" />
-              </div>
+              
 
-              <div class="clearfix"></div>
-
-						<div>
+						<div style="text-align: justify">
 							<p>
 								This HIT is part of a research study being conducted at
 								Rochester Institute of Technology. Please review the <a
 									href="doc/informed_consent.pdf">informed consent</a> form and <b>check
 									the box</b> below to continue.
 							</p>
-
-							<p>I have read and understand the information in informed
+							<table>
+								<tr>
+									<td valign="top" style="padding-right:5px;">
+										<input type="checkbox" name="consent" value="checked" required>
+									</td>
+									<td style="text-align: justify">
+									<p>I have read and understand the information in informed
 								consent form. I will receive a copy of this form if I ask for
 								one. I agree to participate in this study with the understanding
 								that I may choose not to participate or to stop participating at
 								any time without penalty or loss of benefits to which I am
 								otherwise entitled. I understand that by clicking to proceed
 								with the study, I agree to consent to these terms.</p>
+									</td>
+								</tr>
+							</table>
+							
+								
 						</div>
 						<div class="separator">
+              <div>
+                <input type="submit" class="btn btn-default submit" value="Log In" />
+              </div>
+
+              <div class="clearfix"></div>
                 <div class="clearfix"></div>
                 <br />
 
