@@ -43,19 +43,19 @@
               </div>
               
 
-						<div style="text-align: justify">
+						<div style="text-align: left">
 							<p>
 								This HIT is part of a research study being conducted at
 								Rochester Institute of Technology. Please review the <a
-									href="doc/informed_consent.pdf">informed consent</a> form and <b>check
-									the box</b> below to continue.
+									href="doc/informed_consent.pdf" class="text-primary">informed
+									consent</a> form and check the box below to continue.
 							</p>
 							<table>
 								<tr>
 									<td valign="top" style="padding-right:5px;">
 										<input type="checkbox" name="consent" value="checked" required>
 									</td>
-									<td style="text-align: justify">
+									<td style="text-align: left">
 									<p>I have read and understand the information in informed
 								consent form. I will receive a copy of this form if I ask for
 								one. I agree to participate in this study with the understanding
@@ -70,8 +70,8 @@
 								
 						</div>
 						<div class="separator">
-              <div>
-                <input type="submit" class="btn btn-default submit" value="Log In" />
+              <div class="col-md-4 center-block">
+                <input type="submit" class="btn btn-primary submit" value="Log In" />
               </div>
 
               <div class="clearfix"></div>
