@@ -241,7 +241,7 @@ public class DBProcess {
 			String[] tables = {"presurvey_responses", "discpersonality_responses", "creativity_responses"};
 			Statement st = mConn.createStatement();
 			for(int i=0;i<tables.length;i++){
-				rs = st.executeQuery("SELECT COUNT(*) as nos FROM "+tables[i]+" where uid=" + uid);
+				rs = st.executeQuery("SELECT COUNT(*) as nos FROM "+tables[i]+" where user_id=" + uid);
 				rs.next();
 				if(rs.getInt("nos")>0)
 					count+=1;
@@ -259,7 +259,7 @@ public class DBProcess {
 			String[] tables = {"postsurvey_responses"};
 			Statement st = mConn.createStatement();
 			for(int i=0;i<tables.length;i++){
-				rs = st.executeQuery("SELECT COUNT(*) as nos FROM "+tables[i]+" where uid=" + uid);
+				rs = st.executeQuery("SELECT COUNT(*) as nos FROM "+tables[i]+" where user_id=" + uid);
 				rs.next();
 				if(rs.getInt("nos")>0)
 					count+=1;
@@ -369,7 +369,7 @@ public class DBProcess {
 		String dtime = currentDateTIme();
 		try {
 			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
-					"INSERT INTO `discpersonality_responses`(`uid`, `group_no`, `item_no`, `response`, `created_at`) VALUES ('"
+					"INSERT INTO `discpersonality_responses`(`user_id`, `group_no`, `item_no`, `response`, `created_at`) VALUES ('"
 							+ uid + "','" + gid + "','" + iid + "','" + val + "','" + dtime + "')");
 			count += statement.executeUpdate();
 			statement.close();

@@ -109,10 +109,22 @@
 										<td>4 hours</td>
 									</tr>
 									<tr>
+										<td>Pre-Surveys</td>
+										<td><%= dbProc.preSurveyCount(Integer.parseInt(session.getAttribute("userid").toString())) %>
+										</td>
+										<td>3</td>
+									</tr>
+									<tr>
 										<td>Test Cases</td>
 										<td><%= dbProc.testCaseCount(Integer.parseInt(session.getAttribute("userid").toString())) %>
 										</td>
 										<td>2</td>
+									</tr>
+									<tr>
+										<td>Post-Surveys</td>
+										<td><%= dbProc.postSurveyCount(Integer.parseInt(session.getAttribute("userid").toString())) %>
+										</td>
+										<td>1</td>
 									</tr>
 								</table>
 							</div>
