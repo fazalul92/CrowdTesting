@@ -1,106 +1,136 @@
-<%@ page import ="edu.rit.se.creativecrowd.DBProcess" %>
+<%@ page import="edu.rit.se.creativecrowd.DBProcess"%>
 <%
 	DBProcess dbProc = new DBProcess();
 %>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <%@ include file="head.jsp" %>
-  <style>
-  	#detailsTable {
-  		padding:5px;
-  		margin: 50px auto;
-  	}
-  	#detailsTable td{
-  		padding:5px;
-  		margin: 0 auto;
-  		min-width: 200px;
-  		text-align: center;
-  		font-weight: bold;
-  	}
-  </style>
-  </head>
+<head>
+<%@ include file="head.jsp"%>
+<style>
+#detailsTable {
+	padding: 5px;
+	margin: 50px auto;
+}
 
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-		<%@ include file="menu.jsp" %>
-        <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Instructions</h3>
-              </div>
+#detailsTable td {
+	padding: 5px;
+	margin: 0 auto;
+	min-width: 200px;
+	text-align: center;
+	font-weight: bold;
+}
+</style>
+</head>
 
-            </div>
-            <!--  Start Panel -->
-            <div class="col-md-12 col-sm-12 col-xs-12">
-	            <div class="x_panel">
-	                  <div class="x_title">
-	                    <div class="clearfix"></div>
-	                  </div>
-	                  <div class="x_content">
-	                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam commodo arcu lorem, ut efficitur justo posuere id. Phasellus id nisi ut turpis accumsan posuere. Praesent sit amet sem ipsum. Quisque placerat ipsum eget aliquam dapibus. Nam ultricies dui nulla, et suscipit lacus efficitur eget. Nulla cursus commodo tortor, ut semper nibh volutpat ultrices. Donec dapibus tellus leo, vel vulputate mauris sodales sit amet.
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<%@ include file="menu.jsp"%>
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>Instructions</h3>
+						</div>
 
-						</p><p>In vel sapien laoreet, venenatis metus eget, porttitor augue. Phasellus viverra massa vel mi commodo imperdiet. Etiam urna nibh, sodales ac auctor at, mollis vel libero. Cras eleifend, mi et egestas facilisis, felis odio tincidunt lorem, porta malesuada ligula enim vel leo. Ut efficitur quis sapien eget auctor. Curabitur et erat in nulla viverra consectetur. Praesent vehicula velit elit. Aenean dui tellus, congue imperdiet velit eget, fringilla consectetur justo. Aenean posuere libero lorem, quis aliquam ipsum pharetra quis. Duis pulvinar vel arcu pretium vestibulum. Duis faucibus eros ut pulvinar pellentesque. Phasellus eu imperdiet turpis.
+					</div>
+					<!--  Start Panel -->
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="x_panel">
+							<div class="x_title">
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content">
+								<p>
+									<b>Thank you</b> for choosing to participate in this research
+									study. Your participation helps advance the state of the art on
+									crowd computing.
+								</p>
+								<p>
+									If you have questions or experience technical problems during
+									the study, please contact the researcher, Pradeep Murukannaiah,
+									at <a href="mailto:pkmvse@rit.edu" class="text-primary">pkmvse@rit.edu.</a>
+								</p>
 
-						</p><p>Pellentesque ultricies convallis tempus. Vivamus a dui nibh. Nam vitae aliquam dolor. Aliquam tempor neque est, vel accumsan est aliquam at. Sed elementum, lectus vel congue laoreet, ante ex dictum lacus, eu venenatis mauris diam ut orci. Phasellus eget sodales nisi. Fusce accumsan sollicitudin volutpat. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+								<h3>Study Overview</h3>
+								<p>The objective of this study is to engage the crowd to
+									generate ideas in form of test scenarios. This study consists
+									of three main steps:</p>
+								<ul>
+									<li><b>Presurveys</b> collect information about your
+										demographics and personality. Estimated time: 10 to 15
+										minutes, overall.</li>
+									<li><b>Main task</b> requires you to imagine and describe
+										test scenarios. Details on this task with will provided later.
+										Estimated time: 15 to 30 minutes.</li>
+									<li><b>Postsurvey</b> collects information about your
+										experience. Estimated time: 5 minutes.</li>
+								</ul>
+								<p>
+									You will complete these tasks sequentially. Once you finish a
+									step, you will be redirected to the next step, automatically.
+									After the post survey, you will be given a <b>completion
+										code</b> to submit the task on the Amazon MTurk website.
+								</p>
 
-						</p><p>Proin blandit blandit est, at convallis purus tincidunt eget. In eu eleifend urna, non lacinia erat. Nulla scelerisque molestie tincidunt. Ut vel pretium nunc. Proin varius, dui et sagittis condimentum, nisl mi sollicitudin lorem, consequat porta lacus nunc nec velit. Quisque facilisis odio at nunc suscipit, dapibus placerat enim imperdiet. Maecenas volutpat vehicula magna, non imperdiet justo egestas nec.
+								<h3>Important Note on the Time Requirement for the Main Task</h3>
+								<p>
+									Although the actual time the main task might take is about 15
+									to 30 minutes, we require that you sit on the task for <b>at
+										least three hours</b>. That is, the postsurvey will only appear
+									after three hours since your first login time.</p>
+									
+								<p>Please note that we do not require you to work on the
+									main task for all three hours. You can work on the main task
+									intermittently, even in multiple sittings. Your work is saved
+									at each step. You can login any number of times and each time
+									you login, you start from where you left.</p>
+									
+								<p>The HIT expires in 24 hours. So, you should finish all
+									steps with in 24 hours.</p>
+									
+								<h3>Payment and Bonus</h3>
+								<p>The base payment for completing the required tasks is USD
+									2.5. However, you may receive an bonus of upto USD 2.5 based on
+									the quality and quantity of your work on the main task. More
+									details will follow.</p>
+									
+								<table border="1" id="detailsTable">
+									<tr>
+										<td></td>
+										<td>Completed</td>
+										<td>Minimum Required</td>
+									</tr>
+									<tr>
+										<td>Time</td>
+										<td><%= dbProc.timeSinceLogin(session.getAttribute("userid").toString()) %>
+										</td>
+										<td>4 hours</td>
+									</tr>
+									<tr>
+										<td>Test Cases</td>
+										<td><%= dbProc.testCaseCount(Integer.parseInt(session.getAttribute("userid").toString())) %>
+										</td>
+										<td>2</td>
+									</tr>
+								</table>
+							</div>
+							<div class="ln_solid"></div>
+						</div>
+					</div>
+					<!-- End Panel -->
 
-						</p><p>In rhoncus ullamcorper est. Etiam varius dolor at ex scelerisque vulputate. Suspendisse ornare lorem in magna sagittis posuere. Aenean cursus nunc mollis porttitor lacinia. Nunc lacus lectus, rhoncus a turpis at, semper varius mi. Etiam vel hendrerit ipsum, eget tempus enim. Nullam rhoncus tincidunt felis ac mollis. Donec sit amet sem vestibulum, maximus leo sit amet, mattis nulla. Phasellus et nunc ut mauris gravida porttitor. Cras nec consequat orci, quis bibendum magna. Vestibulum lobortis magna et mauris dictum imperdiet.
-	                  </p>
-	                  <table border="1" id="detailsTable">
-	                  	<tr>
-	                  		<td>
-	                  		</td>
-	                  		<td>
-	                  			Completed
-	                  		</td>
-	                  		<td>
-	                  			Minimum Required
-	                  		</td>
-	                  	</tr>
-	                  	<tr>
-	                  		<td>
-	                  			Time
-	                  		</td>
-	                  		<td>
-	                  			<%= dbProc.timeSinceLogin(session.getAttribute("userid").toString()) %>
-	                  		</td>
-	                  		<td>
-	                  			4 hours
-	                  		</td>
-	                  	</tr>
-	                  	<tr>
-	                  		<td>
-	                  			Test Cases
-	                  		</td>
-	                  		<td>
-	                  			<%= dbProc.testCaseCount(Integer.parseInt(session.getAttribute("userid").toString())) %>
-	                  		</td>
-	                  		<td>
-	                  			2
-	                  		</td>
-	                  	</tr>
-	                  </table>
-	                  </div>
-	                  <div class="ln_solid"></div>
-	            </div>
-            </div>
-            <!-- End Panel -->
-            
-            
-           </div>
-        </div>
-        <!-- /page content -->
 
-        
-	<%@ include file="scripts.jsp" %>
-	
-    <script src="build/js/custom.min.js"></script>
-  </body>
+				</div>
+			</div>
+			<!-- /page content -->
+
+
+			<%@ include file="scripts.jsp"%>
+
+			<script src="build/js/custom.min.js"></script>
+</body>
 </html>
 <%
 	dbProc.disConnect();
