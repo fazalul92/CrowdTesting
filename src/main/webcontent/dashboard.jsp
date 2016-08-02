@@ -44,13 +44,58 @@
 							<div class="x_content">
 								<p>
 									<b>Thank you</b> for choosing to participate in this research
-									study. If you have questions or experience technical problems
-									during the study, please contact the researcher, Pradeep
-									Murukannaiah, at
-									<a href="mailto:pkmvse@rit.edu" class="text-primary">pkmvse@rit.edu.</a>
+									study. Your participation helps advance the state of the art on
+									crowd computing.
 								</p>
-								
-								<p><b>Study Overview:</b> This study consists of </p>
+								<p>
+									If you have questions or experience technical problems during
+									the study, please contact the researcher, Pradeep Murukannaiah,
+									at <a href="mailto:pkmvse@rit.edu" class="text-primary">pkmvse@rit.edu.</a>
+								</p>
+
+								<h3>Study Overview</h3>
+								<p>The objective of this study is to engage the crowd to
+									generate ideas in form of test scenarios. This study consists
+									of three main steps:</p>
+								<ul>
+									<li><b>Presurveys</b> collect information about your
+										demographics and personality. Estimated time: 10 to 15
+										minutes, overall.</li>
+									<li><b>Main task</b> requires you to imagine and describe
+										test scenarios. Details on this task with will provided later.
+										Estimated time: 15 to 30 minutes.</li>
+									<li><b>Postsurvey</b> collects information about your
+										experience. Estimated time: 5 minutes.</li>
+								</ul>
+								<p>
+									You will complete these tasks sequentially. Once you finish a
+									step, you will be redirected to the next step, automatically.
+									After the post survey, you will be given a <b>completion
+										code</b> to submit the task on the Amazon MTurk website.
+								</p>
+
+								<h3>Important Note on the Time Requirement for the Main Task</h3>
+								<p>
+									Although the actual time the main task might take is about 15
+									to 30 minutes, we require that you sit on the task for <b>at
+										least three hours</b>. That is, the postsurvey will only appear
+									after three hours since your first login time.</p>
+									
+								<p>Please note that we do not require you to work on the
+									main task for all three hours. You can work on the main task
+									intermittently, even in multiple sittings. Your work is saved
+									at each step. You can login any number of times and each time
+									you login, you start from where you left.</p>
+									
+								<p>The HIT expires in 24 hours. So, you should finish all
+									steps with in 24 hours.</p>
+									
+								<h3>Payment and Bonus</h3>
+								<p>The base payment for completing the required tasks is USD
+									2.5. However, you may receive an bonus of upto USD 2.5 based on
+									the quality and quantity of your work on the main task. More
+									details will follow.</p>
+									
 								<table border="1" id="detailsTable">
 									<tr>
 										<td></td>
