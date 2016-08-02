@@ -234,6 +234,42 @@ public class DBProcess {
 		return 0;
 	}
 
+	public int preSurveyCount(int uid) throws ClassNotFoundException, IOException, SQLException {
+		ResultSet rs = null;
+		int count=0;
+		try {
+			String[] tables = {"presurvey_responses", "discpersonality_responses", "creativity_responses"};
+			Statement st = mConn.createStatement();
+			for(int i=0;i<tables.length;i++){
+				rs = st.executeQuery("SELECT COUNT(*) as nos FROM "+tables[i]+" where uid=" + uid);
+				rs.next();
+				if(rs.getInt("nos")>0)
+					count+=1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	public int postSurveyCount(int uid) throws ClassNotFoundException, IOException, SQLException {
+		ResultSet rs = null;
+		int count=0;
+		try {
+			String[] tables = {"postsurvey_responses"};
+			Statement st = mConn.createStatement();
+			for(int i=0;i<tables.length;i++){
+				rs = st.executeQuery("SELECT COUNT(*) as nos FROM "+tables[i]+" where uid=" + uid);
+				rs.next();
+				if(rs.getInt("nos")>0)
+					count+=1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
 	public int timeOutCheck(int uid) throws ClassNotFoundException, IOException, SQLException {
 		ResultSet rs = null;
 		try {

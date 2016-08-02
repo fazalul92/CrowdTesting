@@ -39,7 +39,7 @@
             <form method="post" action="exec/loginprocess.jsp">
               <h1>Login</h1>
               <div>
-                <input name="mturk" type="text" class="form-control" placeholder="Amazon MTurk ID" required="" />
+                <input name="mturk" type="text" class="form-control" placeholder="Amazon MTurk ID" required minlength=5 />
               </div>
               
 
