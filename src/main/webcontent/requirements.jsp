@@ -15,39 +15,41 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Requirements</h3>
+                <h3>Requirement</h3>
               </div>
 
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+	            <div class="x_panel">
+	                  <div class="x_content">
+	                 
+	                    <!-- Requirement Content Goes Here -->
+	                    Sample Placeholder Sample Placeholder Sample Placeholder Sample Placeholder 
+	                    
+	                  </div>
+	            </div>
             </div>
 			  <%
 			    DBProcess dbProc = new DBProcess();
 			  	ResultSet rs1 = dbProc.getRequirements();
+			  	int i=1;
 			  %>
             <% while(rs1.next()) { %>
             <!--  Start Panel -->
             <div class="col-md-12 col-sm-12 col-xs-12">
 	            <div class="x_panel">
 	                  <div class="x_title">
-	                    <h2>Requirement ID <%= rs1.getString("id") %></h2>
+	                    <h2>Use Case <%= i++ %></h2>
 	                    <div class="clearfix"></div>
 	                  </div>
 	                  <div class="x_content">
-	                  	<b>Stakeholder</b><br>
-	                    <%= rs1.getString("stakeholder") %>
-	                  </div>
-	                  <div class="x_content">
-	                  	<b>Feature</b><br>
-	                    <%= rs1.getString("feature") %>
-	                  </div>
-	                  <div class="x_content">
-	                  	<b>Benefit</b><br>
-	                    <%= rs1.getString("benefit") %>
+	                    <%= rs1.getString("description") %>
 	                  </div>
 	                  <a href="viewTestCases.jsp?id=<%= rs1.getString("id") %>">
-		                  <button type="button" class="btn btn-primary">View Test Cases</button>
+		                  <button type="button" class="btn btn-primary">View Test Scenarios</button>
 					  </a>
 	                  <a href="addTestCase.jsp?id=<%= rs1.getString("id") %>">
-	                  	<button type="button" class="btn btn-success">Add Test Case</button>
+	                  	<button type="button" class="btn btn-success">Add Test Scenario</button>
 	                  </a>
 	            </div>
             </div>

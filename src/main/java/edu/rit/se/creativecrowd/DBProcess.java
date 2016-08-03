@@ -381,14 +381,14 @@ public class DBProcess {
 
 	}
 
-	public int addReqr(String stkholder, String feat, String benf)
+	public int addUseCase(String descr)
 			throws ClassNotFoundException, IOException, SQLException {
 		int count = 0;
 		String dtime = currentDateTIme();
 		try {
 			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
-					"INSERT INTO `requirements`(`stakeholder`, `feature`, `benefit`, `created_at`) VALUES ('"
-							+ stkholder + "','" + feat + "','" + benf + "','" + dtime + "')");
+					"INSERT INTO `requirements`(`description`, `created_at`) VALUES ('"
+							+ descr + "','" + dtime + "')");
 			count = statement.executeUpdate();
 			statement.close();
 

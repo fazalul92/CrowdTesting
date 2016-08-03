@@ -9,13 +9,13 @@
 <style>
 #detailsTable {
 	padding: 5px;
+	width:60%;
 	margin: 50px auto;
 }
 
 #detailsTable td {
 	padding: 5px;
 	margin: 0 auto;
-	min-width: 200px;
 	text-align: center;
 	font-weight: bold;
 }

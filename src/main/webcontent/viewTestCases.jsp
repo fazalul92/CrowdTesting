@@ -15,20 +15,21 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Test Cases</h3>
+                <h3>Test Scenarios</h3>
               </div>
 
             </div>
 			  <%
 			    DBProcess dbProc = new DBProcess();
 			  	ResultSet rs = dbProc.getTestCases(request.getParameter("id"),session.getAttribute("groupid").toString(),session.getAttribute("userid").toString(),session.getAttribute("group_type").toString());
+			  	int i=1;
 			  %>
             <% while(rs.next()) { %>
             <!--  Start Panel -->
             <div class="col-md-12 col-sm-12 col-xs-12">
 	            <div class="x_panel">
 	                  <div class="x_title">
-	                    <h2>Testcase ID <%= rs.getString("id") %><small><%= rs.getString("name") %></small></h2>
+	                    <h2>Testcase <%= i++ %><small><%= rs.getString("name") %></small></h2>
 	                    <div class="clearfix"></div>
 	                  </div>
 	                  <div class="x_content">
@@ -36,11 +37,11 @@
 	                    <%= rs.getString("context") %>
 	                  </div>
 	                  <div class="x_content">
-	                  <b>Stimuli</b><br/>
+	                  <b>Stimulus</b><br/>
 	                    <%= rs.getString("stimuli") %>
 	                  </div>
 	                  <div class="x_content">
-	                  <b>Behavior</b><br/>
+	                  <b>Response</b><br/>
 	                    <%= rs.getString("behavior") %>
 	                  </div>
 	                  <table border="0" style="width:100%;">
