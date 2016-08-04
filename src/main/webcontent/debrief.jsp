@@ -2,6 +2,15 @@
 <html lang="en">
 <head>
 <%@ include file="head.jsp"%>
+<style>
+h2 {
+	font-size: 24px
+}
+
+h3 {
+	font-size: 18px
+}
+</style>
 </head>
 
 <body class="nav-md">
@@ -56,67 +65,88 @@
 									application and use case, for example.</p>
 
 								<ul>
-									<li><b>Requirement:</b> A smart home automatically locks
-										and unlocks doors</li>
-									<li><b>Use cases:</b>
-										<ul>
+									<li><b>Requirement:</b> A smart home should automatically lock
+										and unlock doors.</li>
+									<li><b>Use case 1:</b> When an authorized vehicle comes to
+										the front gates, the smart home automatically opens the gates.</li>
+									<li><b>Use case 2:</b> After a vehicle passes through the
+										front gates, the smart home automatically locks the gates.</li>
+									<!--<ul>
 											<li>When an authorized vehicle comes to the front gate,
 												the smart home automatically opens the gate.</li>
-											<!-- <li>When an authorized person comes to the front door,
+											<li>When an authorized person comes to the front door,
 												the smart home automatically unlocks the door for the
-												person.</li> -->
-										</ul></li>
+												person.</li>
+										</ul>-->
 								</ul>
 
 								<h3>What is a test scenario?</h3>
 
 								<p>A test scenario describes a way to check whether the
-									application meets the prescribed requirement or not. We
-									describe a test scenario via stimulus, response, and context
-									described below.</p>
+									application meets a prescribed use case or not. We describe a
+									test scenario via stimulus, context, and response, described
+									below.</p>
 
 								<ul>
 									<li><b>Stimulus</b> describes how you initiate the
 										application to react in some way.</li>
+                  <li><b>Context</b> describes the condition in which the
+                    stimulus occurs.</li>										
 									<li><b>Response</b> describes what you expect the
 										application to do in response to the stimulus.</li>
-									<li><b>Context</b> describes the condition in which the
-										stimulus occurs.</li>
 								</ul>
 
-								<p>Consider two test scenarios for the requirement and use
-									case provided above, for example.</p>
+								<p>Consider three test scenarios for the requirement and use
+									cases above, for example.</p>
 
 								<ul>
-									<li>Test scenario 1:
+									<li>Test scenario 1 for Use case 1:
 										<ul>
 											<li><b>Stimulus: </b>I drive my motorbike to the front
 												gate.</li>
+                      <li><b>Context: </b>My motorbike is authorized; it is
+                        night time.</li>												
 											<li><b>Response: </b>Front gate should open</li>
-											<li><b>Context: </b>My motorbike is authorized; it is
-												night time.</li>
 										</ul>
 									</li>
-									<li>Test scenario 2:
+									<li>Test scenario 2 for Use case 1:
 										<ul>
 											<li><b>Stimulus: </b>My friend drives his car to the
 												front gate.</li>
+                      <li><b>Context: </b>My friend's car is not authorized.
+                        His car is same make, model, and color as my authorized car.
+                        It is day time.</li>												
 											<li><b>Response: </b>Front gate should not open.</li>
-											<li><b>Context: </b>My friend's car is not authorized.
-												His car is same make, model, and color as my authorized car.
-												It is day time.</li>
 										</ul>
 									</li>
+                  <li>Test scenario 3 for Use case 2:
+                    <ul>
+											<li><b>Stimulus: </b>Once the gate is opened, I drive my
+												car thorough the gates but stop it before passing through
+												the gates completely.</li>
+											<li><b>Context: </b>My car is authorized. </li>
+											<li><b>Response: </b>Front gates should not close as
+												long as my card does not pass through completely.</li>
+										</ul>
+                  </li>									
 								</ul>
 
+                <h3>Important Notes</h3>
+
 								<p>
-									<b>Important note: </b> It is important to be <b>creative</b>
-									in generating test scenarios. Imagine the use cases and misuse
-									cases. Imagine potentially scenarios in which the application
-									may break. Imagine potential ways in which the application may
-									be stressed.
+									It is important to be <b>creative</b> in generating test
+									scenarios. The following are some points you can keep in mind.
 								</p>
 
+								<ul>
+									<li>Imagine how end-users employ the application.</li>
+									<li>Imagine some potential ways in which the application
+										may be misused.</li>
+									<li>Imagine potential scenarios in which the application
+										may break.</li>
+									<li>Imagine potential ways in which the application may be
+										stressed.</li>
+								</ul>
 								<!-- Nominal Group Instructions -->
 								<%
 									  if (Integer.parseInt(session.getAttribute("group_type").toString()) == 1) {
