@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2016 at 11:12 PM
+-- Generation Time: Aug 03, 2016 at 07:12 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `message` varchar(25) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=69 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=73 ;
 
 -- --------------------------------------------------------
 
@@ -210,12 +210,10 @@ CREATE TABLE IF NOT EXISTS `presurvey_responses` (
 
 CREATE TABLE IF NOT EXISTS `requirements` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `stakeholder` varchar(100) NOT NULL,
-  `feature` varchar(500) NOT NULL,
-  `benefit` varchar(500) NOT NULL,
+  `description` varchar(500) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -246,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `testcase_history` (
   `behavior` varchar(500) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -265,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `testcases` (
   `created_at` datetime NOT NULL,
   `published` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 

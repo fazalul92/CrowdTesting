@@ -24,7 +24,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Add Test Case<small></small></h2>
+                  <h2>Add Test Scenario<small></small></h2>
                   <div class="clearfix"></div>
                 </div>
                 <form method="post" action="exec/addTestCase.jsp">
@@ -44,13 +44,13 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <textarea name="stimuli" id="stimuli" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Stimuli" maxlength="500"></textarea>
+                    <textarea name="stimuli" id="stimuli" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Stimulus" maxlength="500"></textarea>
                   </div>
                   
                 </div>
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <textarea name="behavior" id="behavior" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Behavior" maxlength="500"></textarea>
+                    <textarea name="behavior" id="behavior" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Response" maxlength="500"></textarea>
                   </div>
                   
                 </div>
