@@ -59,6 +59,18 @@
 	                    	
 	                    			<% } %>
 	                    	</select></td>
+	                    	<% } else if (rs1.getString("question_type").equals("multiple_choice_radio")) { 
+	                    		String answers = rs1.getString("answer_choices");
+	                    		String[] choices = answers.split("\\|");
+	                    	%>
+	                          <th scope="row"><label class="" for="<%= rs1.getInt("id") %>"><%= rs1.getString("description") %> <span class="required">*</span></label></th>
+	                          <td>
+			                        <% for (int i = 0; i < choices.length; i++) { %>
+			                        <div style="width: 20%; float: left;">
+			                        <input type="radio" name="<%= rs1.getInt("id") %>" value="<%= choices[i] %>" <% if(rs1.getInt("required")==1){ out.println("required"); } %> > <%= choices[i] %>
+	                    			</div>
+	                    			<% } %>
+	                    	</td>
 	                    	<% } %>
 	                        </tr>
 	                    <% } %>

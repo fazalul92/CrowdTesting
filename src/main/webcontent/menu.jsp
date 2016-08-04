@@ -17,7 +17,7 @@
                 <ul class="nav side-menu">
                   <li><a href="dashboard.jsp"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   </li>                  
-                  <% 
+                  <%
                   	String state = session.getAttribute("state").toString();
                   	DBProcess dbp = new DBProcess();
                   	ResultSet rsm = dbp.getMenu(state);

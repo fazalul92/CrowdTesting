@@ -45,13 +45,13 @@
 	                        <tr>
 	                        <% if (rs1.getString("question_type").equals("text")) { %>
 	                          <th scope="row"><label class="" for="<%= rs1.getInt("id") %>"><%= rs1.getString("description") %> <span class="required">*</span></label></th>
-	                          <td><input type="text" id="<%= rs1.getInt("id") %>" name="<%= rs1.getInt("id") %>" required="required" class="form-control" placeholder="<%= rs1.getString("answer_choices") %>"></td>
+	                          <td><input type="text" id="<%= rs1.getInt("id") %>" name="<%= rs1.getInt("id") %>" <% if(rs1.getInt("required")==1){ out.println("required"); } %> class="form-control" placeholder="<%= rs1.getString("answer_choices") %>"></td>
 	                    	<% } else if (rs1.getString("question_type").equals("multiple_choice")) { 
 	                    		String answers = rs1.getString("answer_choices");
 	                    		String[] choices = answers.split("\\|");
 	                    	%>
 	                          <th scope="row"><label class="" for="<%= rs1.getInt("id") %>"><%= rs1.getString("description") %> <span class="required">*</span></label></th>
-	                          <td><select name="<%= rs1.getInt("id") %>" required="required" class="form-control">
+	                          <td><select name="<%= rs1.getInt("id") %>" <% if(rs1.getInt("required")==1){ out.println("required"); } %> class="form-control">
 	                          		<option value=""></option>
 			                        <% for (int i = 0; i < choices.length; i++) { %>
 			                        
@@ -59,6 +59,18 @@
 	                    	
 	                    			<% } %>
 	                    	</select></td>
+	                    	<% } else if (rs1.getString("question_type").equals("multiple_choice_radio")) { 
+	                    		String answers = rs1.getString("answer_choices");
+	                    		String[] choices = answers.split("\\|");
+	                    	%>
+	                          <th scope="row"><label class="" for="<%= rs1.getInt("id") %>"><%= rs1.getString("description") %> <span class="required">*</span></label></th>
+	                          <td>
+			                        <% for (int i = 0; i < choices.length; i++) { %>
+			                        <div style="width: 20%; float: left;">
+			                        <input type="radio" name="<%= rs1.getInt("id") %>" value="<%= choices[i] %>" <% if(rs1.getInt("required")==1){ out.println("required"); } %> > <%= choices[i] %>
+	                    			</div>
+	                    			<% } %>
+	                    	</td>
 	                    	<% } %>
 	                        </tr>
 	                    <% } %>
