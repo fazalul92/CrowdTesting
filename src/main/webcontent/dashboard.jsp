@@ -55,14 +55,16 @@
 
 								<h3>Study Overview</h3>
 								<p>The objective of this study is to engage the crowd to
-									generate ideas in form of test scenarios. This study consists
-									of three main steps:</p>
+									generate ideas in the form of test scenarios. This study
+									consists of three main steps:</p>
 								<ul>
 									<li><b>Presurveys</b> collect information about your
 										demographics and personality. Estimated time: 10 to 15
-										minutes, overall.</li>
-									<li><b>Main task</b> requires you to imagine and describe
-										test scenarios. Details on this task with will provided later.
+										minutes.</li>
+									<li><b>Main task</b> requires you to come up with test
+										scenarios. This task requires you to exercise creativity, but
+										does not require you to have any specific domain knowledge.
+										Details on this task with will provided after presurveys.
 										Estimated time: 15 to 30 minutes.</li>
 									<li><b>Postsurvey</b> collects information about your
 										experience. Estimated time: 5 minutes.</li>
