@@ -447,11 +447,11 @@ INSERT INTO `presurvey_questions` (`id`, `description`, `question_type`, `answer
 INSERT INTO `statuses` (`id`, `seq_no`, `title`, `filename`, `next_seq`) VALUES
 (1, 1, 'Pre-Survey', 'presurvey.jsp', 2),
 (2, 2, 'Personality Survey', 'persona.jsp', 3),
-(4, 5, 'Further Instructions', 'debrief.jsp', 6),
-(5, 5, 'Add Use Cases', 'addUseCase.jsp', 6),
+(4, 5, 'Main Instructions', 'debrief.jsp', 6),
+(5, 5, 'Add Requirements', 'addUseCase.jsp', 6),
 (6, 6, 'Post-Survey', 'postsurvey.jsp', 7),
 (7, 7, 'Completion', 'completed.jsp', 8),
-(8, 5, 'View Use Cases', 'requirements.jsp', 6),
+(8, 5, 'View Requirements', 'requirements.jsp', 6),
 (9, 4, 'Group Creation', 'exec/groupassign.jsp', 5),
 (10, 3, 'Personality Survey', 'mbtipersona.jsp', 4);
 
