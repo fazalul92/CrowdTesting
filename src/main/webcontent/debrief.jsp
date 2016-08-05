@@ -56,21 +56,23 @@ h3 {
 									<!-- The picture to the right shows some Smart Home sensors. -->
 								</p>
 
-								<h3>What is a smart home application?</h3>
+								<h3>What is a smart home requirement?</h3>
 
-								<p>A smart home can host several applications. You will
-									produce test scenarios for one specific application described
-									in the next page. We describe a smart home application as a
-									requirement and a set of use cases. Consider the following
-									application and use case, for example.</p>
+								<p>A smart home may host several applications. Each smart
+									home application addresses one or more user requirements. You
+									will produce test scenarios for one specific application with a
+									given set of requirements (described in the next page). Below,
+									we describe a smart home application with two requirements as
+									an example.</p>
 
 								<ul>
-									<li><b>Requirement:</b> A smart home should automatically lock
-										and unlock doors.</li>
-									<li><b>Use case 1:</b> When an authorized vehicle comes to
-										the front gates, the smart home automatically opens the gates.</li>
-									<li><b>Use case 2:</b> After a vehicle passes through the
-										front gates, the smart home automatically locks the gates.</li>
+									<li><b>Application:</b> Smart doors: a smart home should
+										automatically lock and unlock doors.</li>
+									<li><b>Requirement 1:</b> When an authorized vehicle
+										approaches the garage, the smart home automatically opens the
+										garage door.</li>
+									<li><b>Requirement 2:</b> After a vehicle enters the
+										garage, the smart home automatically locks the garage door.</li>
 									<!--<ul>
 											<li>When an authorized vehicle comes to the front gate,
 												the smart home automatically opens the gate.</li>
@@ -83,9 +85,9 @@ h3 {
 								<h3>What is a test scenario?</h3>
 
 								<p>A test scenario describes a way to check whether the
-									application meets a prescribed use case or not. We describe a
-									test scenario via stimulus, context, and response, described
-									below.</p>
+									application meets a prescribed requirement or not. A test
+									scenario consists of three components: stimulus, context, and
+									response.</p>
 
 								<ul>
 									<li><b>Stimulus</b> describes how you initiate the
@@ -96,46 +98,47 @@ h3 {
 										application to do in response to the stimulus.</li>
 								</ul>
 
-								<p>Consider three test scenarios for the requirement and use
-									cases above, for example.</p>
+								<p>Consider three test scenarios for the requirements, for
+									example.</p>
 
 								<ul>
-									<li>Test scenario 1 for Use case 1:
+									<li>Test scenario 1 for Requirement 1:
 										<ul>
-											<li><b>Stimulus: </b>I drive my motorbike to the front
-												gate.</li>
-                      <li><b>Context: </b>My motorbike is authorized; it is
+											<li><b>Stimulus: </b>I drive my motorbike towards the
+												garage door.</li>
+											<li><b>Context: </b>My motorbike is authorized; it is
                         night time.</li>												
-											<li><b>Response: </b>Front gate should open</li>
+											<li><b>Response: </b>Garage door should open.</li>
 										</ul>
 									</li>
-									<li>Test scenario 2 for Use case 1:
+									<li>Test scenario 2 for Requirement 1:
 										<ul>
-											<li><b>Stimulus: </b>My friend drives his car to the
-												front gate.</li>
-                      <li><b>Context: </b>My friend's car is not authorized.
+											<li><b>Stimulus: </b>My friend drives his car towards my
+												garage door.</li>
+											<li><b>Context: </b>My friend's car is not authorized.
                         His car is same make, model, and color as my authorized car.
                         It is day time.</li>												
-											<li><b>Response: </b>Front gate should not open.</li>
+											<li><b>Response: </b>Garage door should not open.</li>
 										</ul>
 									</li>
-                  <li>Test scenario 3 for Use case 2:
+                  <li>Test scenario 3 for Requirement 2:
                     <ul>
-											<li><b>Stimulus: </b>Once the gate is opened, I drive my
-												car thorough the gates but stop it before passing through
-												the gates completely.</li>
+											<li><b>Stimulus: </b>Once the garage door is open, I
+												drive my car into the garage, but stop it before completely
+												entering the garage.</li>
 											<li><b>Context: </b>My car is authorized. </li>
-											<li><b>Response: </b>Front gates should not close as
-												long as my card does not pass through completely.</li>
+											<li><b>Response: </b>Garage door should not close as
+												long as my car is not completely inside.</li>
 										</ul>
                   </li>									
 								</ul>
 
-                <h3>Important Notes</h3>
+                <h3>Hits to Get Started</h3>
 
 								<p>
 									It is important to be <b>creative</b> in generating test
-									scenarios. The following are some points you can keep in mind.
+									scenarios. The following are some points you can keep in mind
+									to get started.
 								</p>
 
 								<ul>
@@ -157,7 +160,7 @@ h3 {
 									  } else if (Integer.parseInt(session.getAttribute("group_type").toString()) == 2) {
 									%>
 								<h2>Group Work</h2>
-								<p>You will work in group for this task. As part of the
+								<p>You will work in a group for this task. As part of the
 									group, you can see what test scenarios others are producing.
 									Although your scenarios can be inspired from the ones others
 									produce, your scenarios must be different from the ones others
@@ -169,7 +172,7 @@ h3 {
 									  } else if (Integer.parseInt(session.getAttribute("group_type").toString()) == 3) {
 									%>
 								<h2>Group Work</h2>
-								<p>You will work in group for this task. As part of the
+								<p>You will work in a group for this task. As part of the
 									group, you can see what test scenarios others are producing and
 									comment on those scenarios. Although your scenarios can be
 									inspired from the ones others produce, your scenarios must be
