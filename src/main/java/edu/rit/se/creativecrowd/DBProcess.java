@@ -381,6 +381,24 @@ public class DBProcess {
 
 	}
 
+	public int mbtiResponseData(String uid, String gid, String iid)
+			throws ClassNotFoundException, IOException, SQLException {
+		int count = 0;
+		String dtime = currentDateTIme();
+		try {
+			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
+					"INSERT INTO `mbtipersonality_responses`(`user_id`, `group_no`, `choice_no`, `created_at`) VALUES ('"
+							+ uid + "','" + gid + "','" + iid + "','" + dtime + "')");
+			count += statement.executeUpdate();
+			statement.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+
+	}
+
 	public int addUseCase(String descr)
 			throws ClassNotFoundException, IOException, SQLException {
 		int count = 0;
@@ -553,6 +571,21 @@ public class DBProcess {
 			e.printStackTrace();
 		}
 		return rs;
+	}
+	public void executeMbtiQuery(){
+		try{
+			Statement st = mConn.createStatement();
+			int num=0;
+			for(int i=1;i<211;i++){
+				String sql = "UPDATE mbtipersona SET choice_no="+num+" WHERE id=" + i;
+				st.executeUpdate(sql);
+				num++;
+				if(num==3)
+					num=0;
+			}
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
 	}
 
 }

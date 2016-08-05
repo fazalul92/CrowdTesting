@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 04, 2016 at 09:23 PM
+-- Generation Time: Aug 05, 2016 at 10:38 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -108,7 +108,37 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `message` varchar(25) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=75 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mbtipersonality_questions`
+--
+
+CREATE TABLE IF NOT EXISTS `mbtipersonality_questions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_no` int(11) NOT NULL,
+  `choice_no` int(11) NOT NULL DEFAULT '0',
+  `type` varchar(20) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=211 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mbtipersonality_responses`
+--
+
+CREATE TABLE IF NOT EXISTS `mbtipersonality_responses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `group_no` int(11) NOT NULL,
+  `choice_no` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
