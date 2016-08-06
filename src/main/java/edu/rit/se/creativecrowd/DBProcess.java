@@ -398,6 +398,77 @@ public class DBProcess {
 		return count;
 
 	}
+	
+	public int processPersonalities(String uid)
+			throws ClassNotFoundException, IOException, SQLException {
+		int ret = 0;
+		int IO=0,IC=0,IE=0,IA=0,IN=0;
+		int E=0,I=0,S=0,N=0,T=0,F=0,J=0,P=0;
+		int rem = 0, val = 0;
+		try {
+			Statement st = mConn.createStatement();
+			ResultSet rs;
+			rs = st.executeQuery("select * from personality_responses where user_id = "+uid);
+			while(rs.next()){
+				rem = rs.getInt("question_id")%10;
+				val = rs.getInt("description");
+				switch(rem){
+					case 1:	IO += val;
+						break;
+					case 2:	IC += val;	
+						break;
+					case 3:	IE += val;
+						break;
+					case 4:	IA += val;
+						break;
+					case 5:	IN += val;
+						break;
+					case 6:	IO += 6 - val;
+						break;
+					case 7:	IC += 6 - val;
+						break;
+					case 8:	IE += 6 - val;
+						break;
+					case 9:	IA += 6 - val;
+						break;
+					case 0:	IN += 6 - val;
+						break;
+				}
+			}
+			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
+					"INSERT INTO `personality_data`(`uid`, `ipip_E`, `ipip_A`, `ipip_C`, `ipip_N`, `ipip_O`) VALUES ('"
+							+ uid + "','" + IE + "','" + IA + "','" + IC + "','" + IN + "','" + IO + "')");
+			ret = statement.executeUpdate();
+			rs = st.executeQuery("select * from mbtipersonality_responses where user_id = " + uid);
+			while(rs.next()){
+				rem = rs.getInt("group_no")%7;
+				val = rs.getInt("choice_no");
+				switch(rem){
+				case 1: ret = (val==1) ? ++E : ++I;
+						break;
+				case 2:
+				case 3: ret = (val==1) ? ++S : ++N;
+						break;
+				case 4:
+				case 5: ret = (val==1) ? ++T : ++F;
+						break;
+				case 6:
+				case 0: ret = (val==1) ? ++J : ++P;
+						break;
+				}
+			}
+			String sql = "UPDATE personality_data SET mbti_E = '" + E + "', mbti_I = '" + I 
+					+ "', mbti_S = '" + S + "', mbti_N = '" + N 
+					+ "', mbti_T = '" + T + "', mbti_F = '" + F 
+					+ "', mbti_J = '" + J + "', mbti_P = '" + P
+					+ "' WHERE uid=" + uid;
+			ret = st.executeUpdate(sql);
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return ret;
+	}
 
 	public int addUseCase(String descr)
 			throws ClassNotFoundException, IOException, SQLException {

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2016 at 10:38 PM
+-- Generation Time: Aug 07, 2016 at 12:06 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `message` varchar(25) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=78 ;
 
 -- --------------------------------------------------------
 
@@ -138,7 +138,32 @@ CREATE TABLE IF NOT EXISTS `mbtipersonality_responses` (
   `choice_no` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personality_data`
+--
+
+CREATE TABLE IF NOT EXISTS `personality_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `mbti_E` int(11) DEFAULT NULL,
+  `mbti_I` int(11) DEFAULT NULL,
+  `mbti_S` int(11) DEFAULT NULL,
+  `mbti_N` int(11) DEFAULT NULL,
+  `mbti_T` int(11) DEFAULT NULL,
+  `mbti_F` int(11) DEFAULT NULL,
+  `mbti_J` int(11) DEFAULT NULL,
+  `mbti_P` int(11) DEFAULT NULL,
+  `ipip_E` int(11) DEFAULT NULL,
+  `ipip_A` int(11) DEFAULT NULL,
+  `ipip_C` int(11) DEFAULT NULL,
+  `ipip_N` int(11) DEFAULT NULL,
+  `ipip_O` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 

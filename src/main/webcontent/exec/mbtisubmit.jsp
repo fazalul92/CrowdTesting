@@ -11,10 +11,10 @@
     ret += dbProc.mbtiResponseData(uid, parameterName, parameterValue);
   }
   if (ret > 0) {
-  	/* String[] StateInfo = dbProc.updateState(uid,session.getAttribute("state").toString());
+  	String[] StateInfo = dbProc.updateState(uid,session.getAttribute("state").toString());
 	session.setAttribute("state", StateInfo[0]);
     dbProc.disConnect();
-    response.sendRedirect("../"+StateInfo[1]);*/
+    response.sendRedirect("../"+StateInfo[1]);
   } else {
 	dbProc.disConnect();
     response.sendRedirect("../discpersona.jsp");
