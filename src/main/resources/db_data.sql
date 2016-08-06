@@ -423,7 +423,12 @@ INSERT INTO `personality_questions` (`id`, `description`) VALUES
 INSERT INTO `postsurvey_questions` (`id`, `description`, `question_type`, `answer_choices`, `required`) VALUES
 (1, 'How long did the main tasks (excluding pre and post surveys) take?', 'text', 'duration in hours:minutes, e.g., 00:30 for thirty minutes', 1),
 (2, 'How do you rate the difficulty of main tasks?', 'multiple_choice', 'Very easy|Easy|Medium|High|Very high', 1),
-(3, 'Please provide any additional comments you have below', 'text', 'Optional comments', 0);
+(3, 'Please provide any additional comments you have below', 'text', 'Optional comments', 0),
+(4, 'On a scale of 1 to 5, 1 being the least and 5 being the most, answer the following questions', 'description', 'description', 0),
+(5, 'How satisfied are you with your contributions to the tasks?', 'multiple_choice_radio', '1|2|3|4|5', 1),
+(6, 'How cooperative were your team members?', 'multiple_choice_radio', '1|2|3|4|5', 1),
+(7, 'How effective were your team members'' inputs?', 'multiple_choice_radio', '1|2|3|4|5', 1),
+(8, 'How confident were you to share your work with other team members?', 'multiple_choice_radio', '1|2|3|4|5', 1);
 
 --
 -- Dumping data for table `presurvey_questions`
@@ -435,7 +440,7 @@ INSERT INTO `presurvey_questions` (`id`, `description`, `question_type`, `answer
 (3, 'What is the highest level of school you have completed or the highest degree you have received?', 'multiple_choice', 'Less than high school degree|High school degree or equivalent (e.g., GED)|Some college but no degree|Bachelor degree|Graduate degree', 1),
 (4, 'If you went to college, what was your major?', 'text', 'For example, computer science, mechanical engineering, psychology, music, law, etc.', 1),
 (5, 'Have you worked for a technology company?', 'multiple_choice', 'No|Yes; for less than a year|Yes; for one to five years|Yes; for more than five years', 1),
-(6, 'How do you rate your familiarity of concepts related to Computer Science, Information Techonology, and Computer Netowrks?', 'multiple_choice', 'Very low|Low|Medium|High|Very high', 1),
+(6, 'How do you rate your familiarity of concepts related to Computer Science, Information Techonology, and Software Engineering?', 'multiple_choice', 'Very low|Low|Medium|High|Very high', 1),
 (7, 'How do you rate your familiarity of concepts related to Smart Homes, Smart Cities, and Internet of Things?', 'multiple_choice', 'Very low|Low|Medium|High|Very high', 1),
 (8, 'Do you use any Smart Home technologies at your home?', 'multiple_choice', 'Yes|No|Not sure', 1),
 (9, 'Please use the text box if you need to clarify any of your answers above', 'text', 'Optional clarifications', 0);

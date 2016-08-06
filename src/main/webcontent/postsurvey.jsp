@@ -71,6 +71,11 @@
 	                    			</div>
 	                    			<% } %>
 	                    	</td>
+	                    	<% } else if (rs1.getString("question_type").equals("description")) { 
+	                    	%>
+	                          <th scope="row"><label class="" for="<%= rs1.getInt("id") %>"><%= rs1.getString("description") %> <span class="required"></span></label></th>
+	                          <td>
+	                    	</td>
 	                    	<% } %>
 	                        </tr>
 	                    <% } %>
