@@ -66,7 +66,7 @@ h3 {
 									an example.</p>
 
 								<ul>
-									<li><b>Application:</b> Smart doors: a smart home should
+									<li><b>Application:</b> Smart doors&mdash;A smart home should
 										automatically lock and unlock doors.</li>
 									<li><b>Requirement 1:</b> When an authorized vehicle
 										approaches the garage, the smart home automatically opens the
