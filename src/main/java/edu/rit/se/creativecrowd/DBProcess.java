@@ -499,6 +499,17 @@ public class DBProcess {
 		return rs;
 	}
 
+	public ResultSet getRequirement(String id) throws ClassNotFoundException, IOException, SQLException {
+		ResultSet rs = null;
+		try {
+			Statement st = mConn.createStatement();
+			rs = st.executeQuery("select * from requirements where id="+id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+
 	public int addTestCase(String rid, String uid, String gid, String cont, String stim, String behv)
 			throws ClassNotFoundException, IOException, SQLException {
 		int count = 0;

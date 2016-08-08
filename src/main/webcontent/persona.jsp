@@ -23,7 +23,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Personality Questions</h3>
+                <h3>Pre-Survey 2 </h3>
               </div>
 
             </div>
@@ -31,22 +31,36 @@
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Personality Questions <small>Step 2</small></h2>
-                    <div class="clearfix"></div>
-                  </div>
                   <div class="x_content">
-                    <br />
-                    
+                    <p>
+                    Please use the rating scale below to describe how accurately
+  each statement describes you. </p>
+  
+    <ol>
+  <li>Very Inaccurate</li>
+  <li>Moderately Inaccurate</li>
+  <li>Neither Inaccurate nor Accurate</li>
+  <li>Moderately Accurate</li>
+  <li>Very Accurate</li>
+ </ol>
+  
+  <p><b>Note: </b> Describe yourself as you generally are
+  now, not as you wish to be in the future. Describe yourself as you
+  honestly see yourself, in relation to other people you know of the
+  same sex as you are, and roughly your same age. So that you can
+  describe yourself in an honest manner, your responses will be kept in
+  absolute confidence. Please read each statement carefully, but do not over-analyze them. Some seem worded poorly. Go with what feels best.</p>
+
+  
                     <form class="form-horizontal form-label-left" method="post" id="persona" action="exec/persona.jsp">
                      <table class="table" style="border:0px;">
                      <thead>
-                     	<th>Question</th>
-                     	<th>1</th>
-                     	<th>2</th>
-                     	<th>3</th>
-                     	<th>4</th>
-                     	<th>5</th>
+                     	<th style="width:50%">Question</th>
+                     	<th style="width:10%">1</th>
+                     	<th style="width:10%">2</th>
+                     	<th style="width:10%">3</th>
+                     	<th style="width:10%">4</th>
+                     	<th style="width:10%">5</th>
                      </thead>
                       <tbody>
                         <% while(rs2.next()) { %>
@@ -81,10 +95,6 @@
 
         
 	<%@ include file="scripts.jsp" %>
-	<script type="text/javascript">
-			   $("#subm").click(function(){
-			       console.log($('#presurvey').serialize());
-			  }); 
-	</script>
+	<script src="build/js/custom.min.js"></script>
   </body>
 </html>

@@ -29,11 +29,16 @@
 					<div class="">
 						<div class="page-title">
 							<div class="title_left">
-								<h3>Personality Questions</h3>
+								<h3>Pre-Survey 3</h3>
 							</div>
 						</div>
 						<div class="clearfix"></div>
-
+<p>For each of the questions below, please choose the option that describes you the best. </p><p><b>Note: </b> Describe yourself as you generally are
+  now, not as you wish to be in the future. Describe yourself as you
+  honestly see yourself, in relation to other people you know of the
+  same sex as you are, and roughly your same age. So that you can
+  describe yourself in an honest manner, your responses will be kept in
+  absolute confidence. Please read each statement carefully, but do not over-analyze them. Some seem worded poorly. Go with what feels best.</p>
 						
 						<form id="discform" class="form-horizontal form-label-left" action="exec/mbtisubmit.jsp" method="POST">
 							<% for(int i = 0; i<35 ; i++) { %>

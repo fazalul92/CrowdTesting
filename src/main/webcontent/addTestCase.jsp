@@ -3,6 +3,12 @@
   <head>
   <%@ include file="head.jsp" %>
   </head>
+  <%
+  	DBProcess dbProc = new DBProcess();
+  	String rid = request.getParameter("id");
+  	ResultSet rs1 = dbProc.getRequirement(rid);
+  	rs1.next();
+  %>
 
   <body class="nav-md">
     <div class="container body">
@@ -14,12 +20,24 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Test Cases</h3>
+                <h3>Test Scenarios</h3>
               </div>
 
             </div>
             <div class="clearfix"></div>
             <div class="row">
+            <!--  Start Panel -->
+            <div class="col-md-12 col-sm-12 col-xs-12">
+	            <div class="x_panel">
+	                  <div class="x_title">
+	                    <h2>Requirement</h2>
+	                    <div class="clearfix"></div>
+	                  </div>
+	                  <div class="x_content">
+	                    <%= rs1.getString("description") %>
+	                  </div>
+	            </div>
+            </div>
             
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -38,13 +56,13 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <textarea name="context" id="context" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Context" maxlength="500"></textarea>
+                    <textarea name="stimuli" id="stimuli" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Stimulus" maxlength="500"></textarea>
                   </div>
                   
                 </div>
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <textarea name="stimuli" id="stimuli" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Stimulus" maxlength="500"></textarea>
+                    <textarea name="context" id="context" style="height:100px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="Context" maxlength="500"></textarea>
                   </div>
                   
                 </div>

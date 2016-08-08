@@ -44,13 +44,13 @@
                         <% while(rs1.next()) { %>
 	                        <tr>
 	                        <% if (rs1.getString("question_type").equals("text")) { %>
-	                          <th scope="row"><label class="" for="<%= rs1.getInt("id") %>"><%= rs1.getString("description") %> <span class="required">*</span></label></th>
+	                          <th scope="row"><label class="" for="<%= rs1.getInt("id") %>"><%= rs1.getString("description") %> <span class="required"><% if(rs1.getInt("required")==1){ out.println("*"); } %></span></label></th>
 	                          <td><input type="text" id="<%= rs1.getInt("id") %>" name="<%= rs1.getInt("id") %>" <% if(rs1.getInt("required")==1){ out.println("required"); } %> class="form-control" placeholder="<%= rs1.getString("answer_choices") %>"></td>
 	                    	<% } else if (rs1.getString("question_type").equals("multiple_choice")) { 
 	                    		String answers = rs1.getString("answer_choices");
 	                    		String[] choices = answers.split("\\|");
 	                    	%>
-	                          <th scope="row"><label class="" for="<%= rs1.getInt("id") %>"><%= rs1.getString("description") %> <span class="required">*</span></label></th>
+	                          <th scope="row"><label class="" for="<%= rs1.getInt("id") %>"><%= rs1.getString("description") %> <span class="required"><% if(rs1.getInt("required")==1){ out.println("*"); } %></span></label></th>
 	                          <td><select <% if(rs1.getInt("required")==1){ out.println("required"); } %> name="<%= rs1.getInt("id") %>" class="form-control">
 	                          		<option value=""></option>
 			                        <% for (int i = 0; i < choices.length; i++) { %>
@@ -63,7 +63,7 @@
 	                    		String answers = rs1.getString("answer_choices");
 	                    		String[] choices = answers.split("\\|");
 	                    	%>
-	                          <th scope="row"><label class="" for="<%= rs1.getInt("id") %>"><%= rs1.getString("description") %> <span class="required">*</span></label></th>
+	                          <th scope="row"><label class="" for="<%= rs1.getInt("id") %>"><%= rs1.getString("description") %> <span class="required"><% if(rs1.getInt("required")==1){ out.println("*"); } %></span></label></th>
 	                          <td>
 			                        <% for (int i = 0; i < choices.length; i++) { %>
 			                        <div style="width: 20%; float: left;">
@@ -98,8 +98,7 @@
 
         
 	<%@ include file="scripts.jsp" %>
-	<script type="text/javascript">
-	</script>
+	<script src="build/js/custom.min.js"></script>
   </body>
 </html>
 <% dbProc.disConnect(); %>

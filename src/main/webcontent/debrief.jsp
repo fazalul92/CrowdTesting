@@ -29,9 +29,6 @@ h3 {
 					<!--  Start Panel -->
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="x_panel">
-							<div class="x_title">
-								<div class="clearfix"></div>
-							</div>
 							<div class="x_content">
 								<h2>Task Description</h2>
 
@@ -207,7 +204,6 @@ h3 {
 								%>
 
 							</div>
-							<div class="ln_solid"></div>
 							<a href="requirements.jsp">
 								<button type="button" class="btn btn-success">I
 									Understand, Continue</button>
