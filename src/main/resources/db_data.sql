@@ -462,3 +462,9 @@ INSERT INTO `statuses` (`seq_no`, `title`, `filename`, `next_seq`) VALUES
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+INSERT INTO `requirements` (`description`, `created_at`) VALUES
+('If there is no movement or noise in a room for a preconfigured time, the smart home should automatically fade off the lights in that room, so as to save energy.', NOW()),
+('If a person walks into a dark room, the smart home should automatically turn on the lights in that room, so as to enhance convenience and safety.', NOW()),
+('If there is movement outside home when it is dark outside, the smart home should automatically turn on some lights, so that potential intruders are scared off.', NOW()),
+('A smart home should optimize the lighting (e.g., brightness and color) in a room based on the activity of the users in that room, so as to enhance user experience (assume that the desired lighting for an activity is preconfigured, e.g., dim lighting for watching TV).', NOW());
