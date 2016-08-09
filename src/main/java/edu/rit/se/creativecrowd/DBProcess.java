@@ -53,11 +53,12 @@ public class DBProcess {
 		long elapsedDays = different / daysInMilli;
 		different = different % daysInMilli;
 		long elapsedHours = different / hoursInMilli;
-		different = different % hoursInMilli; 
-		long elapsedMinutes = different / minutesInMilli; 
-		  
-		 /* different = different % minutesInMilli; long
-		 * elapsedSeconds = different / secondsInMilli;
+		different = different % hoursInMilli;
+		long elapsedMinutes = different / minutesInMilli;
+
+		/*
+		 * different = different % minutesInMilli; long elapsedSeconds =
+		 * different / secondsInMilli;
 		 *
 		 *
 		 * if(elapsedDays>0) ret = elapsedDays+" days, "+elapsedHours+" hours, "
@@ -95,8 +96,9 @@ public class DBProcess {
 		int count = 0;
 		int completion = 0;
 		String dtime = currentDateTIme();
-		/*NameGen gen = new NameGen();
-		String name = gen.getName();*/
+		/*
+		 * NameGen gen = new NameGen(); String name = gen.getName();
+		 */
 		String name = "Participant";
 		try {
 			PreparedStatement statement = mConn
@@ -169,36 +171,30 @@ public class DBProcess {
 		}
 		return count;
 	}
-	
+
 	public boolean checkAttention(String uid) throws SQLException {
 		int TrueCount = 0;
 		try {
-		Statement st = mConn.createStatement();
-		ResultSet rs = st.executeQuery("select generic_name, choice_no from generic_responses where user_id = "+uid);
-		while(rs.next()){
-			if(rs.getString("generic_name").contains("mbtigeneric")){
-				switch(rs.getString("generic_name")){
-				case "mbtigeneric1":
-				case "mbtigeneric3": 
-					TrueCount += (rs.getInt("choice_no") == 2) ? 1 : 0;
-					break;
-				case "mbtigeneric2":
-				case "mbtigeneric4": 
-					TrueCount += (rs.getInt("choice_no") == 1) ? 1 : 0;
-					break;
-				}
+			Statement st = mConn.createStatement();
+			ResultSet rs = st
+					.executeQuery("select generic_name, choice_no from generic_responses where user_id = " + uid);
+			while (rs.next()) {
+					if (rs.getString("generic_name").equals("mbtigeneric1")
+							|| rs.getString("generic_name").equals("mbtigeneric3"))
+						TrueCount += (rs.getInt("choice_no") == 2) ? 1 : 0;
+					else if (rs.getString("generic_name").equals("mbtigeneric2")
+							|| rs.getString("generic_name").equals("mbtigeneric4"))
+						TrueCount += (rs.getInt("choice_no") == 1) ? 1 : 0;
+					else if (rs.getString("generic_name").equals("personageneric1") && rs.getInt("choice_no") < 3)
+						TrueCount += 1;
+					else if (rs.getString("generic_name").equals("personageneric2") && rs.getInt("choice_no") > 3)
+						TrueCount += 1;
 			}
-			else if (rs.getString("generic_name").contains("personageneric")) {
-				if(rs.getString("generic_name").equals("personageneric1")&&rs.getInt("choice_no") < 3)
-					TrueCount+=1;
-				if(rs.getString("generic_name").equals("personageneric2")&&rs.getInt("choice_no") > 3)
-					TrueCount+=1;
-			}
-		}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(TrueCount>4)
+		System.out.println(uid + " "+ TrueCount);
+		if (TrueCount > 4)
 			return true;
 		else
 			return false;
@@ -210,26 +206,26 @@ public class DBProcess {
 		try {
 			Statement st = mConn.createStatement();
 			Statement st1 = mConn.createStatement();
-			if(checkAttention(uid)) {
+			if (checkAttention(uid)) {
 				rs = st.executeQuery("select * from usergroups where status=2 order by gid");
 				rs.next();
 				int gid = rs.getInt("gid");
 				int i = 1;
-				for (i = 1; rs.getString("uid" + i) != null; i++);
-				String name = "Participant "+i;
+				for (i = 1; rs.getString("uid" + i) != null; i++)
+					;
+				String name = "Participant " + i;
 				String uidn = "uid" + i;
 				if (i < 3) {
 					count = st1.executeUpdate("UPDATE usergroups SET " + uidn + " = " + uid + " WHERE gid=" + gid);
 				} else {
-					count = st1
-							.executeUpdate("UPDATE usergroups SET " + uidn + " = " + uid + ", status = 3 WHERE gid=" + gid);
+					count = st1.executeUpdate(
+							"UPDATE usergroups SET " + uidn + " = " + uid + ", status = 3 WHERE gid=" + gid);
 					st1.executeUpdate("UPDATE usergroups SET status = 2 WHERE gid=" + (gid + 1));
 				}
-				st1.executeUpdate(
-						"UPDATE users SET gid = " + gid + ", group_type = " + rs.getInt("type") + ", name='"+name+"' WHERE id=" + uid);
+				st1.executeUpdate("UPDATE users SET gid = " + gid + ", group_type = " + rs.getInt("type") + ", name='"
+						+ name + "' WHERE id=" + uid);
 			} else {
-				st1.executeUpdate(
-						"UPDATE users SET gid = -1, group_type = 1, name='Participant' WHERE id=" + uid);
+				st1.executeUpdate("UPDATE users SET gid = -1, group_type = 1, name='Participant' WHERE id=" + uid);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -276,15 +272,15 @@ public class DBProcess {
 
 	public int preSurveyCount(int uid) throws ClassNotFoundException, IOException, SQLException {
 		ResultSet rs = null;
-		int count=0;
+		int count = 0;
 		try {
-			String[] tables = {"presurvey_responses", "personality_responses", "mbtipersonality_responses"};
+			String[] tables = { "presurvey_responses", "personality_responses", "mbtipersonality_responses" };
 			Statement st = mConn.createStatement();
-			for(int i=0;i<tables.length;i++){
-				rs = st.executeQuery("SELECT COUNT(*) as nos FROM "+tables[i]+" where user_id=" + uid);
+			for (int i = 0; i < tables.length; i++) {
+				rs = st.executeQuery("SELECT COUNT(*) as nos FROM " + tables[i] + " where user_id=" + uid);
 				rs.next();
-				if(rs.getInt("nos")>0)
-					count+=1;
+				if (rs.getInt("nos") > 0)
+					count += 1;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -294,15 +290,15 @@ public class DBProcess {
 
 	public int postSurveyCount(int uid) throws ClassNotFoundException, IOException, SQLException {
 		ResultSet rs = null;
-		int count=0;
+		int count = 0;
 		try {
-			String[] tables = {"postsurvey_responses"};
+			String[] tables = { "postsurvey_responses" };
 			Statement st = mConn.createStatement();
-			for(int i=0;i<tables.length;i++){
-				rs = st.executeQuery("SELECT COUNT(*) as nos FROM "+tables[i]+" where user_id=" + uid);
+			for (int i = 0; i < tables.length; i++) {
+				rs = st.executeQuery("SELECT COUNT(*) as nos FROM " + tables[i] + " where user_id=" + uid);
 				rs.next();
-				if(rs.getInt("nos")>0)
-					count+=1;
+				if (rs.getInt("nos") > 0)
+					count += 1;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -336,30 +332,30 @@ public class DBProcess {
 			boolean uniq = true;
 			Statement st = mConn.createStatement();
 			ResultSet rs;
-			String salt="";
-			while(uniq){
+			String salt = "";
+			while (uniq) {
 				salt = getSaltString();
 				rs = st.executeQuery("select id from users where completion_code = '" + salt + "'");
-				if(!rs.isBeforeFirst())
-					uniq=false;
+				if (!rs.isBeforeFirst())
+					uniq = false;
 			}
-			st3.executeUpdate("UPDATE users SET completion_code = '"+salt+"' WHERE id='" + uid + "'");
+			st3.executeUpdate("UPDATE users SET completion_code = '" + salt + "' WHERE id='" + uid + "'");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	protected String getSaltString() {
-        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
-        while (salt.length() < 10) {
-            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-            salt.append(SALTCHARS.charAt(index));
-        }
-        String saltStr = salt.toString();
-        return saltStr;
-    }
+		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		StringBuilder salt = new StringBuilder();
+		Random rnd = new Random();
+		while (salt.length() < 10) {
+			int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+			salt.append(SALTCHARS.charAt(index));
+		}
+		String saltStr = salt.toString();
+		return saltStr;
+	}
 
 	public String getCompletionCode(String uid) throws ClassNotFoundException, IOException, SQLException {
 		String ret = "";
@@ -456,41 +452,50 @@ public class DBProcess {
 		return count;
 
 	}
-	
-	public int processPersonalities(String uid)
-			throws ClassNotFoundException, IOException, SQLException {
+
+	public int processPersonalities(String uid) throws ClassNotFoundException, IOException, SQLException {
 		int ret = 0;
-		int IO=0,IC=0,IE=0,IA=0,IN=0;
-		int E=0,I=0,S=0,N=0,T=0,F=0,J=0,P=0;
+		int IO = 0, IC = 0, IE = 0, IA = 0, IN = 0;
+		int E = 0, I = 0, S = 0, N = 0, T = 0, F = 0, J = 0, P = 0;
 		int rem = 0, val = 0;
 		try {
 			Statement st = mConn.createStatement();
 			ResultSet rs;
-			rs = st.executeQuery("select * from personality_responses where user_id = "+uid);
-			while(rs.next()){
-				rem = rs.getInt("question_id")%10;
+			rs = st.executeQuery("select * from personality_responses where user_id = " + uid);
+			while (rs.next()) {
+				rem = rs.getInt("question_id") % 10;
 				val = rs.getInt("description");
-				switch(rem){
-					case 1:	IO += val;
-						break;
-					case 2:	IC += val;	
-						break;
-					case 3:	IE += val;
-						break;
-					case 4:	IA += val;
-						break;
-					case 5:	IN += val;
-						break;
-					case 6:	IO += 6 - val;
-						break;
-					case 7:	IC += 6 - val;
-						break;
-					case 8:	IE += 6 - val;
-						break;
-					case 9:	IA += 6 - val;
-						break;
-					case 0:	IN += 6 - val;
-						break;
+				switch (rem) {
+				case 1:
+					IO += val;
+					break;
+				case 2:
+					IC += val;
+					break;
+				case 3:
+					IE += val;
+					break;
+				case 4:
+					IA += val;
+					break;
+				case 5:
+					IN += val;
+					break;
+				case 6:
+					IO += 6 - val;
+					break;
+				case 7:
+					IC += 6 - val;
+					break;
+				case 8:
+					IE += 6 - val;
+					break;
+				case 9:
+					IA += 6 - val;
+					break;
+				case 0:
+					IN += 6 - val;
+					break;
 				}
 			}
 			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
@@ -498,44 +503,44 @@ public class DBProcess {
 							+ uid + "','" + IE + "','" + IA + "','" + IC + "','" + IN + "','" + IO + "')");
 			ret = statement.executeUpdate();
 			rs = st.executeQuery("select * from mbtipersonality_responses where user_id = " + uid);
-			while(rs.next()){
-				rem = rs.getInt("group_no")%7;
+			while (rs.next()) {
+				rem = rs.getInt("group_no") % 7;
 				val = rs.getInt("choice_no");
-				switch(rem){
-				case 1: ret = (val==1) ? ++E : ++I;
-						break;
+				switch (rem) {
+				case 1:
+					ret = (val == 1) ? ++E : ++I;
+					break;
 				case 2:
-				case 3: ret = (val==1) ? ++S : ++N;
-						break;
+				case 3:
+					ret = (val == 1) ? ++S : ++N;
+					break;
 				case 4:
-				case 5: ret = (val==1) ? ++T : ++F;
-						break;
+				case 5:
+					ret = (val == 1) ? ++T : ++F;
+					break;
 				case 6:
-				case 0: ret = (val==1) ? ++J : ++P;
-						break;
+				case 0:
+					ret = (val == 1) ? ++J : ++P;
+					break;
 				}
 			}
-			String sql = "UPDATE personality_data SET mbti_E = '" + E + "', mbti_I = '" + I 
-					+ "', mbti_S = '" + S + "', mbti_N = '" + N 
-					+ "', mbti_T = '" + T + "', mbti_F = '" + F 
-					+ "', mbti_J = '" + J + "', mbti_P = '" + P
-					+ "' WHERE uid=" + uid;
+			String sql = "UPDATE personality_data SET mbti_E = '" + E + "', mbti_I = '" + I + "', mbti_S = '" + S
+					+ "', mbti_N = '" + N + "', mbti_T = '" + T + "', mbti_F = '" + F + "', mbti_J = '" + J
+					+ "', mbti_P = '" + P + "' WHERE uid=" + uid;
 			ret = st.executeUpdate(sql);
-			
-		} catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return ret;
 	}
 
-	public int addUseCase(String descr)
-			throws ClassNotFoundException, IOException, SQLException {
+	public int addUseCase(String descr) throws ClassNotFoundException, IOException, SQLException {
 		int count = 0;
 		String dtime = currentDateTIme();
 		try {
 			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
-					"INSERT INTO `requirements`(`description`, `created_at`) VALUES ('"
-							+ descr + "','" + dtime + "')");
+					"INSERT INTO `requirements`(`description`, `created_at`) VALUES ('" + descr + "','" + dtime + "')");
 			count = statement.executeUpdate();
 			statement.close();
 
@@ -561,7 +566,7 @@ public class DBProcess {
 		ResultSet rs = null;
 		try {
 			Statement st = mConn.createStatement();
-			rs = st.executeQuery("select * from requirements where id="+id);
+			rs = st.executeQuery("select * from requirements where id=" + id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -712,18 +717,19 @@ public class DBProcess {
 		}
 		return rs;
 	}
-	public void executeMbtiQuery(){
-		try{
+
+	public void executeMbtiQuery() {
+		try {
 			Statement st = mConn.createStatement();
-			int num=0;
-			for(int i=1;i<211;i++){
-				String sql = "UPDATE mbtipersona SET choice_no="+num+" WHERE id=" + i;
+			int num = 0;
+			for (int i = 1; i < 211; i++) {
+				String sql = "UPDATE mbtipersona SET choice_no=" + num + " WHERE id=" + i;
 				st.executeUpdate(sql);
 				num++;
-				if(num==3)
-					num=0;
+				if (num == 3)
+					num = 0;
 			}
-		} catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
