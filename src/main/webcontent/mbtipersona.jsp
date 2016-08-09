@@ -33,7 +33,7 @@
 							</div>
 						</div>
 						<div class="clearfix"></div>
-<p>For each of the questions below, please choose the option that describes you the best. </p><p><b>Note: </b> Describe yourself as you generally are
+<p>For each of the questions below, please choose the option that you agree to the most. </p><p><b>Note: </b> Describe yourself as you generally are
   now, not as you wish to be in the future. Describe yourself as you
   honestly see yourself, in relation to other people you know of the
   same sex as you are, and roughly your same age. So that you can
