@@ -420,15 +420,19 @@ INSERT INTO `personality_questions` (`id`, `description`) VALUES
 -- Dumping data for table `postsurvey_questions`
 --
 
-INSERT INTO `postsurvey_questions` (`id`, `description`, `question_type`, `answer_choices`, `required`) VALUES
-(1, 'How long did the main tasks (excluding pre and post surveys) take?', 'text', 'duration in hours:minutes, e.g., 00:30 for thirty minutes', 1),
-(2, 'How do you rate the difficulty of main tasks?', 'multiple_choice', 'Very easy|Easy|Medium|High|Very high', 1),
-(3, 'Please provide any additional comments you have below', 'text', 'Optional comments', 0),
-(4, 'On a scale of 1 to 5, 1 being the least and 5 being the most, answer the following questions', 'description', 'description', 0),
-(5, 'How satisfied are you with your contributions to the tasks?', 'multiple_choice_radio', '1|2|3|4|5', 1),
-(6, 'How cooperative were your team members?', 'multiple_choice_radio', '1|2|3|4|5', 1),
-(7, 'How effective were your team members'' inputs?', 'multiple_choice_radio', '1|2|3|4|5', 1),
-(8, 'How confident were you to share your work with other team members?', 'multiple_choice_radio', '1|2|3|4|5', 1);
+INSERT INTO `postsurvey_questions` (`id`, `user_group_type`, `description`, `question_type`, `answer_choices`, `required`) VALUES
+(1, 0, 'How long did the main tasks (excluding pre and post surveys) take?', 'text', 'duration in hours:minutes, e.g., 00:30 for thirty minutes', 1),
+(2, 0, 'How do you rate the difficulty of main tasks?', 'multiple_choice', 'Very easy|Easy|Medium|High|Very high', 1),
+(3, 0, 'Indicate the extent which the following phrases describe you experience with the main task (generating test scenarios) on a scale of 1 (strongly disagree) to 5 (strongly agree)', 'description', 'description', 0),
+(4, 0, 'I enjoyed the task of generating test scenarios', 'multiple_choice_radio', '1|2|3|4|5', 1),
+(5, 0, 'I found the task of generating test scenarios boring', 'multiple_choice_radio', '1|2|3|4|5', 1),
+(6, 0, 'I am confident that the test scenarios I generated will be useful', 'multiple_choice_radio', '1|2|3|4|5', 1),
+(7, 0, 'I am anxious that the test scenariosI generated may not be useful', 'multiple_choice_radio', '1|2|3|4|5', 1),
+(8, 2, 'The test scenarios my team members produced inspired me', 'multiple_choice_radio', '1|2|3|4|5', 1),
+(9, 2, 'I believe that the test scenarios I produced inspired my team members', 'multiple_choice_radio', '1|2|3|4|5', 1),
+(10, 3, 'My team members answered my questions', 'multiple_choice_radio', '1|2|3|4|5', 1),
+(11, 3, 'My team members provided helpful comments', 'multiple_choice_radio', '1|2|3|4|5', 1),
+(12, 0, 'Please provide any additional comments you have below', 'text', 'Optional comments', 0);
 
 --
 -- Dumping data for table `presurvey_questions`

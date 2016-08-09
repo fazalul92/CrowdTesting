@@ -202,6 +202,7 @@ CREATE TABLE IF NOT EXISTS `personality_responses` (
 
 CREATE TABLE IF NOT EXISTS `postsurvey_questions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_group_type` int(11) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `question_type` varchar(50) DEFAULT NULL,
   `answer_choices` varchar(255) DEFAULT NULL,
