@@ -1,6 +1,10 @@
 <%@ page import="edu.rit.se.creativecrowd.DBProcess"%>
 <%
 	DBProcess dbProc = new DBProcess();
+	if(Integer.parseInt(session.getAttribute("completion").toString())==0){
+		int comp = dbProc.timeOutCheck(Integer.parseInt(session.getAttribute("userid").toString()));
+		session.setAttribute("completion", comp);
+	}
 %>
 
 <!DOCTYPE html>
@@ -66,7 +70,7 @@
 									<li><b>Presurveys</b> collect information about your
 										demographics and personality. Estimated time: 10 to 15
 										minutes.</li>
-									<li><b>Main task</b> requires you to come up with test
+									<li><b>Main task</b> requires you to come up with atleast two test
 										scenarios. Details on this task will be provided after
 										presurveys. Estimated time: 15 to 30 minutes.</li>
 									<li><b>Postsurvey</b> collects information about your
@@ -115,7 +119,7 @@
 										<td>Time</td>
 										<td><%= dbProc.timeSinceLogin(session.getAttribute("userid").toString()) %>
 										</td>
-										<td>4 hours</td>
+										<td>3 hours</td>
 									</tr>
 									<tr>
 										<td>Pre-Surveys</td>
@@ -124,13 +128,13 @@
 										<td>3</td>
 									</tr>
 									<tr>
-										<td>Test Cases</td>
+										<td>Test Scenarios</td>
 										<td><%= dbProc.testCaseCount(Integer.parseInt(session.getAttribute("userid").toString())) %>
 										</td>
 										<td>2</td>
 									</tr>
 									<tr>
-										<td>Post-Surveys</td>
+										<td>Post-Survey</td>
 										<td><%= dbProc.postSurveyCount(Integer.parseInt(session.getAttribute("userid").toString())) %>
 										</td>
 										<td>1</td>
@@ -148,8 +152,6 @@
 
 
 			<%@ include file="scripts.jsp"%>
-
-			<script src="build/js/custom.min.js"></script>
 </body>
 </html>
 <%

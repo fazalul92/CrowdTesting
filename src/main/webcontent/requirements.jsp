@@ -65,8 +65,6 @@
 
         
 	<%@ include file="scripts.jsp" %>
-	
-    <script src="build/js/custom.min.js"></script>
   </body>
 </html>
 <% dbProc.disConnect(); %>

@@ -53,9 +53,10 @@ public class DBProcess {
 		long elapsedDays = different / daysInMilli;
 		different = different % daysInMilli;
 		long elapsedHours = different / hoursInMilli;
-		/*
-		 * different = different % hoursInMilli; long elapsedMinutes = different
-		 * / minutesInMilli; different = different % minutesInMilli; long
+		different = different % hoursInMilli; 
+		long elapsedMinutes = different / minutesInMilli; 
+		  
+		 /* different = different % minutesInMilli; long
 		 * elapsedSeconds = different / secondsInMilli;
 		 *
 		 *
@@ -66,9 +67,9 @@ public class DBProcess {
 		 */
 		String ret = "";
 		if (elapsedDays > 0)
-			ret = elapsedDays + " days, " + elapsedHours + " hours";
+			ret = elapsedDays + " days, " + elapsedHours + " hours, " + elapsedMinutes + " minutes";
 		else
-			ret = elapsedHours + " hours";
+			ret = elapsedHours + " hours, " + elapsedMinutes + " minutes";
 		return ret;
 	}
 
@@ -238,7 +239,7 @@ public class DBProcess {
 		ResultSet rs = null;
 		int count=0;
 		try {
-			String[] tables = {"presurvey_responses", "discpersonality_responses", "creativity_responses"};
+			String[] tables = {"presurvey_responses", "personality_responses", "mbtipersonality_responses"};
 			Statement st = mConn.createStatement();
 			for(int i=0;i<tables.length;i++){
 				rs = st.executeQuery("SELECT COUNT(*) as nos FROM "+tables[i]+" where user_id=" + uid);
@@ -275,7 +276,7 @@ public class DBProcess {
 		try {
 			Statement st = mConn.createStatement();
 			rs = st.executeQuery("SELECT * FROM users WHERE users.id = " + uid
-					+ " and users.created_at > DATE_SUB(CURTIME(), INTERVAL 4 HOUR)");
+					+ " and users.created_at > DATE_SUB(CURTIME(), INTERVAL 3 HOUR)");
 			int tcount = testCaseCount(uid);
 			/* Modify tcount to base */
 			if (!rs.isBeforeFirst() && tcount > 1) {

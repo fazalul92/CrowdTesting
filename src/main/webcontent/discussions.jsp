@@ -18,39 +18,23 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Test Cases</h3>
+                <h3>Discussions</h3>
               </div>
 
             </div>
 			  <%
 			    DBProcess dbProc = new DBProcess();
-			  	ResultSet rs1 = dbProc.viewTestCase(request.getParameter("id"),session.getAttribute("groupid").toString());
-			  	ResultSet rs2 = dbProc.getComments("testcase",request.getParameter("id"),session.getAttribute("groupid").toString());
+			  	ResultSet rs2 = dbProc.getComments("testcase","0",session.getAttribute("groupid").toString());
 			  %>
-            <% while(rs1.next()) { %>
             <!--  Start Panel -->
             <div class="col-md-12 col-sm-12 col-xs-12">
 	            <div class="x_panel">
-	                  <div class="x_title">
-	                    <h2>Testcase ID <%= rs1.getString("id") %><small><%= rs1.getString("name") %></small></h2>
-	                    <div class="clearfix"></div>
-	                  </div>
 	                  <div class="x_content">
-	                  <b>Context</b><br/>
-	                    <%= rs1.getString("context") %>
-	                  </div>
-	                  <div class="x_content">
-	                  <b>Stimuli</b><br/>
-	                    <%= rs1.getString("stimuli") %>
-	                  </div>
-	                  <div class="x_content">
-	                  <b>Behavior</b><br/>
-	                    <%= rs1.getString("behavior") %>
+	                  You can use this forum to ask questions about the main task or respond to your team members.
 	                  </div>
 	            </div>
             </div>
             <!-- End Panel -->
-            <% } %>
             
             
             
@@ -77,7 +61,7 @@
 		                <form method="post" action="exec/addComment.jsp">
 		                <div class="x_content ">
 		                    <input name="parentID" type="hidden" value="<%= rs2.getString("id") %>">
-		                    <input name="testcaseID" type="hidden" value="<%= request.getParameter("id") %>">
+		                    <input name="testcaseID" type="hidden" value="0">
 		                    <input name="type" type="hidden" value="comment">
 		                <div class="row">
 		                  <div class="col-md-12 col-sm-12 col-xs-12 form-group">
@@ -110,8 +94,8 @@
                   <div id="alerts"></div>
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <input name="testcaseID" type="hidden" value="<%= request.getParameter("id") %>">
-                    <input name="parentID" type="hidden" value="<%= request.getParameter("id") %>">
+                    <input name="testcaseID" type="hidden" value="0">
+                    <input name="parentID" type="hidden" value="0">
                     <input name="type" type="hidden" value="testcase">
                   </div>
                   

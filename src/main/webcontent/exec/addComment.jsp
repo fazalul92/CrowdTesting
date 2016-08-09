@@ -10,8 +10,14 @@
   int ret = dbProc.addComment(type, pid, uid, gid, descr);
   dbProc.disConnect();
   if (ret == 1) {
-    response.sendRedirect("../viewComments.jsp?id="+testcaseID);
+	if (Integer.parseInt(testcaseID)==0)
+		response.sendRedirect("../discussions.jsp");
+	else
+		response.sendRedirect("../viewComments.jsp?id="+testcaseID);
   } else {
-    response.sendRedirect("../viewComments.jsp?error=2&id="+testcaseID);
+	if (Integer.parseInt(testcaseID)==0)
+		response.sendRedirect("../discussions.jsp?error=2");
+	else
+		response.sendRedirect("../viewComments.jsp?error=2&id="+testcaseID);
   }
 %>

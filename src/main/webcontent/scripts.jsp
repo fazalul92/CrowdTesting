@@ -44,3 +44,4 @@
     <!-- bootstrap-daterangepicker -->
     <script src="js/moment/moment.min.js"></script>
     <script src="js/datepicker/daterangepicker.js"></script>
+    <script src="build/js/custom.min.js"></script>
