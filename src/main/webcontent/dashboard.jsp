@@ -14,7 +14,7 @@
 <style>
 #detailsTable {
 	padding: 5px;
-	width:60%;
+	width: 60%;
 	margin: 50px auto;
 }
 
@@ -70,13 +70,13 @@
 									<li><b>Presurveys</b> collect information about your
 										demographics and personality. Estimated time: 10 to 15
 										minutes.</li>
-									<li><b>Main task</b> requires you to come up with atleast two test
-										scenarios. Details on this task will be provided after
-										presurveys. Estimated time: 15 to 30 minutes.</li>
+									<li><b>Main task</b> requires you to come up with atleast
+										two test scenarios. Details on this task will be provided
+										after presurveys. Estimated time: 15 to 30 minutes.</li>
 									<li><b>Postsurvey</b> collects information about your
 										experience on the main task. Estimated time: 5 minutes.</li>
 								</ul>
-								
+
 								<p>
 									You will complete these tasks sequentially. Once you finish a
 									step, you will be redirected to the next step, automatically.
@@ -97,11 +97,12 @@
 									main task for all three hours. You can work on the main task
 									intermittently, even in multiple sittings. Your work is saved
 									at each step. You can login any number of times and each time
-									you login, you can start from where you left.</p>
-									
+									you login, you can start from where you left. If you experience
+									any problems, please start over from the login page.</p>
+
 								<p>The HIT expires in 24 hours. So, you should finish all
 									steps with in 24 hours.</p>
-									
+
 								<h3>Payment and Bonus</h3>
 
 								<p>The base payment for completing the required tasks is USD
