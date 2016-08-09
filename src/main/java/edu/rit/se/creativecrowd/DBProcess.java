@@ -656,10 +656,11 @@ public class DBProcess {
 			statement.executeUpdate();
 			statement.close();
 
-			Statement st = mConn.createStatement();
-			String sql = "UPDATE testcases SET context = '" + cont + "', stimuli = '" + stim + "', behavior = '" + behv
-					+ "' WHERE id='" + tid + "'";
-			ret = st.executeUpdate(sql);
+			PreparedStatement st = mConn.prepareStatement("UPDATE testcases SET context = ?, stimuli = ?, behavior = ? WHERE id=" + tid);
+			st.setString(1, cont);
+			st.setString(2, stim);
+			st.setString(3, behv);
+			ret = st.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
