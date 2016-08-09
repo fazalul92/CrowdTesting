@@ -386,9 +386,10 @@ public class DBProcess {
 		int count = 0;
 		String dtime = currentDateTIme();
 		try {
-			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
-					"INSERT INTO `" + table + "`(`question_id`, `user_id`, `description`, `created_at`) VALUES ('"
-							+ parameterName + "','" + uid + "','" + parameterValue + "','" + dtime + "')");
+		  PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
+          "INSERT INTO `" + table + "`(`question_id`, `user_id`, `description`, `created_at`) VALUES ('"
+              + parameterName + "','" + uid + "', ?, '" + dtime + "')");
+		  statement.setString(1, parameterValue);
 			count += statement.executeUpdate();
 			statement.close();
 
