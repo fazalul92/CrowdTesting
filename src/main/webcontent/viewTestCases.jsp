@@ -64,13 +64,13 @@
 							<table border="0" style="width: 100%;">
 								<tr>
 									<td width="100">
-										<% if((Integer) session.getAttribute("group_type") == 3) { %> <b><%= dbProc.getCommentCount(rs.getString("id")) %>
+										<% if(Integer.parseInt(session.getAttribute("group_type").toString()) == 3) { %> <b><%= dbProc.getCommentCount(rs.getString("id")) %>
 											comments</b> <% } %>
 									</td>
 									<td>
 										<div style="float: right;">
 											<%
-						  		if((Integer) session.getAttribute("userid") == rs.getInt("uid")) {
+						  		if(Integer.parseInt(session.getAttribute("userid").toString()) == rs.getInt("uid")) {
 						  	%>
 											<a href="editTestCase.jsp?id=<%= rs.getString("id") %>">
 												<button type="button" class="btn btn-danger">Edit</button>
@@ -78,7 +78,7 @@
 											<%
 						  		}
 						  	%>
-											<% if((Integer) session.getAttribute("group_type") == 3) { %>
+											<% if(Integer.parseInt(session.getAttribute("group_type").toString()) == 3) { %>
 											<a href="viewComments.jsp?id=<%= rs.getString("id") %>">
 												<button type="button" class="btn btn-primary">View
 													And Add Comments</button>

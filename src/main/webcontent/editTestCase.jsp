@@ -3,7 +3,7 @@
 	String gid = session.getAttribute("groupid").toString();
 	DBProcess dbProc = new DBProcess();
 	ResultSet rs = dbProc.viewTestCase(Integer.toString(tid), gid);
-	if (!rs.next() || rs.getInt("uid")!=(Integer) session.getAttribute("userid") ) {    
+	if (!rs.next() || rs.getInt("uid")!=Integer.parseInt(session.getAttribute("userid").toString()) ) {    
 	    response.sendRedirect("viewTestCases.jsp?id="+tid);
 	} 
 %>
