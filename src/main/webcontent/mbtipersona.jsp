@@ -19,6 +19,9 @@
 				<%
 				  DBProcess dbProc = new DBProcess();
 					ResultSet rs2 = dbProc.getQuestions("mbtipersonality_questions");
+					String[] Generic = {"How many questions are on this page", "Seventy Four", "Eighty", "How many days does August have", "Thirty", "Thirty One", "Where is 2016 Olympic games held", "Rio, Brazil", "Toronto, Canada", "Which planet is closest to the Sun", "Mercury", "Jupiter"};
+					int gencount = 0;
+					int counter = 1;
 					rs2.next();
 				%>
 				
@@ -41,9 +44,51 @@
   absolute confidence. Please read each statement carefully, but do not over-analyze them. Some seem worded poorly. Go with what feels best.</p>
 						
 						<form id="discform" class="form-horizontal form-label-left" action="exec/mbtisubmit.jsp" method="POST">
-							<% for(int i = 0; i<35 ; i++) { %>
+							<% for(int i = 0; i<37 ; i++) { %>
 							<div class="row">
 								<% for(int j=0;j<2;j++) { %>
+								<% if(counter == 15 || counter==29 || counter==46 || counter==61) { %>
+								<div class="col-md-6 col-sm-12 col-xs-12">
+									<div class="x_panel">
+										<div class="x_content">
+
+												<table style="width:100%;">
+													<div class="set">
+														<% for(int tc = 0, temp = gencount/3;tc<3;tc++,gencount++) { 
+														%>
+														<div class="group">
+														<tr>	
+																<% if(gencount%3==0) {  %>
+																<td style="width:10%;"> 
+																	<%= counter %>
+																</td>
+																<td style="width:80%;"> 
+																	<b><%= Generic[gencount] %></b>
+																</td>
+																<% } else { %>
+																<td style="width:10%;"> 
+																 
+																</td>
+																<td style="width:80%;">
+																	<input type="radio" required name="mbtigeneric<%= temp+1 %>" class="teamGeneric" value="<%= tc %>">
+																	<%= Generic[gencount] %>
+																</td>
+																<% } %>
+															
+														</tr>
+														</div>
+														<% } %>
+													</div>
+												</table>
+											
+										</div>
+								  
+									</div>
+								</div>
+								<% 
+										counter++;
+										continue;
+									} %>
 								<div class="col-md-6 col-sm-12 col-xs-12">
 									<div class="x_panel">
 										<div class="x_content">
@@ -56,7 +101,7 @@
 														<tr>	
 																<% if(rs2.getString("type").equals("question")) {  %>
 																<td style="width:10%;"> 
-																<%= rs2.getString("group_no") %>
+																<%= counter %>
 																</td>
 																<td style="width:80%;"> 
 																	<b><%= rs2.getString("description") %></b>
@@ -73,10 +118,9 @@
 															
 														</tr>
 														</div>
-													<% 		
+													<% 
 															rs2.next();
 														} 
-														
 													%>
 													
 													</div>
@@ -86,7 +130,9 @@
 								  
 									</div>
 								</div>
-								<% } %>
+								<% 
+									counter++;
+								} %>
 							</div>
 							<% } %>
 							<button type="submit" class="btn btn-success">Submit</button>

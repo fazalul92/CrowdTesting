@@ -399,6 +399,24 @@ public class DBProcess {
 		return count;
 
 	}
+
+	public int genericResponseData(String uid, String gid, String iid)
+			throws ClassNotFoundException, IOException, SQLException {
+		int count = 0;
+		String dtime = currentDateTIme();
+		try {
+			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
+					"INSERT INTO `generic_responses`(`user_id`, `generic_name`, `choice_no`, `created_at`) VALUES ('"
+							+ uid + "','" + gid + "','" + iid + "','" + dtime + "')");
+			count += statement.executeUpdate();
+			statement.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+
+	}
 	
 	public int processPersonalities(String uid)
 			throws ClassNotFoundException, IOException, SQLException {
