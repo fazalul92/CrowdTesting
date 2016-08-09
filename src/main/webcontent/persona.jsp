@@ -10,16 +10,13 @@
 	<div class="container body">
 		<div class="main_container">
 			<%@ include file="menu.jsp"%>
-
 			<%
 		  DBProcess dbProc = new DBProcess();
 			ResultSet rs2 = dbProc.getQuestions("personality_questions");
-			String[] GenericQuestions = {"Eight plus seven is nineteen", "New York is in North America"};
+			String[] GenericQuestions = {"Eight plus seven is nineteen", "New York is in United States of America"};
 			int gencount = 0;
 			int counter = 1;
 		%>
-
-			<!-- page content -->
 
 
 			<div class="right_col" role="main">
@@ -35,16 +32,21 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_content">
-									<p>Please use the rating scale below to describe how
-										accurately each statement describes you.</p>
+									<p>
+										Please describe the extent to which you agree to the following
+										statements on a scale of <span style="color: #e82c2c;">1
+											(Strongly disagree)</span> to <span style="color: #e82c2c;">5
+											(Strongly agree)</span>.
+									</p>
 
-									<ol>
-										<li>Very Inaccurate</li>
-										<li>Moderately Inaccurate</li>
-										<li>Neither Inaccurate nor Accurate</li>
-										<li>Moderately Accurate</li>
-										<li>Very Accurate</li>
-									</ol>
+									<!-- <ol>
+  <li>Very Inaccurate</li>
+  <li>Moderately Inaccurate</li>
+  <li>Neither Inaccurate nor Accurate</li>
+  <li>Moderately Accurate</li>
+  <li>Very Accurate</li>
+ </ol> -->
+
 
 									<p>
 										<b>Note: </b> Describe yourself as you generally are now, not

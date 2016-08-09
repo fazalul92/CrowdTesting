@@ -395,33 +395,33 @@ INSERT INTO `mbtipersonality_questions` (`id`, `group_no`, `choice_no`, `type`, 
 --
 
 INSERT INTO `personality_questions` (`id`, `description`) VALUES
-(1, 'Am the life of the party'),
-(2, 'Sympathize with others'' feelings'),
-(3, 'Get chores done right away'),
-(4, 'Have frequent mood swings'),
-(5, 'Have a vivid imagination'),
-(6, 'Don''t talk a lot'),
-(7, 'Am not interested in other people''s problems'),
-(8, 'Often forget to put things back in their proper place'),
-(9, 'Am relaxed most of the time'),
-(10, 'Am not interested in abstract ideas'),
-(11, 'Talk to a lot of different people at parties'),
-(12, 'Feel others'' emotions'),
-(13, 'Like order'),
-(14, 'Get upset easily'),
-(15, 'Have difficulty understanding abstract ideas'),
-(16, 'Keep in the background'),
-(17, 'Am not really interested in others'),
-(18, 'Make a mess of things'),
-(19, 'Seldom feel blue'),
-(20, 'Do not have a good imagination');
+(1, 'I am the life of the party'),
+(2, 'I sympathize with others'' feelings'),
+(3, 'I get chores done right away'),
+(4, 'I have frequent mood swings'),
+(5, 'I have a vivid imagination'),
+(6, 'I don''t talk a lot'),
+(7, 'I am not interested in other people''s problems'),
+(8, 'I often forget to put things back in their proper place'),
+(9, 'I am relaxed most of the time'),
+(10, 'I am not interested in abstract ideas'),
+(11, 'I talk to a lot of different people at parties'),
+(12, 'I feel others'' emotions'),
+(13, 'I like order'),
+(14, 'I get upset easily'),
+(15, 'I have difficulty understanding abstract ideas'),
+(16, 'I keep in the background'),
+(17, 'I am not really interested in others'),
+(18, 'I make a mess of things'),
+(19, 'I seldom feel blue'),
+(20, 'I do not have a good imagination');
 
 --
 -- Dumping data for table `postsurvey_questions`
 --
 
 INSERT INTO `postsurvey_questions` (`id`, `user_group_type`, `description`, `question_type`, `answer_choices`, `required`) VALUES
-(1, 0, 'How long did the main tasks (excluding pre and post surveys) take?', 'text', 'duration in hours:minutes, e.g., 00:30 for thirty minutes', 1),
+(1, 0, 'How long did the main tasks (excluding pre and post surveys) take? Please count only the actual time you spent on the task, not the intermittent time you might have spent on other tasks.', 'text', 'duration in hours:minutes, e.g., 00:30 for thirty minutes', 1),
 (2, 0, 'How do you rate the difficulty of main tasks?', 'multiple_choice', 'Very easy|Easy|Medium|High|Very high', 1),
 (3, 0, 'Indicate the extent which the following phrases describe you experience with the main task (generating test scenarios) on a scale of 1 (strongly disagree) to 5 (strongly agree)', 'description', 'description', 0),
 (4, 0, 'I enjoyed the task of generating test scenarios', 'multiple_choice_radio', '1|2|3|4|5', 1),
