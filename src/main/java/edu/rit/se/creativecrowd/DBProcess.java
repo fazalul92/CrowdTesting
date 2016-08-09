@@ -276,7 +276,7 @@ public class DBProcess {
 		try {
 			Statement st = mConn.createStatement();
 			rs = st.executeQuery("SELECT * FROM users WHERE users.id = " + uid
-					+ " and users.created_at > DATE_SUB(CURTIME(), INTERVAL 3 HOUR)");
+					+ " and users.created_at > DATE_SUB(NOW(), INTERVAL 3 HOUR)");
 			int tcount = testCaseCount(uid);
 			/* Modify tcount to base */
 			if (!rs.isBeforeFirst() && tcount > 1) {

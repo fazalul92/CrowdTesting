@@ -10,7 +10,7 @@
   int ret = dbProc.addTestCase(rid, uid, gid, cont, stim, behv);
   dbProc.disConnect();
   if (ret == 1) {
-    response.sendRedirect("../requirements.jsp");
+    response.sendRedirect("../viewTestCases.jsp?id="+rid);
   } else {
     response.sendRedirect("../addTestCase.jsp?id=" + rid + "&error=2");
   }
