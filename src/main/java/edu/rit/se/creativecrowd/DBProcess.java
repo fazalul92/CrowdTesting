@@ -701,8 +701,8 @@ public class DBProcess {
 		String dtime = currentDateTIme();
 		try {
 			PreparedStatement statement = mConn.prepareStatement(
-					"INSERT INTO `comments` (`parent_type`, `pid`, `uid`, `gid`, `description`, `created_at`) VALUES ("
-							+ parent + "," + pid + "," + uid + "," + gid + ",?,'" + dtime + "')");
+					"INSERT INTO `comments` (`parent_type`, `pid`, `uid`, `gid`, `description`, `created_at`) VALUES ('"
+							+ parent + "'," + pid + "," + uid + "," + gid + ",?,'" + dtime + "')");
 			statement.setString(1, descr);
 			count = statement.executeUpdate();
 			statement.close();
