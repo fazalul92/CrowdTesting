@@ -193,7 +193,7 @@ public class DBProcess {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(uid + " "+ TrueCount);
+		// System.out.println(uid + " "+ TrueCount);
 		if (TrueCount > 4)
 			return true;
 		else

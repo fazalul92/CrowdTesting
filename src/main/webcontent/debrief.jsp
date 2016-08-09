@@ -176,6 +176,9 @@ h3 {
 									different from the ones others produce in some aspect (e.g.,
 									different stimulus, response, or context).</p>
 
+								<p>You can use the Discussions page to ask questions your
+									group members and answer others' questions</p>
+
 								<%
 								  }
 								%>
@@ -197,8 +200,10 @@ h3 {
 								<%
 								  if (Integer.parseInt(session.getAttribute("group_type").toString()) == 3) {
 								%>
-								<p>Further, your bonus will depend on how well you work as a
-									team.</p>
+								<p>
+									<b>Important note: </b> Your bonus will also depend on how well
+									you work as a team.
+								</p>
 								<%
 								  }
 								%>
