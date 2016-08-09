@@ -169,29 +169,68 @@ public class DBProcess {
 		}
 		return count;
 	}
+	
+	public boolean checkAttention(String uid) throws SQLException {
+		int TrueCount = 0;
+		try {
+		Statement st = mConn.createStatement();
+		ResultSet rs = st.executeQuery("select generic_name, choice_no from generic_responses where user_id = "+uid);
+		while(rs.next()){
+			if(rs.getString("generic_name").contains("mbtigeneric")){
+				switch(rs.getString("generic_name")){
+				case "mbtigeneric1":
+				case "mbtigeneric3": 
+					TrueCount += (rs.getInt("choice_no") == 2) ? 1 : 0;
+					break;
+				case "mbtigeneric2":
+				case "mbtigeneric4": 
+					TrueCount += (rs.getInt("choice_no") == 1) ? 1 : 0;
+					break;
+				}
+			}
+			else if (rs.getString("generic_name").contains("personageneric")) {
+				if(rs.getString("generic_name").equals("personageneric1")&&rs.getInt("choice_no") < 3)
+					TrueCount+=1;
+				if(rs.getString("generic_name").equals("personageneric2")&&rs.getInt("choice_no") > 3)
+					TrueCount+=1;
+			}
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(TrueCount>4)
+			return true;
+		else
+			return false;
+	}
 
-	public int assignTeam(String uid) throws ClassNotFoundException, IOException, SQLException {
+	public int assignTeam(String uid) throws IOException, SQLException {
 		int count = 0;
 		ResultSet rs = null;
 		try {
 			Statement st = mConn.createStatement();
 			Statement st1 = mConn.createStatement();
-			rs = st.executeQuery("select * from usergroups where status=2 order by gid");
-			rs.next();
-			int gid = rs.getInt("gid");
-			int i = 1;
-			for (i = 1; rs.getString("uid" + i) != null; i++);
-			String name = "Participant "+i;
-			String uidn = "uid" + i;
-			if (i < 3) {
-				count = st1.executeUpdate("UPDATE usergroups SET " + uidn + " = " + uid + " WHERE gid=" + gid);
+			if(checkAttention(uid)) {
+				rs = st.executeQuery("select * from usergroups where status=2 order by gid");
+				rs.next();
+				int gid = rs.getInt("gid");
+				int i = 1;
+				for (i = 1; rs.getString("uid" + i) != null; i++);
+				String name = "Participant "+i;
+				String uidn = "uid" + i;
+				if (i < 3) {
+					count = st1.executeUpdate("UPDATE usergroups SET " + uidn + " = " + uid + " WHERE gid=" + gid);
+				} else {
+					count = st1
+							.executeUpdate("UPDATE usergroups SET " + uidn + " = " + uid + ", status = 3 WHERE gid=" + gid);
+					st1.executeUpdate("UPDATE usergroups SET status = 2 WHERE gid=" + (gid + 1));
+				}
+				st1.executeUpdate(
+						"UPDATE users SET gid = " + gid + ", group_type = " + rs.getInt("type") + ", name='"+name+"' WHERE id=" + uid);
 			} else {
-				count = st1
-						.executeUpdate("UPDATE usergroups SET " + uidn + " = " + uid + ", status = 3 WHERE gid=" + gid);
-				st1.executeUpdate("UPDATE usergroups SET status = 2 WHERE gid=" + (gid + 1));
+				st1.executeUpdate(
+						"UPDATE users SET gid = -1, group_type = 1, name='Participant' WHERE id=" + uid);
 			}
-			st1.executeUpdate(
-					"UPDATE users SET gid = " + gid + ", group_type = " + rs.getInt("type") + ", name='"+name+"' WHERE id=" + uid);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

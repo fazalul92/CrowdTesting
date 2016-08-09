@@ -19,7 +19,7 @@
 				<%
 				  DBProcess dbProc = new DBProcess();
 					ResultSet rs2 = dbProc.getQuestions("mbtipersonality_questions");
-					String[] Generic = {"How many questions are on this page:", "Eighty", "Seventy Four", "How many days does August have:", "Thirty", "Thirty One", "Where is 2016 Olympic games held:", "Toronto, Canada", "Rio, Brazil", "Which planet is closest to the Sun:", "Mercury", "Jupiter"};
+					String[] Generic = {"How many questions are on this page:", "Eighty", "Seventy Four", "How many days does August have:", "Thirty One", "Thirty", "Where is 2016 Olympic games held:", "Toronto, Canada", "Rio, Brazil", "Which planet is closest to the Sun:", "Mercury", "Jupiter"};
 					int gencount = 0;
 					int counter = 1;
 					rs2.next();
