@@ -27,11 +27,11 @@
                   </li>
                   <% } %>
                   <% if(Integer.parseInt(session.getAttribute("group_type").toString())==3 && Integer.parseInt(session.getAttribute("state").toString())>4) { %>
-                  <li><a href="discussions.jsp"><i class="fa fa-home"></i> Discussions <span class="fa fa-chevron-down"></span></a>
+                  <li><a href="discussions.jsp"><i class="fa fa-users"></i> Discussions <span class="fa fa-chevron-down"></span></a>
                   </li>  
                   <% } %>
                   <% if(Integer.parseInt(session.getAttribute("completion").toString())==1) { %>
-                  <li><a href="completion.jsp"><i class="fa fa-home"></i> Get Completion Code <span class="fa fa-chevron-down"></span></a>
+                  <li><a href="completion.jsp"><i class="fa fa-external-link"></i> Get Completion Code <span class="fa fa-chevron-down"></span></a>
                   </li>  
                   <% } %>
                 </ul>
