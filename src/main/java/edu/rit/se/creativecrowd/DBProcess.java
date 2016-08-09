@@ -138,7 +138,7 @@ public class DBProcess {
 		int ret = 0;
 		String dtime = currentDateTIme();
 		try {
-			PreparedStatement statement = (PreparedStatement) mConn
+			PreparedStatement statement = mConn
 					.prepareStatement("INSERT INTO `logs`(`uid`, `message`, `created_at`) VALUES ('" + uid + "','"
 							+ message + "','" + dtime + "')");
 			ret = statement.executeUpdate();
@@ -386,7 +386,7 @@ public class DBProcess {
 		int count = 0;
 		String dtime = currentDateTIme();
 		try {
-		  PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
+		  PreparedStatement statement = mConn.prepareStatement(
           "INSERT INTO `" + table + "`(`question_id`, `user_id`, `description`, `created_at`) VALUES ('"
               + parameterName + "','" + uid + "', ?, '" + dtime + "')");
 		  statement.setString(1, parameterValue);
@@ -405,7 +405,7 @@ public class DBProcess {
 		int count = 0;
 		String dtime = currentDateTIme();
 		try {
-			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
+			PreparedStatement statement = mConn.prepareStatement(
 					"INSERT INTO `discpersonality_responses`(`user_id`, `group_no`, `item_no`, `response`, `created_at`) VALUES ('"
 							+ uid + "','" + gid + "','" + iid + "','" + val + "','" + dtime + "')");
 			count += statement.executeUpdate();
@@ -423,7 +423,7 @@ public class DBProcess {
 		int count = 0;
 		String dtime = currentDateTIme();
 		try {
-			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
+			PreparedStatement statement = mConn.prepareStatement(
 					"INSERT INTO `mbtipersonality_responses`(`user_id`, `group_no`, `choice_no`, `created_at`) VALUES ('"
 							+ uid + "','" + gid + "','" + iid + "','" + dtime + "')");
 			count += statement.executeUpdate();
@@ -441,7 +441,7 @@ public class DBProcess {
 		int count = 0;
 		String dtime = currentDateTIme();
 		try {
-			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
+			PreparedStatement statement = mConn.prepareStatement(
 					"INSERT INTO `generic_responses`(`user_id`, `generic_name`, `choice_no`, `created_at`) VALUES ('"
 							+ uid + "','" + gid + "','" + iid + "','" + dtime + "')");
 			count += statement.executeUpdate();
@@ -499,7 +499,7 @@ public class DBProcess {
 					break;
 				}
 			}
-			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
+			PreparedStatement statement = mConn.prepareStatement(
 					"INSERT INTO `personality_data`(`uid`, `ipip_E`, `ipip_A`, `ipip_C`, `ipip_N`, `ipip_O`) VALUES ('"
 							+ uid + "','" + IE + "','" + IA + "','" + IC + "','" + IN + "','" + IO + "')");
 			ret = statement.executeUpdate();
@@ -540,8 +540,9 @@ public class DBProcess {
 		int count = 0;
 		String dtime = currentDateTIme();
 		try {
-			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
-					"INSERT INTO `requirements`(`description`, `created_at`) VALUES ('" + descr + "','" + dtime + "')");
+			PreparedStatement statement = mConn.prepareStatement(
+					"INSERT INTO `requirements`(`description`, `created_at`) VALUES (?,'" + dtime + "')");
+			statement.setString(1, descr);;
 			count = statement.executeUpdate();
 			statement.close();
 
@@ -579,10 +580,13 @@ public class DBProcess {
 		int count = 0;
 		String dtime = currentDateTIme();
 		try {
-			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
-					"INSERT INTO `testcases` (`rid`, `uid`, `gid`, `context`, `stimuli`, `behavior`, `created_at`) VALUES ('"
-							+ rid + "','" + uid + "','" + gid + "','" + cont + "','" + stim + "','" + behv + "','"
+			PreparedStatement statement = mConn.prepareStatement(
+					"INSERT INTO `testcases` (`rid`, `uid`, `gid`, `context`, `stimuli`, `behavior`, `created_at`) VALUES ("
+							+ rid + "," + uid + "," + gid + ",?,?,?,'"
 							+ dtime + "')");
+			statement.setString(1, cont);
+			statement.setString(2, stim);
+			statement.setString(3, behv);
 			count = statement.executeUpdate();
 			statement.close();
 
@@ -646,7 +650,7 @@ public class DBProcess {
 			// Insert into `testcase_history` (`pid`, `context`, `stimuli`,
 			// `behavior`, `created_at`) SELECT id, context, stimuli, behavior,
 			// created_at from `testcases` where id='2'
-			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
+			PreparedStatement statement = mConn.prepareStatement(
 					"Insert into `testcase_history` (`pid`, `context`, `stimuli`, `behavior`, `created_at`)  SELECT id, context, stimuli, behavior, created_at from `testcases` where id="
 							+ tid);
 			statement.executeUpdate();
@@ -696,9 +700,10 @@ public class DBProcess {
 		int count = 0;
 		String dtime = currentDateTIme();
 		try {
-			PreparedStatement statement = (PreparedStatement) mConn.prepareStatement(
-					"INSERT INTO `comments` (`parent_type`, `pid`, `uid`, `gid`, `description`, `created_at`) VALUES ('"
-							+ parent + "','" + pid + "','" + uid + "','" + gid + "','" + descr + "','" + dtime + "')");
+			PreparedStatement statement = mConn.prepareStatement(
+					"INSERT INTO `comments` (`parent_type`, `pid`, `uid`, `gid`, `description`, `created_at`) VALUES ("
+							+ parent + "," + pid + "," + uid + "," + gid + ",?,'" + dtime + "')");
+			statement.setString(1, descr);
 			count = statement.executeUpdate();
 			statement.close();
 
