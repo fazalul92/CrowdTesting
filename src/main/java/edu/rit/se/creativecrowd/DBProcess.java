@@ -179,16 +179,16 @@ public class DBProcess {
 			ResultSet rs = st
 					.executeQuery("select generic_name, choice_no from generic_responses where user_id = " + uid);
 			while (rs.next()) {
-					if (rs.getString("generic_name").equals("mbtigeneric1")
-							|| rs.getString("generic_name").equals("mbtigeneric3"))
-						TrueCount += (rs.getInt("choice_no") == 2) ? 1 : 0;
-					else if (rs.getString("generic_name").equals("mbtigeneric2")
-							|| rs.getString("generic_name").equals("mbtigeneric4"))
-						TrueCount += (rs.getInt("choice_no") == 1) ? 1 : 0;
-					else if (rs.getString("generic_name").equals("personageneric1") && rs.getInt("choice_no") < 3)
-						TrueCount += 1;
-					else if (rs.getString("generic_name").equals("personageneric2") && rs.getInt("choice_no") > 3)
-						TrueCount += 1;
+				if (rs.getString("generic_name").equals("mbtigeneric1")
+						|| rs.getString("generic_name").equals("mbtigeneric3"))
+					TrueCount += (rs.getInt("choice_no") == 2) ? 1 : 0;
+				else if (rs.getString("generic_name").equals("mbtigeneric2")
+						|| rs.getString("generic_name").equals("mbtigeneric4"))
+					TrueCount += (rs.getInt("choice_no") == 1) ? 1 : 0;
+				else if (rs.getString("generic_name").equals("personageneric1") && rs.getInt("choice_no") < 3)
+					TrueCount += 1;
+				else if (rs.getString("generic_name").equals("personageneric2") && rs.getInt("choice_no") > 3)
+					TrueCount += 1;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -386,10 +386,10 @@ public class DBProcess {
 		int count = 0;
 		String dtime = currentDateTIme();
 		try {
-		  PreparedStatement statement = mConn.prepareStatement(
-          "INSERT INTO `" + table + "`(`question_id`, `user_id`, `description`, `created_at`) VALUES ('"
-              + parameterName + "','" + uid + "', ?, '" + dtime + "')");
-		  statement.setString(1, parameterValue);
+			PreparedStatement statement = mConn.prepareStatement(
+					"INSERT INTO `" + table + "`(`question_id`, `user_id`, `description`, `created_at`) VALUES ('"
+							+ parameterName + "','" + uid + "', ?, '" + dtime + "')");
+			statement.setString(1, parameterValue);
 			count += statement.executeUpdate();
 			statement.close();
 
@@ -542,7 +542,8 @@ public class DBProcess {
 		try {
 			PreparedStatement statement = mConn.prepareStatement(
 					"INSERT INTO `requirements`(`description`, `created_at`) VALUES (?,'" + dtime + "')");
-			statement.setString(1, descr);;
+			statement.setString(1, descr);
+			;
 			count = statement.executeUpdate();
 			statement.close();
 
@@ -582,8 +583,7 @@ public class DBProcess {
 		try {
 			PreparedStatement statement = mConn.prepareStatement(
 					"INSERT INTO `testcases` (`rid`, `uid`, `gid`, `context`, `stimuli`, `behavior`, `created_at`) VALUES ("
-							+ rid + "," + uid + "," + gid + ",?,?,?,'"
-							+ dtime + "')");
+							+ rid + "," + uid + "," + gid + ",?,?,?,'" + dtime + "')");
 			statement.setString(1, cont);
 			statement.setString(2, stim);
 			statement.setString(3, behv);
@@ -656,7 +656,8 @@ public class DBProcess {
 			statement.executeUpdate();
 			statement.close();
 
-			PreparedStatement st = mConn.prepareStatement("UPDATE testcases SET context = ?, stimuli = ?, behavior = ? WHERE id=" + tid);
+			PreparedStatement st = mConn
+					.prepareStatement("UPDATE testcases SET context = ?, stimuli = ?, behavior = ? WHERE id=" + tid);
 			st.setString(1, cont);
 			st.setString(2, stim);
 			st.setString(3, behv);
