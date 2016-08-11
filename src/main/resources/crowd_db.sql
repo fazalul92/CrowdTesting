@@ -162,8 +162,9 @@ CREATE TABLE IF NOT EXISTS `personality_data` (
   `ipip_C` int(11) DEFAULT NULL,
   `ipip_N` int(11) DEFAULT NULL,
   `ipip_O` int(11) DEFAULT NULL,
+  `creativity` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 

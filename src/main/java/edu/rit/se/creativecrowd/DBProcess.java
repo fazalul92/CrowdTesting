@@ -179,12 +179,14 @@ public class DBProcess {
 			ResultSet rs = st
 					.executeQuery("select generic_name, choice_no from generic_responses where user_id = " + uid);
 			while (rs.next()) {
-				/*if (rs.getString("generic_name").equals("mbtigeneric1")
-						|| rs.getString("generic_name").equals("mbtigeneric3"))
-					TrueCount += (rs.getInt("choice_no") == 2) ? 1 : 0;
-				else if (rs.getString("generic_name").equals("mbtigeneric2")
-						|| rs.getString("generic_name").equals("mbtigeneric4"))
-					TrueCount += (rs.getInt("choice_no") == 1) ? 1 : 0;*/
+				/*
+				 * if (rs.getString("generic_name").equals("mbtigeneric1") ||
+				 * rs.getString("generic_name").equals("mbtigeneric3"))
+				 * TrueCount += (rs.getInt("choice_no") == 2) ? 1 : 0; else if
+				 * (rs.getString("generic_name").equals("mbtigeneric2") ||
+				 * rs.getString("generic_name").equals("mbtigeneric4"))
+				 * TrueCount += (rs.getInt("choice_no") == 1) ? 1 : 0;
+				 */
 				if (rs.getString("generic_name").equals("creativegeneric1") && rs.getInt("choice_no") < 3)
 					TrueCount += 1;
 				else if (rs.getString("generic_name").equals("creativegeneric2") && rs.getInt("choice_no") > 3)
@@ -278,7 +280,7 @@ public class DBProcess {
 		ResultSet rs = null;
 		int count = 0;
 		try {
-			String[] tables = { "presurvey_responses", "personality_responses", "mbtipersonality_responses" };
+			String[] tables = { "presurvey_responses", "personality_responses", "creativity_responses" };
 			Statement st = mConn.createStatement();
 			for (int i = 0; i < tables.length; i++) {
 				rs = st.executeQuery("SELECT COUNT(*) as nos FROM " + tables[i] + " where user_id=" + uid);
@@ -507,31 +509,31 @@ public class DBProcess {
 					"INSERT INTO `personality_data`(`uid`, `ipip_E`, `ipip_A`, `ipip_C`, `ipip_N`, `ipip_O`) VALUES ('"
 							+ uid + "','" + IE + "','" + IA + "','" + IC + "','" + IN + "','" + IO + "')");
 			ret = statement.executeUpdate();
-			rs = st.executeQuery("select * from mbtipersonality_responses where user_id = " + uid);
-			while (rs.next()) {
-				rem = rs.getInt("group_no") % 7;
-				val = rs.getInt("choice_no");
-				switch (rem) {
-				case 1:
-					ret = (val == 1) ? ++E : ++I;
-					break;
-				case 2:
-				case 3:
-					ret = (val == 1) ? ++S : ++N;
-					break;
-				case 4:
-				case 5:
-					ret = (val == 1) ? ++T : ++F;
-					break;
-				case 6:
-				case 0:
-					ret = (val == 1) ? ++J : ++P;
-					break;
-				}
+			/*
+			 * rs = st.
+			 * executeQuery("select * from mbtipersonality_responses where user_id = "
+			 * + uid); while (rs.next()) { rem = rs.getInt("group_no") % 7; val
+			 * = rs.getInt("choice_no"); switch (rem) { case 1: ret = (val == 1)
+			 * ? ++E : ++I; break; case 2: case 3: ret = (val == 1) ? ++S : ++N;
+			 * break; case 4: case 5: ret = (val == 1) ? ++T : ++F; break; case
+			 * 6: case 0: ret = (val == 1) ? ++J : ++P; break; } } String sql =
+			 * "UPDATE personality_data SET mbti_E = '" + E + "', mbti_I = '" +
+			 * I + "', mbti_S = '" + S + "', mbti_N = '" + N + "', mbti_T = '" +
+			 * T + "', mbti_F = '" + F + "', mbti_J = '" + J + "', mbti_P = '" +
+			 * P + "' WHERE uid=" + uid; ret = st.executeUpdate(sql);
+			 */
+			int creativityIndex = 0;
+			int[] positiveAttributeStr = { 0, 2, 4, 5, 7, 9, 11, 13, 16, 18, 19, 20, 22, 24, 25, 26, 28, 29 };
+			boolean[] positiveAttribute = new boolean[30];
+			for (int positiveIndex : positiveAttributeStr) {
+				positiveAttribute[positiveIndex] = true;
 			}
-			String sql = "UPDATE personality_data SET mbti_E = '" + E + "', mbti_I = '" + I + "', mbti_S = '" + S
-					+ "', mbti_N = '" + N + "', mbti_T = '" + T + "', mbti_F = '" + F + "', mbti_J = '" + J
-					+ "', mbti_P = '" + P + "' WHERE uid=" + uid;
+			rs = st.executeQuery("select * from creativity_responses where user_id = " + uid);
+			while (rs.next()) {
+				creativityIndex += positiveAttribute[rs.getInt("question_id") - 1] ? rs.getInt("description")
+						: (6 - rs.getInt("description"));
+			}
+			String sql = "UPDATE personality_data SET creativity = " + creativityIndex + " WHERE uid=" + uid;
 			ret = st.executeUpdate(sql);
 
 		} catch (SQLException e) {
