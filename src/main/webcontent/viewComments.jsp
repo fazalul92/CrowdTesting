@@ -81,7 +81,7 @@
 		                    <input name="type" type="hidden" value="comment">
 		                <div class="row">
 		                  <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-		                    <textarea name="descr" id="descr" style="height:40px;overflow:auto;" minlength="2" class="col-md-10 col-sm-10 col-xs-10 form-group"></textarea>
+		                    <textarea name="descr" id="descr" style="height:40px;overflow:auto;" minlength="2" class="col-md-10 col-sm-10 col-xs-10 form-group" required></textarea>
 		                    <button type="submit" class="btn btn-success" style="float:right;">Reply</button>
 		                  </div>
 		                  
@@ -118,14 +118,14 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                    <textarea name="descr" id="descr" style="height:50px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="" minlength="2"></textarea>
+                    <textarea name="descr" id="descr" style="height:50px" class="col-md-12 col-sm-12 col-xs-12 form-group" placeholder="" minlength="2" required></textarea>
                   </div>
                   
                 </div>
 
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button type="submit" class="btn btn-primary">Cancel</button>
+                          <button type="reset" class="btn btn-primary">Cancel</button>
                           <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                       </div>

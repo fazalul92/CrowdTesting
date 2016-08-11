@@ -179,12 +179,16 @@ public class DBProcess {
 			ResultSet rs = st
 					.executeQuery("select generic_name, choice_no from generic_responses where user_id = " + uid);
 			while (rs.next()) {
-				if (rs.getString("generic_name").equals("mbtigeneric1")
+				/*if (rs.getString("generic_name").equals("mbtigeneric1")
 						|| rs.getString("generic_name").equals("mbtigeneric3"))
 					TrueCount += (rs.getInt("choice_no") == 2) ? 1 : 0;
 				else if (rs.getString("generic_name").equals("mbtigeneric2")
 						|| rs.getString("generic_name").equals("mbtigeneric4"))
-					TrueCount += (rs.getInt("choice_no") == 1) ? 1 : 0;
+					TrueCount += (rs.getInt("choice_no") == 1) ? 1 : 0;*/
+				if (rs.getString("generic_name").equals("creativegeneric1") && rs.getInt("choice_no") < 3)
+					TrueCount += 1;
+				else if (rs.getString("generic_name").equals("creativegeneric2") && rs.getInt("choice_no") > 3)
+					TrueCount += 1;
 				else if (rs.getString("generic_name").equals("personageneric1") && rs.getInt("choice_no") < 3)
 					TrueCount += 1;
 				else if (rs.getString("generic_name").equals("personageneric2") && rs.getInt("choice_no") > 3)

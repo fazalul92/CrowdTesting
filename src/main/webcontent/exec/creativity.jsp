@@ -8,7 +8,11 @@
 	while (en.hasMoreElements()) {
 	    String parameterName = (String) en.nextElement();
 	    String parameterValue = request.getParameter(parameterName);
-	    ret += dbProc.responseData("creativity_responses",uid, parameterName, parameterValue);
+	    if(parameterName.contains("generic")){
+	    	ret += dbProc.genericResponseData(uid, parameterName, parameterValue);	
+	    } else {
+	    	ret += dbProc.responseData("creativity_responses",uid, parameterName, parameterValue);
+	    }
 	}
     if (ret > 0) {
       	String[] StateInfo = dbProc.updateState(uid,session.getAttribute("state").toString());
