@@ -14,7 +14,7 @@
 		<%
 		  DBProcess dbProc = new DBProcess();
 			ResultSet rs2 = dbProc.getQuestions("creativity_questions");
-			String[] GenericQuestions = {"There are twenty questions on this page", "August has thirty one days"};
+			String[] GenericQuestions = {"There are twenty questions on this page", "August has thirty one days", "Mercury is closer to the sun than Jupiter"};
 			int gencount = 0;
 			int counter = 1;
 		%>
@@ -79,19 +79,19 @@
                      </thead>
                       <tbody>
                         <% while(rs2.next()) { %>
-												<% if( counter==8 || counter==20 ) {%>
+												<% if( counter==8 || counter==18 || counter==26 ) {%>
 												<tr>
-													<td><label class="" for="generic<%= gencount %>"><%= GenericQuestions[gencount] %></label></td>
+													<td><label class="" for="generic<%= gencount %>"><%= counter %>. <%= GenericQuestions[gencount] %></label></td>
 													<% for(int i=0;i<5;i++) { %>
 													<td><input type="radio" name="creativegeneric<%= gencount+1 %>"
 														value="<%= i+1 %>" required></td>
 													<% } %>
 												</tr>
-												<% 
+												<% 		counter++;
 							                        	gencount++;	                        
 							                        } %>
 	                        <tr>
-	                          <td><label class="" for="<%= rs2.getInt("id") %>"><%= rs2.getString("description") %> </label></td>
+	                          <td><label class="" for="<%= rs2.getInt("id") %>"><%= counter %>. <%= rs2.getString("description") %> </label></td>
 	                          <% for(int i=0;i<5;i++) { %>
 	                          		<td><input type="radio" name="<%= rs2.getInt("id") %>" value="<%= i+1 %>" required></td>
 	                          <% } %>

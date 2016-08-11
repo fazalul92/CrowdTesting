@@ -191,6 +191,8 @@ public class DBProcess {
 					TrueCount += 1;
 				else if (rs.getString("generic_name").equals("creativegeneric2") && rs.getInt("choice_no") > 3)
 					TrueCount += 1;
+				else if (rs.getString("generic_name").equals("creativegeneric3") && rs.getInt("choice_no") > 3)
+					TrueCount += 1;
 				else if (rs.getString("generic_name").equals("personageneric1") && rs.getInt("choice_no") < 3)
 					TrueCount += 1;
 				else if (rs.getString("generic_name").equals("personageneric2") && rs.getInt("choice_no") > 3)
@@ -200,7 +202,7 @@ public class DBProcess {
 			e.printStackTrace();
 		}
 		// System.out.println(uid + " "+ TrueCount);
-		if (TrueCount > 4)
+		if (TrueCount > 3)
 			return true;
 		else
 			return false;
