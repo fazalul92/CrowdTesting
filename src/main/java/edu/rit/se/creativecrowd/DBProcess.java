@@ -55,7 +55,6 @@ public class DBProcess {
 		long elapsedHours = different / hoursInMilli;
 		different = different % hoursInMilli;
 		long elapsedMinutes = different / minutesInMilli;
-
 		/*
 		 * different = different % minutesInMilli; long elapsedSeconds =
 		 * different / secondsInMilli;
@@ -208,7 +207,6 @@ public class DBProcess {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// System.out.println(uid + " "+ TrueCount);
 		if (TrueCount > 4)
 			return true;
 		else
@@ -289,7 +287,7 @@ public class DBProcess {
 		ResultSet rs = null;
 		int count = 0;
 		try {
-			String[] tables = { "presurvey_responses", "personality_responses", "discpersona_responses" };
+			String[] tables = { "presurvey_responses", "personality_responses", "discpersonality_responses" };
 			Statement st = mConn.createStatement();
 			for (int i = 0; i < tables.length; i++) {
 				rs = st.executeQuery("SELECT COUNT(*) as nos FROM " + tables[i] + " where user_id=" + uid);
@@ -448,7 +446,6 @@ public class DBProcess {
 			e.printStackTrace();
 		}
 		return count;
-
 	}
 
 	public int genericResponseData(String uid, String gid, String iid)
@@ -466,7 +463,6 @@ public class DBProcess {
 			e.printStackTrace();
 		}
 		return count;
-
 	}
 
 	public int processPersonalities(String uid) throws ClassNotFoundException, IOException, SQLException {
