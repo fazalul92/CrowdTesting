@@ -186,16 +186,19 @@ public class DBProcess {
 				 * (rs.getString("generic_name").equals("mbtigeneric2") ||
 				 * rs.getString("generic_name").equals("mbtigeneric4"))
 				 * TrueCount += (rs.getInt("choice_no") == 1) ? 1 : 0;
+				 *
+				 * if (rs.getString("generic_name").equals("creativegeneric1")
+				 * && rs.getInt("choice_no") < 3) TrueCount += 1; else if
+				 * (rs.getString("generic_name").equals("creativegeneric2") &&
+				 * rs.getInt("choice_no") > 3) TrueCount += 1; else if
+				 * (rs.getString("generic_name").equals("creativegeneric3") &&
+				 * rs.getInt("choice_no") > 3) TrueCount += 1;
 				 */
-				/*if (rs.getString("generic_name").equals("creativegeneric1") && rs.getInt("choice_no") < 3)
-					TrueCount += 1;
-				else if (rs.getString("generic_name").equals("creativegeneric2") && rs.getInt("choice_no") > 3)
-					TrueCount += 1;
-				else if (rs.getString("generic_name").equals("creativegeneric3") && rs.getInt("choice_no") > 3)
-					TrueCount += 1;*/
-				if (rs.getString("generic_name").equals("discgeneric1") || rs.getString("generic_name").equals("discgeneric3"))
-					TrueCount += (rs.getInt("choice_no") == 2) ? 1 : 0; 
-				else if (rs.getString("generic_name").equals("discgeneric2") || rs.getString("generic_name").equals("discgeneric4"))
+				if (rs.getString("generic_name").equals("discgeneric1")
+						|| rs.getString("generic_name").equals("discgeneric3"))
+					TrueCount += (rs.getInt("choice_no") == 2) ? 1 : 0;
+				else if (rs.getString("generic_name").equals("discgeneric2")
+						|| rs.getString("generic_name").equals("discgeneric4"))
 					TrueCount += (rs.getInt("choice_no") == 1) ? 1 : 0;
 				else if (rs.getString("generic_name").equals("personageneric1") && rs.getInt("choice_no") < 3)
 					TrueCount += 1;
