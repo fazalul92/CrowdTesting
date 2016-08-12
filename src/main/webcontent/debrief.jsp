@@ -130,7 +130,7 @@ h3 {
                   </li>									
 								</ul>
 
-                <h3>Hits to Get Started</h3>
+                <h3>Hints to Get Started</h3>
 
 								<p>
 									It is important to be <b>creative</b> in generating test
@@ -199,7 +199,7 @@ h3 {
 								<p>
 									<b>Bonus: </b>Depending on the the number of test scenarios you
 									produce and their quality, you may receive a Bonus of up to USD
-									2.5. High quality test scenarios are easy to understand, cover
+									3. High quality test scenarios are easy to understand, cover
 									a variety of scenarios, and, most importantly, help find faults
 									in the application.
 								</p>
