@@ -9,7 +9,11 @@
     String parameterName = (String) en.nextElement();
     String[] arr = parameterName.split("\\.");
     String parameterValue = request.getParameter(parameterName);
-    ret += dbProc.discResponseData(uid, arr[0], arr[1], parameterValue);
+    if(parameterName.contains("generic")){
+    	ret += dbProc.genericResponseData(uid, parameterName, parameterValue);	
+    } else {
+    	ret += dbProc.discResponseData(uid, arr[0], arr[1], parameterValue);
+    }
   }
   if (ret > 0) {
   	String[] StateInfo = dbProc.updateState(uid,session.getAttribute("state").toString());

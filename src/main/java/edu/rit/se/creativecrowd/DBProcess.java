@@ -187,12 +187,16 @@ public class DBProcess {
 				 * rs.getString("generic_name").equals("mbtigeneric4"))
 				 * TrueCount += (rs.getInt("choice_no") == 1) ? 1 : 0;
 				 */
-				if (rs.getString("generic_name").equals("creativegeneric1") && rs.getInt("choice_no") < 3)
+				/*if (rs.getString("generic_name").equals("creativegeneric1") && rs.getInt("choice_no") < 3)
 					TrueCount += 1;
 				else if (rs.getString("generic_name").equals("creativegeneric2") && rs.getInt("choice_no") > 3)
 					TrueCount += 1;
 				else if (rs.getString("generic_name").equals("creativegeneric3") && rs.getInt("choice_no") > 3)
-					TrueCount += 1;
+					TrueCount += 1;*/
+				if (rs.getString("generic_name").equals("discgeneric1") || rs.getString("generic_name").equals("discgeneric3"))
+					TrueCount += (rs.getInt("choice_no") == 2) ? 1 : 0; 
+				else if (rs.getString("generic_name").equals("discgeneric2") || rs.getString("generic_name").equals("discgeneric4"))
+					TrueCount += (rs.getInt("choice_no") == 1) ? 1 : 0;
 				else if (rs.getString("generic_name").equals("personageneric1") && rs.getInt("choice_no") < 3)
 					TrueCount += 1;
 				else if (rs.getString("generic_name").equals("personageneric2") && rs.getInt("choice_no") > 3)
@@ -202,7 +206,7 @@ public class DBProcess {
 			e.printStackTrace();
 		}
 		// System.out.println(uid + " "+ TrueCount);
-		if (TrueCount > 3)
+		if (TrueCount > 4)
 			return true;
 		else
 			return false;
@@ -282,7 +286,7 @@ public class DBProcess {
 		ResultSet rs = null;
 		int count = 0;
 		try {
-			String[] tables = { "presurvey_responses", "personality_responses", "creativity_responses" };
+			String[] tables = { "presurvey_responses", "personality_responses", "discpersona_responses" };
 			Statement st = mConn.createStatement();
 			for (int i = 0; i < tables.length; i++) {
 				rs = st.executeQuery("SELECT COUNT(*) as nos FROM " + tables[i] + " where user_id=" + uid);
