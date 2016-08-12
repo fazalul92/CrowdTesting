@@ -106,9 +106,9 @@
 								<h3>Payment and Bonus</h3>
 
 								<p>The base payment for completing the required tasks is USD
-									2.5. However, you may receive an additional bonus of upto USD
-									2.5 based on the quality and quantity of your work. More
-									details will follow. The table below summarizes your progress.</p>
+									3. However, you may receive an additional bonus of upto USD 3
+									based on the quality and quantity of your work. More details
+									will follow. The table below summarizes your progress.</p>
 
 								<table border="1" id="detailsTable">
 									<tr>
