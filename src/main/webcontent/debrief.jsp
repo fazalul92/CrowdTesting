@@ -164,6 +164,9 @@ h3 {
 									produce in some aspect (e.g., different stimulus, response, or
 									context).</p>
 
+								<p>Please keep in mind that your group mates may not be
+									online at the same time you are.</p>
+
 								<!-- Interacting Group Instructions -->
 								<%
 									  } else if (Integer.parseInt(session.getAttribute("group_type").toString()) == 3) {
@@ -179,6 +182,9 @@ h3 {
 								<p>You can use the Discussions page to ask questions your
 									group members and answer others' questions</p>
 
+                <p>Please keep in mind that your group mates may not be
+                  online at the same time you are.</p>
+                  
 								<%
 								  }
 								%>
@@ -201,8 +207,9 @@ h3 {
 								  if (Integer.parseInt(session.getAttribute("group_type").toString()) == 3) {
 								%>
 								<p>
-									<b>Important note: </b> Your bonus will also depend on how well
-									you work as a team.
+									<b>Important note: </b> You can also earn bonus for your
+									contributions to your group, e.g., by answering questions and
+									providing constructive comments.
 								</p>
 								<%
 								  }
