@@ -215,6 +215,7 @@ public class DBProcess {
 
 	public int assignTeam(String uid) throws IOException, SQLException {
 		int count = 0;
+		int groupSize = 4;
 		ResultSet rs = null;
 		try {
 			Statement st = mConn.createStatement();
@@ -224,11 +225,10 @@ public class DBProcess {
 				rs.next();
 				int gid = rs.getInt("gid");
 				int i = 1;
-				for (i = 1; rs.getString("uid" + i) != null; i++)
-					;
+				for (i = 1; rs.getString("uid" + i) != null && i < (groupSize+1); i++);
 				String name = "Participant " + i;
 				String uidn = "uid" + i;
-				if (i < 3) {
+				if (i < groupSize) {
 					count = st1.executeUpdate("UPDATE usergroups SET " + uidn + " = " + uid + " WHERE gid=" + gid);
 				} else {
 					count = st1.executeUpdate(

@@ -74,7 +74,7 @@ poorly. Go with what feels best.
 																</td>
 																<% } else { %>
 																<td style="width:80%;">
-																	<input type="radio" required name="discgeneric<%= temp+1 %>" class="" value="<%= tc %>" style="margin-left: 32px;">
+																	<input type="radio" required name="discgeneric<%= temp+1 %>" value="<%= tc %>" style="margin-left: 32px;">
 																	<%= Generic[gencount] %>
 																</td>
 																<% } %>
