@@ -756,7 +756,7 @@ public class DBProcess {
 		ResultSet rs = null;
 		try {
 			Statement st = mConn.createStatement();
-			rs = st.executeQuery("select link, content, created_at from notifications where gid = " + groupId);
+			rs = st.executeQuery("select link, content, created_at from notifications where gid = " + groupId+" order by id desc");
 		} catch (SQLException e){
 			e.printStackTrace();
 		}

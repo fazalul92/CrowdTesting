@@ -70,20 +70,20 @@
                     <span class="badge bg-green" id="NotificationCount">0</span>
                   </a>
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <% while(Notifications.next()&& notificationCount<5) { %>
+                    <% while(Notifications.next()) { %>
+	                  <a href="<%= Notifications.getString("link") %>">
 	                    <li>
 	                      <a>
 	                        <span>
 	                          <span></span>
 	                          <span class="time"><%= Notifications.getString("created_at") %></span>
 	                        </span>
-	                        <a href="<%= Notifications.getString("link") %>">
 	                        <span class="message" style="margin-top:15px;">
 	                          <%= Notifications.getString("content") %>
 	                        </span>
-	                        </a>
 	                      </a>
 	                    </li>
+	                  </a>
                     <% 
                     	notificationCount++;
                     } %>
@@ -110,11 +110,6 @@
           </div>
         </div>
         <!-- /top navigation -->
-        <%
-        	while(Notifications.next()){
-        		notificationCount++;
-        	}
-        %>
         <script>
         	var notCount = <%= notificationCount %>;
 	        document.getElementById("NotificationCount").innerHTML = notCount;
