@@ -61,6 +61,8 @@
 	                  </a>
                 
                 </li>
+                
+                <%  if(Integer.parseInt(session.getAttribute("group_type").toString()) > 1) {%>
                 <li role="presentation" class="dropdown" style="float:left;">
                 	
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
@@ -99,6 +101,7 @@
 				<li role="presentation" style="float:left;color: #2a3f54;margin-top: 18px;font-weight: bold;font-size: medium;">
                 	Group Updates
                 </li>
+                <% } %>
                 <li style="color: #2a3f54;margin-top: 18px;font-weight: bold;font-size: medium;">
                 	<%= session.getAttribute("name").toString() %>
                 </li>
