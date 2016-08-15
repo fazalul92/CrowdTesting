@@ -24,10 +24,19 @@
 	                    <div class="clearfix"></div>
 	                  </div>
 	                  <div class="x_content">
-	                    <p> Thank you for participating in this research. Please submit the completion code given below in MTurk so that we can verify that you have completed the tasks. 
-	                    </p><br/>
-	                    
-	                    <% 
+								<p>Thank you for participating in this research. Please
+									submit the completion code given below in MTurk so that we can
+									verify that you have completed the tasks.</p>
+
+								<p>
+									<b>Important Note: </b> You can only submit this HIT once
+									across batches. If you submit this HIT multiple times, your
+									work will be rejected.
+								</p>
+
+								<br />
+
+								<% 
 	                    	DBProcess dbProc = new DBProcess();
 	                    	String uid = session.getAttribute("userid").toString();
 	                    	String ccode = dbProc.getCompletionCode(uid);
