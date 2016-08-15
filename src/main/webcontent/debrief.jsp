@@ -192,7 +192,7 @@ h3 {
 								<h2>Quantity and Quality</h2>
 
 								<p>You required to come up with at least two unique test
-									scenarios. For that, you will receive a base pay of USD 2.5.
+									scenarios. For that, you will receive a base pay of USD 3.
 									However, we encourage you to come up with as many test
 									scenarios as possible.</p>
 
