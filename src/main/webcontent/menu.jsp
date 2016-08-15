@@ -71,9 +71,8 @@
                   </a>
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                     <% while(Notifications.next()) { %>
-	                  <a href="<%= Notifications.getString("link") %>">
 	                    <li>
-	                      <a>
+	                      <a href="<%= Notifications.getString("link") %>">
 	                        <span>
 	                          <span></span>
 	                          <span class="time"><%= Notifications.getString("created_at") %></span>
@@ -83,7 +82,6 @@
 	                        </span>
 	                      </a>
 	                    </li>
-	                  </a>
                     <% 
                     	notificationCount++;
                     } %>
