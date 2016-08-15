@@ -335,12 +335,14 @@ CREATE TABLE IF NOT EXISTS `usergroups` (
   `uid1` int(11) DEFAULT NULL,
   `uid2` int(11) DEFAULT NULL,
   `uid3` int(11) DEFAULT NULL,
+  `uid4` int(11) DEFAULT NULL,
   `description` text NOT NULL,
   `status` int(11) NOT NULL COMMENT '1 = empty, 2 = partial, 3 = full',
   PRIMARY KEY (`gid`),
   KEY `uid1` (`uid1`),
   KEY `uid2` (`uid2`),
-  KEY `uid3` (`uid3`)
+  KEY `uid3` (`uid3`),
+  KEY `uid4` (`uid4`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 -- --------------------------------------------------------
@@ -416,6 +418,7 @@ ALTER TABLE `usergroups`
   ADD CONSTRAINT `usergroups_ibfk_1` FOREIGN KEY (`uid1`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `usergroups_ibfk_2` FOREIGN KEY (`uid2`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `usergroups_ibfk_3` FOREIGN KEY (`uid3`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `usergroups_ibfk_4` FOREIGN KEY (`uid4`) REFERENCES `users` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
