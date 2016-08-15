@@ -1,3 +1,4 @@
+<%@page import="edu.rit.se.creativecrowd.DBProcess"%>
 <%@ page import ="java.sql.ResultSet" %>
         <%@page import="edu.rit.se.creativecrowd.DBProcess"%>
 <div class="col-md-3 left_col">
@@ -20,6 +21,8 @@
                   <%
                   	String state = session.getAttribute("state").toString();
                   	DBProcess dbp = new DBProcess();
+                  	ResultSet Notifications = dbp.getNotifications(Integer.parseInt(session.getAttribute("groupid").toString()));
+                  	int notificationCount = 0;
                   	ResultSet rsm = dbp.getMenu(state);
                   	while(rsm.next()) {
                   %>
@@ -50,13 +53,51 @@
 				<div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
+              
               <ul class="nav navbar-nav navbar-right">
-				
                 <li>
                 	<a href="exec/logout.jsp">
 	                  	<button type="button" class="btn btn-success">Log Out</button>
 	                  </a>
                 
+                </li>
+                <li role="presentation" class="dropdown" style="float:left;">
+                	
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green" id="NotificationCount">0</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <% while(Notifications.next()&& notificationCount<5) { %>
+	                    <li>
+	                      <a>
+	                        <span>
+	                          <span></span>
+	                          <span class="time"><%= Notifications.getString("created_at") %></span>
+	                        </span>
+	                        <a href="<%= Notifications.getString("link") %>">
+	                        <span class="message" style="margin-top:15px;">
+	                          <%= Notifications.getString("content") %>
+	                        </span>
+	                        </a>
+	                      </a>
+	                    </li>
+                    <% 
+                    	notificationCount++;
+                    } %>
+                    <!-- <li>
+                      <div class="text-center">
+                        <a href="notifications.jsp">
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li> -->
+                  </ul>
+                </li>
+                
+				<li role="presentation" style="float:left;color: #2a3f54;margin-top: 18px;font-weight: bold;font-size: medium;">
+                	Group Updates
                 </li>
                 <li style="color: #2a3f54;margin-top: 18px;font-weight: bold;font-size: medium;">
                 	<%= session.getAttribute("name").toString() %>
@@ -66,5 +107,17 @@
           </div>
         </div>
         <!-- /top navigation -->
+        <%
+        	while(Notifications.next()){
+        		notificationCount++;
+        	}
+        %>
+        <script>
+        	var notCount = <%= notificationCount %>;
+	        document.getElementById("NotificationCount").innerHTML = notCount;
+	        if(notCount > 0){
+	        	document.getElementById("NotificationCount").className = "badge bg-red";
+	        }
+        </script>
 
 <% dbp.disConnect(); %>

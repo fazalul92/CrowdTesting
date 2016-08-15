@@ -708,8 +708,7 @@ public class DBProcess {
 		return "0";
 	}
 
-	public int addComment(String parent, String pid, String uid, String gid, String descr)
-			throws ClassNotFoundException, IOException, SQLException {
+	public int addComment(String parent, String pid, String uid, String gid, String descr) throws  IOException, SQLException {
 		int count = 0;
 		String dtime = currentDateTIme();
 		try {
@@ -724,6 +723,44 @@ public class DBProcess {
 			e.printStackTrace();
 		}
 		return count;
+	}
+	
+	public void addNotification(String parentType, String parentId, String groupId, String submitter) {
+		String dtime = currentDateTIme();
+		String content="";
+		String link="";
+		try {
+			if(parentType.equals("testcase")){
+				content = submitter+" added a new testcase";
+				link="viewTestCases.jsp?id="+parentId;
+			} else if(parentType=="comment"){
+				content = submitter+" commented on a testcase";
+				link="viewComments.jsp?id="+parentId;
+			} else if(parentType=="discussion"){
+				content = submitter+" posted in discussion";
+				link = "discussions.jsp";
+			}
+			PreparedStatement statement = mConn.prepareStatement("INSERT INTO `notifications`(`gid`, `link`, `content`, `created_at`) VALUES ("+
+											groupId+", '"+
+												link+"', '"+
+													content+"', '"+
+															dtime+"')");
+			statement.executeUpdate();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ResultSet getNotifications(int groupId){
+		ResultSet rs = null;
+		try {
+			Statement st = mConn.createStatement();
+			rs = st.executeQuery("select link, content, created_at from notifications where gid = " + groupId);
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return rs;
 	}
 
 	public ResultSet getMenu(String SeqNo) {

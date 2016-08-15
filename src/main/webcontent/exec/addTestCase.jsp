@@ -8,6 +8,7 @@
   String behv = request.getParameter("behavior");
   DBProcess dbProc = new DBProcess();
   int ret = dbProc.addTestCase(rid, uid, gid, cont, stim, behv);
+  dbProc.addNotification("testcase", rid, gid, session.getAttribute("name").toString());
   dbProc.disConnect();
   if (ret == 1) {
     response.sendRedirect("../viewTestCases.jsp?id="+rid);
