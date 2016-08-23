@@ -213,11 +213,12 @@ public class DBProcess {
 			return false;
 	}
 
-	public int assignTeam(String uid) throws IOException, SQLException {
+	public int assignTeam(String uid) throws IOException, SQLException, ClassNotFoundException {
 		int count = 0;
 		int groupSize = 4;
 		ResultSet rs = null;
 		try {
+			//processPersonalities(uid);
 			Statement st = mConn.createStatement();
 			Statement st1 = mConn.createStatement();
 			if (checkAttention(uid)) {
@@ -225,7 +226,8 @@ public class DBProcess {
 				rs.next();
 				int gid = rs.getInt("gid");
 				int i = 1;
-				for (i = 1; rs.getString("uid" + i) != null && i < (groupSize+1); i++);
+				for (i = 1; rs.getString("uid" + i) != null && i < (groupSize + 1); i++)
+					;
 				String name = "Participant " + i;
 				String uidn = "uid" + i;
 				if (i < groupSize) {
@@ -515,7 +517,7 @@ public class DBProcess {
 							+ uid + "','" + IE + "','" + IA + "','" + IC + "','" + IN + "','" + IO + "')");
 			ret = statement.executeUpdate();
 			/*
-			 * rs = st.
+			 * MBTI DATA rs = st.
 			 * executeQuery("select * from mbtipersonality_responses where user_id = "
 			 * + uid); while (rs.next()) { rem = rs.getInt("group_no") % 7; val
 			 * = rs.getInt("choice_no"); switch (rem) { case 1: ret = (val == 1)
@@ -525,26 +527,85 @@ public class DBProcess {
 			 * "UPDATE personality_data SET mbti_E = '" + E + "', mbti_I = '" +
 			 * I + "', mbti_S = '" + S + "', mbti_N = '" + N + "', mbti_T = '" +
 			 * T + "', mbti_F = '" + F + "', mbti_J = '" + J + "', mbti_P = '" +
-			 * P + "' WHERE uid=" + uid; ret = st.executeUpdate(sql);
+			 * P + "' WHERE uid=" + uid; ret = st.executeUpdate(sql); CREATIVITY
+			 * DATA int creativityIndex = 0; int[] positiveAttributeStr = { 0,
+			 * 2, 4, 5, 7, 9, 11, 13, 16, 18, 19, 20, 22, 24, 25, 26, 28, 29 };
+			 * boolean[] positiveAttribute = new boolean[30]; for (int
+			 * positiveIndex : positiveAttributeStr) {
+			 * positiveAttribute[positiveIndex] = true; } rs =
+			 * st.executeQuery("select * from creativity_responses where user_id
+			 * = " + uid); while (rs.next()) { creativityIndex +=
+			 * positiveAttribute[rs.getInt("question_id") - 1] ?
+			 * rs.getInt("description") : (6 - rs.getInt("description")); }
+			 * String sql = "UPDATE personality_data SET creativity = " +
+			 * creativityIndex + " WHERE uid=" + uid; ret =
+			 * st.executeUpdate(sql);
 			 */
-			int creativityIndex = 0;
-			int[] positiveAttributeStr = { 0, 2, 4, 5, 7, 9, 11, 13, 16, 18, 19, 20, 22, 24, 25, 26, 28, 29 };
-			boolean[] positiveAttribute = new boolean[30];
-			for (int positiveIndex : positiveAttributeStr) {
-				positiveAttribute[positiveIndex] = true;
-			}
-			rs = st.executeQuery("select * from creativity_responses where user_id = " + uid);
-			while (rs.next()) {
-				creativityIndex += positiveAttribute[rs.getInt("question_id") - 1] ? rs.getInt("description")
-						: (6 - rs.getInt("description"));
-			}
-			String sql = "UPDATE personality_data SET creativity = " + creativityIndex + " WHERE uid=" + uid;
-			ret = st.executeUpdate(sql);
-
+			ret += processDiscPersonality(uid);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return ret;
+	}
+
+	public int processDiscPersonality(String uid) {
+		String[][] discData = { { "I", "C", "S", "D" }, { "D", "I", "S", "C" }, { "S", "C", "D", "I" },
+				{ "C", "D", "I", "S" }, { "C", "I", "S", "D" }, { "S", "I", "C", "D" }, { "D", "C", "S", "I" },
+				{ "I", "S", "C", "D" }, { "S", "C", "D", "I" }, { "C", "S", "I", "D" }, { "D", "I", "S", "C" },
+				{ "I", "S", "C", "D" }, { "S", "C", "D", "I" }, { "C", "D", "I", "S" }, { "D", "I", "S", "C" },
+				{ "C", "D", "S", "I" }, { "I", "S", "D", "C" }, { "S", "D", "C", "I" }, { "D", "I", "S", "C" },
+				{ "C", "S", "D", "I" }, { "I", "S", "C", "D" }, { "S", "C", "D", "I" }, { "C", "D", "I", "S" },
+				{ "S", "D", "C", "I" }, { "D", "I", "S", "C" }, { "I", "S", "C", "D" }, { "I", "S", "C", "D" },
+				{ "C", "D", "I", "S" } };
+		int[] raws = { 0, 0, 0, 0 };
+		float[] norms = { 28, 28, 28, 28 };
+		int returnValue = 0, totalDisc = 0;
+		try {
+			Statement st = mConn.createStatement();
+			ResultSet rs = st.executeQuery(
+					"SELECT group_no, item_no, response FROM `discpersonality_responses` WHERE user_id = " + uid);
+			while (rs.next()) {
+				switch (discData[rs.getInt("group_no") - 1][rs.getInt("item_no") - 1]) {
+				case "D":
+					returnValue += (rs.getString("response").equals("yes")) ? ++raws[0] : --raws[0];
+					break;
+				case "I":
+					returnValue += (rs.getString("response").equals("yes")) ? ++raws[1] : --raws[1];
+					break;
+				case "S":
+					returnValue += (rs.getString("response").equals("yes")) ? ++raws[2] : --raws[2];
+					break;
+				case "C":
+					returnValue += (rs.getString("response").equals("yes")) ? ++raws[3] : --raws[3];
+					break;
+				default:
+					System.out.println("Wrong value for Disc");
+					break;
+				}
+			}
+			totalDisc = raws[0] + raws[1] + raws[2] + raws[3] + (28 * 4);
+			int i = 0;
+			for (i = 0; i < 4; i++) {
+				norms[i] += raws[i];
+				norms[i] /= totalDisc;
+			}
+			PreparedStatement statement = mConn.prepareStatement(
+					"UPDATE personality_data SET rawD = ?, rawI = ?, rawS = ?, rawC = ?, normD = ?, normI = ?, normS = ?, normC = ? where uid = "
+							+ uid);
+			i = 1;
+			while (i < 5) {
+				statement.setInt(i, raws[i - 1]);
+				i++;
+			}
+			while (i < 9) {
+				statement.setFloat(i, norms[i - 5]);
+				i++;
+			}
+			returnValue = statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return returnValue;
 	}
 
 	public int addUseCase(String descr) throws ClassNotFoundException, IOException, SQLException {
@@ -708,7 +769,8 @@ public class DBProcess {
 		return "0";
 	}
 
-	public int addComment(String parent, String pid, String uid, String gid, String descr) throws  IOException, SQLException {
+	public int addComment(String parent, String pid, String uid, String gid, String descr)
+			throws IOException, SQLException {
 		int count = 0;
 		String dtime = currentDateTIme();
 		try {
@@ -724,40 +786,39 @@ public class DBProcess {
 		}
 		return count;
 	}
-	
+
 	public void addNotification(String parentType, String parentId, String groupId, String submitter) {
 		String dtime = currentDateTIme();
-		String content="";
-		String link="";
+		String content = "";
+		String link = "";
 		try {
-			if(parentType.equals("testcase")){
-				content = submitter+" added a new testcase";
-				link="viewTestCases.jsp?id="+parentId;
-			} else if(parentType=="comment"){
-				content = submitter+" commented on a testcase";
-				link="viewComments.jsp?id="+parentId;
-			} else if(parentType=="discussion"){
-				content = submitter+" posted in discussion";
+			if (parentType.equals("testcase")) {
+				content = submitter + " added a new testcase";
+				link = "viewTestCases.jsp?id=" + parentId;
+			} else if (parentType == "comment") {
+				content = submitter + " commented on a testcase";
+				link = "viewComments.jsp?id=" + parentId;
+			} else if (parentType == "discussion") {
+				content = submitter + " posted in discussion";
 				link = "discussions.jsp";
 			}
-			PreparedStatement statement = mConn.prepareStatement("INSERT INTO `notifications`(`gid`, `link`, `content`, `created_at`) VALUES ("+
-											groupId+", '"+
-												link+"', '"+
-													content+"', '"+
-															dtime+"')");
+			PreparedStatement statement = mConn
+					.prepareStatement("INSERT INTO `notifications`(`gid`, `link`, `content`, `created_at`) VALUES ("
+							+ groupId + ", '" + link + "', '" + content + "', '" + dtime + "')");
 			statement.executeUpdate();
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public ResultSet getNotifications(int groupId){
+
+	public ResultSet getNotifications(int groupId) {
 		ResultSet rs = null;
 		try {
 			Statement st = mConn.createStatement();
-			rs = st.executeQuery("select link, content, created_at from notifications where gid = " + groupId+" order by id desc");
-		} catch (SQLException e){
+			rs = st.executeQuery(
+					"select link, content, created_at from notifications where gid = " + groupId + " order by id desc");
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return rs;

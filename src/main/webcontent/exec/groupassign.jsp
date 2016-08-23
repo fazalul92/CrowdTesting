@@ -4,7 +4,7 @@
   if(Integer.parseInt(session.getAttribute("groupid").toString())==0) {
 	  String uid = session.getAttribute("userid").toString();
 	  DBProcess dbProc = new DBProcess();
-	  //dbProc.processPersonalities(uid);
+	  dbProc.processPersonalities(uid);
 	  int ret = dbProc.assignTeam(uid);
 	  response.sendRedirect("resetSession.jsp");
   }
