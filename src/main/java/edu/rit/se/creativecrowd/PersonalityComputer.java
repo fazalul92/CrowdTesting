@@ -29,7 +29,11 @@ public class PersonalityComputer {
 		ResultSet rs = st.executeQuery("SELECT user_id FROM discpersonality_responses where group_no = 1 and item_no = 1");
 		while(rs.next()){
 			DBProcess dbProc = new DBProcess();
-			dbProc.processPersonalities(rs.getString("user_id"));
+			try {
+			  dbProc.processPersonalities(rs.getString("user_id"));
+			} finally {
+			  dbProc.disConnect();
+			}
 		}
 		
 	}
