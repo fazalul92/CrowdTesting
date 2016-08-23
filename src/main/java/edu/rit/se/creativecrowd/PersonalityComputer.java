@@ -26,7 +26,7 @@ public class PersonalityComputer {
 			}
 		}
 		Statement st = mConn.createStatement();
-		ResultSet rs = st.executeQuery("SELECT user_id FROM discpersonality_responses where group_no = 1 and item_no = 1");
+		ResultSet rs = st.executeQuery("SELECT DISTINCT user_id FROM discpersonality_responses;");
 		while(rs.next()){
 			DBProcess dbProc = new DBProcess();
 			dbProc.processPersonalities(rs.getString("user_id"));
