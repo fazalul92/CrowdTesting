@@ -213,34 +213,62 @@ public class DBProcess {
 			return false;
 	}
 
+	/*
+	 * public int assignTeamOld(String uid) throws IOException, SQLException,
+	 * ClassNotFoundException { int count = 0; int groupSize = 4; ResultSet rs =
+	 * null; try { Statement st = mConn.createStatement(); Statement st1 =
+	 * mConn.createStatement(); if (checkAttention(uid)) { rs =
+	 * st.executeQuery("select * from usergroups where status=2 order by gid");
+	 * rs.next(); int gid = rs.getInt("gid"); int i = 1; for (i = 1;
+	 * rs.getString("uid" + i) != null && i < (groupSize + 1); i++) ; String
+	 * name = "Participant " + i; String uidn = "uid" + i; if (i < groupSize) {
+	 * count = st1.executeUpdate("UPDATE usergroups SET " + uidn + " = " + uid +
+	 * " WHERE gid=" + gid); } else { count = st1.executeUpdate(
+	 * "UPDATE usergroups SET " + uidn + " = " + uid + ", status = 3 WHERE gid="
+	 * + gid); st1.executeUpdate("UPDATE usergroups SET status = 2 WHERE gid=" +
+	 * (gid + 1)); } st1.executeUpdate("UPDATE users SET gid = " + gid +
+	 * ", group_type = " + rs.getInt("type") + ", name='" + name + "' WHERE id="
+	 * + uid); } else { st1.
+	 * executeUpdate("UPDATE users SET gid = -1, group_type = 1, name='Participant' WHERE id="
+	 * + uid); } } catch (SQLException e) { e.printStackTrace(); } return count;
+	 * }
+	 */
+	 
+
 	public int assignTeam(String uid) throws IOException, SQLException, ClassNotFoundException {
 		int count = 0;
-		int groupSize = 4;
 		ResultSet rs = null;
 		try {
 			//processPersonalities(uid);
 			Statement st = mConn.createStatement();
+			rs = st.executeQuery("SELECT personality from users where id="+uid);
+			String userPersonality = rs.getString("personality");
 			Statement st1 = mConn.createStatement();
 			if (checkAttention(uid)) {
-				rs = st.executeQuery("select * from usergroups where status=2 order by gid");
-				rs.next();
-				int gid = rs.getInt("gid");
-				int i = 1;
-				for (i = 1; rs.getString("uid" + i) != null && i < (groupSize + 1); i++)
-					;
-				String name = "Participant " + i;
-				String uidn = "uid" + i;
-				if (i < groupSize) {
-					count = st1.executeUpdate("UPDATE usergroups SET " + uidn + " = " + uid + " WHERE gid=" + gid);
-				} else {
-					count = st1.executeUpdate(
-							"UPDATE usergroups SET " + uidn + " = " + uid + ", status = 3 WHERE gid=" + gid);
-					st1.executeUpdate("UPDATE usergroups SET status = 2 WHERE gid=" + (gid + 1));
+				rs = st.executeQuery("select * from usergroups where status<3 order by status desc");
+				while(rs.next()){
+					int i;
+					for(i=1;i<5;i++){
+						String gpersona1, gpersona2;
+						if(rs.getString("uPersona"+i).length()==2){
+							gpersona1 =  Character.toString(rs.getString("uPersona"+i).charAt(0));
+							gpersona2 =  Character.toString(rs.getString("uPersona"+i).charAt(1));
+						} else {
+							gpersona1 =  Character.toString(rs.getString("uPersona"+i).charAt(0));
+							gpersona2 =  Character.toString(rs.getString("uPersona"+i).charAt(0));
+						}
+						if(rs.getString("uid"+i)!=null || (!userPersonality.equals(gpersona1) || !userPersonality.equals(gpersona2)))
+							continue;
+						else{
+							int nullCount = 0;
+							for(int j=1;j<5;j++)
+								if(rs.getString("uid"+j)==null)
+									nullCount++;
+							int status = (nullCount==0) ? 3 : 2;
+							count = st1.executeUpdate("UPDATE usergroups SET uid" + i + " = " + uid + ", status = "+status+" WHERE gid=" + rs.getInt("gid"));
+						}
+					}
 				}
-				st1.executeUpdate("UPDATE users SET gid = " + gid + ", group_type = " + rs.getInt("type") + ", name='"
-						+ name + "' WHERE id=" + uid);
-			} else {
-				st1.executeUpdate("UPDATE users SET gid = -1, group_type = 1, name='Participant' WHERE id=" + uid);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -585,10 +613,14 @@ public class DBProcess {
 			}
 			totalDisc = raws[0] + raws[1] + raws[2] + raws[3] + (28 * 4);
 			int i = 0;
+			int maxValIndex = 0;
 			for (i = 0; i < 4; i++) {
 				norms[i] += raws[i];
 				norms[i] /= totalDisc;
+				if (norms[i] > norms[maxValIndex])
+					maxValIndex = i;
 			}
+			String maxDisc = (maxValIndex < 2) ? ((maxValIndex == 0) ? "D" : "I") : ((maxValIndex == 2) ? "S" : "C");
 			PreparedStatement statement = mConn.prepareStatement(
 					"UPDATE personality_data SET rawD = ?, rawI = ?, rawS = ?, rawC = ?, normD = ?, normI = ?, normS = ?, normC = ? where uid = "
 							+ uid);
@@ -602,6 +634,9 @@ public class DBProcess {
 				i++;
 			}
 			returnValue = statement.executeUpdate();
+			statement = mConn.prepareStatement("UPDATE users SET personality = ? where uid = " + uid);
+			statement.setString(1, maxDisc);
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
