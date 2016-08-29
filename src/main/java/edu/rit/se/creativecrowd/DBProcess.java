@@ -244,14 +244,12 @@ public class DBProcess {
 			String userPersonality = rs.getString("personality");
 			Statement st1 = mConn.createStatement();
 			if (checkAttention(uid)) {
-				rs = st.executeQuery("select * from usergroups where status<3 order by status desc");
+				rs = st.executeQuery("select * from usergroups where status<3 order by status, filled desc");
 				boolean rowFound = false;
 				while(rs.next() && !rowFound){
 					int i;
 					for(i=1;i<5 && !rowFound;i++){
 						if(rs.getString("uid"+i)!=null || !(rs.getString("upersona"+i).contains(userPersonality) || rs.getString("upersona"+i).contains("A"))) {
-							System.out.println(rs.getString("upersona"+i)+" contains "+userPersonality+" ? "+ rs.getString("upersona"+i).contains(userPersonality));
-							System.out.println("Loop Continued");
 							continue;
 						}
 						else {
@@ -261,8 +259,9 @@ public class DBProcess {
 								if(rs.getString("uid"+j)==null)
 									nullCount++;
 							}
+							int filled = 4 - nullCount;
 							int status = (nullCount==0) ? 3 : 2;
-							count = st1.executeUpdate("UPDATE usergroups SET uid" + i + " = " + uid + ", status = "+status+" WHERE gid=" + rs.getInt("gid"));
+							count = st1.executeUpdate("UPDATE usergroups SET uid" + i + " = " + uid + ", status = "+status+", filled = "+filled+" WHERE gid=" + rs.getInt("gid"));
 							count += st1.executeUpdate("UPDATE users SET gid = "+rs.getInt("gid")+", group_type = "+rs.getInt("type")+", name = 'Participant "+i+"' WHERE id = "+uid);
 						}
 					}
