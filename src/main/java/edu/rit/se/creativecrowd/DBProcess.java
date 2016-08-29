@@ -259,6 +259,7 @@ public class DBProcess {
 								if(rs.getString("uid"+j)==null)
 									nullCount++;
 							}
+							nullCount--;
 							int filled = 4 - nullCount;
 							int status = (nullCount==0) ? 3 : 2;
 							count = st1.executeUpdate("UPDATE usergroups SET uid" + i + " = " + uid + ", status = "+status+", filled = "+filled+" WHERE gid=" + rs.getInt("gid"));
