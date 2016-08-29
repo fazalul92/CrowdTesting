@@ -244,7 +244,7 @@ public class DBProcess {
 			String userPersonality = rs.getString("personality");
 			Statement st1 = mConn.createStatement();
 			if (checkAttention(uid)) {
-				rs = st.executeQuery("select * from usergroups where status<3 order by status desc");
+				rs = st.executeQuery("select * from usergroups where status<3 order by status, filled desc");
 				boolean rowFound = false;
 				while(rs.next() && !rowFound){
 					int i;
