@@ -232,43 +232,45 @@ public class DBProcess {
 	 * executeUpdate("UPDATE users SET gid = -1, group_type = 1, name='Participant' WHERE id="
 	 * + uid); } } catch (SQLException e) { e.printStackTrace(); } return count;
 	 * }
-	 */
-	 
+	 */	 
 
 	public int assignTeam(String uid) throws IOException, SQLException, ClassNotFoundException {
 		int count = 0;
 		ResultSet rs = null;
 		try {
-			//processPersonalities(uid);
 			Statement st = mConn.createStatement();
 			rs = st.executeQuery("SELECT personality from users where id="+uid);
+			rs.next();
 			String userPersonality = rs.getString("personality");
 			Statement st1 = mConn.createStatement();
 			if (checkAttention(uid)) {
 				rs = st.executeQuery("select * from usergroups where status<3 order by status desc");
-				while(rs.next()){
+				boolean rowFound = false;
+				while(rs.next() && !rowFound){
 					int i;
-					for(i=1;i<5;i++){
-						String gpersona1, gpersona2;
-						if(rs.getString("uPersona"+i).length()==2){
-							gpersona1 =  Character.toString(rs.getString("uPersona"+i).charAt(0));
-							gpersona2 =  Character.toString(rs.getString("uPersona"+i).charAt(1));
-						} else {
-							gpersona1 =  Character.toString(rs.getString("uPersona"+i).charAt(0));
-							gpersona2 =  Character.toString(rs.getString("uPersona"+i).charAt(0));
-						}
-						if(rs.getString("uid"+i)!=null || (!userPersonality.equals(gpersona1) || !userPersonality.equals(gpersona2)))
+					for(i=1;i<5 && !rowFound;i++){
+						if(rs.getString("uid"+i)!=null || !(rs.getString("upersona"+i).contains(userPersonality) || rs.getString("upersona"+i).contains("A"))) {
+							System.out.println(rs.getString("upersona"+i)+" contains "+userPersonality+" ? "+ rs.getString("upersona"+i).contains(userPersonality));
+							System.out.println("Loop Continued");
 							continue;
-						else{
+						}
+						else {
+							rowFound = true;
 							int nullCount = 0;
-							for(int j=1;j<5;j++)
+							for(int j=1;j<5;j++){
 								if(rs.getString("uid"+j)==null)
 									nullCount++;
+							}
 							int status = (nullCount==0) ? 3 : 2;
 							count = st1.executeUpdate("UPDATE usergroups SET uid" + i + " = " + uid + ", status = "+status+" WHERE gid=" + rs.getInt("gid"));
+							count += st1.executeUpdate("UPDATE users SET gid = "+rs.getInt("gid")+", group_type = "+rs.getInt("type")+", name = 'Participant "+i+"' WHERE id = "+uid);
 						}
 					}
 				}
+				if(!rowFound)
+					System.out.print("Cannot be assigned");
+			} else {
+				st1.executeUpdate("UPDATE users SET gid = -1, group_type = 1, name='Participant' WHERE id=" + uid);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -634,7 +636,7 @@ public class DBProcess {
 				i++;
 			}
 			returnValue = statement.executeUpdate();
-			statement = mConn.prepareStatement("UPDATE users SET personality = ? where uid = " + uid);
+			statement = mConn.prepareStatement("UPDATE users SET personality = ? where id = " + uid);
 			statement.setString(1, maxDisc);
 			statement.executeUpdate();
 		} catch (SQLException e) {
