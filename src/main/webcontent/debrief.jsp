@@ -180,11 +180,14 @@ h3 {
 									different stimulus, response, or context).</p>
 
 								<p>You can use the Discussions page to ask questions your
-									group members and answer others' questions</p>
+									group members and answer others' questions.</p>
 
                 <p>Please keep in mind that your group mates may not be
                   online at the same time you are.</p>
-                  
+
+								<p>Be a team player! You can contribute to your group, e.g.,
+									by answering questions and providing constructive comments.</p>
+
 								<%
 								  }
 								%>
@@ -203,17 +206,6 @@ h3 {
 									a variety of scenarios, and, most importantly, help find faults
 									in the application.
 								</p>
-								<%
-								  if (Integer.parseInt(session.getAttribute("group_type").toString()) == 3) {
-								%>
-								<p>
-									<b>Important note: </b> You can also earn bonus for your
-									contributions to your group, e.g., by answering questions and
-									providing constructive comments.
-								</p>
-								<%
-								  }
-								%>
 
 							</div>
 							<a href="requirements.jsp">
@@ -223,7 +215,6 @@ h3 {
 						</div>
 					</div>
 					<!-- End Panel -->
-
 
 				</div>
 			</div>
