@@ -50,3 +50,26 @@ update userdata_admin set bonus_amt_cents = 150 where testcase_count in (5, 6, 7
 update userdata_admin set bonus_amt_cents = 100 where testcase_count = 4 and uid > 381;
 
 update userdata_admin set bonus_amt_cents = 50 where testcase_count = 3 and uid > 381;
+
+/*
+ * Update missing DISC personality column in the users table
+ */
+update crowd_testing.users u, crowd_testing.personality_data p
+set u.personality =  
+  case when p.normD is null or p.normI is null or p.normS is null or p.normC is null then null
+       when p.normD >= p.normI and p.normD >= p.normS and p.normD >= p.normC then 'D'
+       when p.normI >= p.normS and p.normI >= p.normC then 'I'
+       when p.normS >= p.normC then 'S'
+       else 'C'
+  end
+where u.id = p.uid;
+
+select u.id, u.personality,
+  case when p.normD is null or p.normI is null or p.normS is null or p.normC is null then null
+       when p.normD >= p.normI and p.normD >= p.normS and p.normD >= p.normC then 'D'
+       when p.normI >= p.normS and p.normI >= p.normC then 'I'
+       when p.normS >= p.normC then 'S'
+       else 'C'
+  end as normDISC
+from crowd_testing.users as u, crowd_testing.personality_data as p
+where u.id = p.uid order by uid;
