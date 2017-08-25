@@ -253,4 +253,53 @@ where (u.id = g.uid1 or u.id = g.uid2 or u.id = g.uid3) and u.id = a.uid and u.i
   and g.upersona1 is null and g.filled >= 3 and g.type = 1
   and t.id not in (33,39,92,273,288,307,377,488,570,601,637,752,797,879,1127,1229,1415,1424,1502,1521,1598,1627,1697,1830,1898)
 order by rand();
-  
+
+/*
+ * A temporary table for storing combined ratings; 
+ * TODO: Should this be temporary?
+ */
+create table temp_combined_ratings (
+  `rid` int(11) not null,
+  `detailedness` decimal(5,2) not null,
+  `novelty` decimal(5,2) not null,
+  `usefulness` decimal(5,2) not null,
+  PRIMARY KEY (`rid`)
+);
+
+/*
+ * Create, alter, and update users2 table 
+ */
+CREATE TABLE `users2` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `gid` int(11) NOT NULL DEFAULT '0',
+  `group_type` int(11) NOT NULL DEFAULT '1' COMMENT '1 = nominal, 2 = non-interactive, 3 = interacting',
+  `mturk_id` varchar(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `completion` tinyint(4) NOT NULL COMMENT '0 = not completed, 1 = completed.',
+  `personality` varchar(2) DEFAULT NULL,
+  `state` int(11) NOT NULL DEFAULT '1' COMMENT '0 = new user, 1 = presurvey, 2 = personality, 3 = creativity, 10 = prereqs completed.',
+  `completion_code` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=787 DEFAULT CHARSET=utf8;
+
+insert into users2 select * from users;
+
+alter table users2 add column `group_size` int(11) NOT NULL DEFAULT '0'after group_type;
+
+update users2 u
+inner join 
+  (select u.gid, count(*) as count, g.filled, g.type
+   from users u, usergroups2 g
+   where u.completion_code is not null and u.gid = g.gid
+   group by u.gid) as g2 
+on u.gid = g2.gid
+set u.group_size = g2.count;
+
+alter table users2 add column `group_size2` int(11) NOT NULL DEFAULT '0'after group_size;
+
+update users2
+set group_size2 = group_size;
+
+update users2
+set group_size2 = 1 where group_type = 1;
